@@ -1,3 +1,6 @@
+import { notionItems } from './notion-items';
+import { notionJobs } from './notion-jobs';
+
 export const TIERS = ['S', 'A', 'B', 'C', 'D'] as const;
 export type Tier = typeof TIERS[number];
 
@@ -35,58 +38,8 @@ export type Guide = {
 
 // 실제 운영 데이터는 관리자가 검증한 뒤 이 배열에 추가합니다.
 export const entries: Entry[] = [
-    {
-    id: 'warrior_1',
-    name: '사냥꾼',
-    category: '직업',
-    type: '공격력 · 둔화 ',
-    element: '무속성',
-    rarity: '직업',
-    icon: 'sword',
-    description: '고유기로 강한 데미지와 둔화를 부여하는 직업입니다.',
-    power: 0,
-    team: 'A',
-    counts: [0, 0, 0, 0, 0],
-  },
-    {
-    id: 'warrior_2',
-    name: '난투사',
-    category: '직업',
-    type: '반사 · 피해 감소 ',
-    element: '무속성',
-    rarity: '직업',
-    icon: 'sword',
-    description: '고유기로 데미지를 경감시키고, 경감된 피해를 반사시키는 직업입니다.',
-    power: 0,
-    team: 'A',
-    counts: [0, 0, 0, 0, 0],
-  },
-    {
-    id: 'warrior_3',
-    name: '검객',
-    category: '직업',
-    type: '공격력 · 치명타 ',
-    element: '무속성',
-    rarity: '직업',
-    icon: 'sword',
-    description: '고유기의 검기로 데미지를 입히고, 자신의 치명타 확률을 증가시키는 직업입니다.',
-    power: 0,
-    team: 'A',
-    counts: [0, 0, 0, 0, 0],
-  },
-    {
-    id: 'warrior_4',
-    name: '돌격병',
-    category: '직업',
-    type: '공격력 · 상태이상 ',
-    element: '무속성',
-    rarity: '직업',
-    icon: 'sword',
-    description: '고유기로 이동하며, 적에게 에어본을 누적하는 직업입니다.',
-    power: 0,
-    team: 'A',
-    counts: [0, 0, 0, 0, 0],
-  },
+  ...notionJobs,
+  ...notionItems,
 ];
 export const guides: Guide[] = [];
 
