@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
+import { Trash2 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 
 type CommentRow = {
@@ -53,11 +54,20 @@ export function CommunityDiscussion({
     await load();
   }
 
+  async function remove(comment:CommentRow){
+    if(!supabase||!userId||comment.user_id!==userId)return;
+    if(!window.confirm('이 의견을 삭제할까요?'))return;
+    setError('');
+    const result=await supabase.from('comments').delete().eq('id',comment.id).eq('user_id',userId);
+    if(result.error){setError('의견을 삭제하지 못했습니다.');return}
+    setComments(previous=>previous.filter(item=>item.id!==comment.id));
+  }
+
   return <section className="discussion">
     <div className="section-heading"><h3>모험가의 의견 <span className="muted">{comments.length}</span></h3></div>
     {loading&&<p className="empty-mini">의견을 불러오는 중입니다.</p>}
     {!loading&&!comments.length&&<p className="empty-mini">첫 의견을 남겨보세요.</p>}
-    {comments.map(comment=><div className="comment" key={comment.id}><span className="avatar">{comment.profiles?.nickname?.slice(0,1)||'?'}</span><div><strong>{comment.profiles?.nickname||'모험가'}</strong><p>{comment.content}</p></div></div>)}
+    {comments.map(comment=><div className="comment" key={comment.id}><span className="avatar">{comment.profiles?.nickname?.slice(0,1)||'?'}</span><div className="comment-copy"><strong>{comment.profiles?.nickname||'모험가'}</strong><p>{comment.content}</p></div>{comment.user_id===userId&&<button className="comment-delete" onClick={()=>void remove(comment)} aria-label="내 의견 삭제" title="삭제"><Trash2 size={14}/></button>}</div>)}
     {error&&<p className="editor-error" role="alert">{error}</p>}
     {!userId?<button className="secondary" onClick={onLogin}>Google 로그인 후 의견 남기기</button>
     :!nickname?<button className="secondary" onClick={onNickname}>닉네임을 설정하고 의견 남기기</button>

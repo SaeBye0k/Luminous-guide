@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 import Link from 'next/link';
-import { BookOpen, ChevronRight, PenLine, X } from 'lucide-react';
+import { BookOpen, ChevronRight, PenLine, Trash2, X } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { CommunityDiscussion } from '@/components/community-discussion';
 
@@ -70,6 +70,16 @@ export function GuideBoard({userId,nickname,onLogin,onNickname,preview=false}:Pr
     setTitle('');setContent('');setWriting(false);await load();
   }
 
+  async function removePost(post:GuidePost){
+    if(!supabase||!userId||post.user_id!==userId)return;
+    if(!window.confirm('이 공략글을 삭제할까요?'))return;
+    setError('');
+    const result=await supabase.from('guide_posts').delete().eq('id',post.id).eq('user_id',userId);
+    if(result.error){setError('공략글을 삭제하지 못했습니다.');return}
+    setPosts(previous=>previous.filter(item=>item.id!==post.id));
+    setSelected(null);
+  }
+
   return <section className={preview?'section guide-board':'guide-board'}>
     <div className="section-heading"><div>{preview&&<span className="overline">ADVENTURER GUIDES</span>}<h2>{preview?'새로 올라온 모험가 공략':'공략 게시판'}</h2></div>{preview?<Link href="/guides/" className="text-button">모든 공략 <ChevronRight size={16}/></Link>:<button className="primary" onClick={startWriting}><PenLine size={16}/> 공략 작성</button>}</div>
     {error&&<p className="editor-error" role="alert">{error}</p>}
@@ -77,6 +87,6 @@ export function GuideBoard({userId,nickname,onLogin,onNickname,preview=false}:Pr
     {!loading&&!posts.length&&<div className="empty"><BookOpen/><h3>아직 등록된 공략이 없습니다</h3><p>첫 번째 공략을 작성해 모험가들과 경험을 나눠보세요.</p>{!preview&&<button className="primary" onClick={startWriting}>첫 공략 작성하기</button>}</div>}
     {!!posts.length&&<div className="board-list">{posts.map(post=><button className="board-row" key={post.id} onClick={()=>setSelected(post)}><span className="board-icon"><BookOpen size={19}/></span><span className="board-copy"><strong>{post.title}</strong><small>{post.content}</small></span><span className="board-meta"><b>{post.profiles?.nickname||'모험가'}</b><time>{new Date(post.created_at).toLocaleDateString('ko-KR')}</time></span><ChevronRight size={17}/></button>)}</div>}
     {writing&&<BoardModal title="새 공략 작성" onClose={()=>setWriting(false)}><form className="guide-write-form" onSubmit={submit}><label>제목<input autoFocus required maxLength={100} value={title} onChange={e=>setTitle(e.target.value)} placeholder="공략 제목을 입력하세요"/></label><label>공략 내용<textarea required maxLength={10000} rows={14} value={content} onChange={e=>setContent(e.target.value)} placeholder="장비 구성, 운영 방법, 주의할 점 등을 자유롭게 작성하세요."/></label><div className="editor-actions"><button type="button" className="secondary" onClick={()=>setWriting(false)}>취소</button><button className="primary" disabled={saving||!title.trim()||!content.trim()}>{saving?'등록 중':'공략 등록'}</button></div></form></BoardModal>}
-    {selected&&<BoardModal title="모험가 공략" onClose={()=>setSelected(null)}><article className="community-guide"><span className="overline">ADVENTURER FIELD NOTE</span><h1>{selected.title}</h1><p className="guide-byline">{selected.profiles?.nickname||'모험가'} · {new Date(selected.created_at).toLocaleDateString('ko-KR')}</p><div className="guide-content">{selected.content}</div></article><CommunityDiscussion targetKey={`guide-post:${selected.id}`} userId={userId} nickname={nickname} onLogin={onLogin} onNickname={onNickname}/></BoardModal>}
+    {selected&&<BoardModal title="모험가 공략" onClose={()=>setSelected(null)}><article className="community-guide"><span className="overline">ADVENTURER FIELD NOTE</span><h1>{selected.title}</h1><div className="guide-byline"><span>{selected.profiles?.nickname||'모험가'} · {new Date(selected.created_at).toLocaleDateString('ko-KR')}</span>{selected.user_id===userId&&<button className="text-button danger-button" onClick={()=>void removePost(selected)}><Trash2 size={14}/> 내 공략 삭제</button>}</div><div className="guide-content">{selected.content}</div></article><CommunityDiscussion targetKey={`guide-post:${selected.id}`} userId={userId} nickname={nickname} onLogin={onLogin} onNickname={onNickname}/></BoardModal>}
   </section>;
 }
