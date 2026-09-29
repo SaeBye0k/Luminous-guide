@@ -47,3 +47,19 @@ GitHub Pages는 서버나 비공개 관리자 세션을 제공하지 않습니�
 - 개인 티어표 초안과 저장본은 방문자의 브라우저에만 저장됩니다.
 
 GitHub Pages만으로는 여러 사용자가 공유하는 투표·댓글·좋아요를 안전하게 저장할 수 없습니다. 해당 기능을 실제로 운영하려면 별도의 인증·데이터베이스 API가 필요합니다.
+
+## Google 로그인과 투표 설정
+
+이 프로젝트는 Supabase Google 로그인과 계정당 한 표 투표 구조를 포함합니다.
+
+1. Supabase에서 프로젝트를 생성합니다.
+2. Supabase **SQL Editor**에서 `supabase/schema.sql`을 실행합니다.
+3. **Authentication → Providers → Google**에서 Google 로그인을 활성화합니다.
+4. **Authentication → URL Configuration**의 Site URL을
+   `https://saebye0k.github.io/Luminous-guide/`로 설정하고 같은 주소를 Redirect URLs에도 추가합니다.
+5. GitHub 저장소 **Settings → Secrets and variables → Actions**에 다음 Repository secret을 추가합니다.
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+6. 새 커밋을 Push하거나 Actions에서 배포 작업을 다시 실행합니다.
+
+공개용 anon 키는 브라우저에 포함되는 값입니다. `service_role` 키는 절대 GitHub나 프론트엔드에 넣지 마세요. 중복 투표는 데이터베이스 기본 키 `(user_id, entry_id, version)`로 차단하며, 다시 투표하면 기존 행을 갱신합니다.
