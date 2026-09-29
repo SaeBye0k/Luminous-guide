@@ -17,10 +17,10 @@ export function useCommunityVotes(entries:Entry[], version:string) {
   const [saving,setSaving]=useState('');
   const [error,setError]=useState('');
 
-  const refresh=useCallback(async(currentUser?:User|null)=>{
+  const refresh=useCallback(async(activeUser:User|null)=>{
     if(!supabase){setLoading(false);return}
-    const activeUser=currentUser===undefined?user:currentUser;
     setLoading(true);setError('');
+
     const aggregate=await supabase.rpc('get_vote_counts',{p_version:version});
     if(aggregate.error)setError('투표 결과를 불러오지 못했습니다.');
     else {
@@ -33,26 +33,65 @@ export function useCommunityVotes(entries:Entry[], version:string) {
       }
       setCounts(next);
     }
+
     if(activeUser){
       const own=await supabase.from('votes').select('entry_id,tier').eq('version',version).eq('user_id',activeUser.id);
-      if(!own.error)setMyVotes(Object.fromEntries(((own.data||[]) as VoteRow[]).map(row=>[row.entry_id,row.tier])));
+      if(own.error)setError('내 투표 정보를 불러오지 못했습니다.');
+      else setMyVotes(Object.fromEntries(((own.data||[]) as VoteRow[]).map(row=>[row.entry_id,row.tier])));
     }else setMyVotes({});
     setLoading(false);
-  },[entries,user,version]);
+  },[entries,version]);
 
   useEffect(()=>{
     if(!supabase){setLoading(false);return}
     let active=true;
-    supabase.auth.getUser().then(({data})=>{if(active){setUser(data.user);void refresh(data.user)}});
-    const {data}=supabase.auth.onAuthStateChange((_event,session)=>{if(active){setUser(session?.user||null);void refresh(session?.user||null)}});
-    return()=>{active=false;data.subscription.unsubscribe()};
+    const timers=new Set<ReturnType<typeof setTimeout>>();
+    const schedule=(nextUser:User|null)=>{
+      const timer=setTimeout(()=>{
+        timers.delete(timer);
+        if(active)void refresh(nextUser);
+      },0);
+      timers.add(timer);
+    };
+
+    supabase.auth.getSession().then(({data,error:sessionError})=>{
+      if(!active)return;
+      if(sessionError)setError('로그인 상태를 확인하지 못했습니다.');
+      const nextUser=data.session?.user||null;
+      setUser(nextUser);
+      schedule(nextUser);
+    });
+
+    const {data}=supabase.auth.onAuthStateChange((_event,session)=>{
+      if(!active)return;
+      const nextUser=session?.user||null;
+      setUser(nextUser);
+      schedule(nextUser);
+    });
+
+    return()=>{
+      active=false;
+      for(const timer of timers)clearTimeout(timer);
+      data.subscription.unsubscribe();
+    };
   },[refresh]);
 
   async function signIn(){
     if(!supabase)return;
-    await supabase.auth.signInWithOAuth({provider:'google',options:{redirectTo:window.location.href.split('#')[0]}});
+    setError('');
+    const {error:signInError}=await supabase.auth.signInWithOAuth({
+      provider:'google',
+      options:{redirectTo:window.location.origin+window.location.pathname},
+    });
+    if(signInError)setError('Google 로그인을 시작하지 못했습니다.');
   }
-  async function signOut(){if(supabase)await supabase.auth.signOut()}
+
+  async function signOut(){
+    if(!supabase)return;
+    const {error:signOutError}=await supabase.auth.signOut();
+    if(signOutError)setError('로그아웃하지 못했습니다.');
+  }
+
   async function vote(entryId:string,tier:Tier){
     if(!supabase||!user)return false;
     setSaving(entryId);setError('');
