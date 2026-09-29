@@ -16,6 +16,7 @@ export function useCommunityVotes(entries:Entry[], version:string) {
   const [loading,setLoading]=useState(true);
   const [saving,setSaving]=useState('');
   const [error,setError]=useState('');
+  const [nickname,setNickname]=useState('');
 
   const refresh=useCallback(async(activeUser:User|null)=>{
     if(!supabase){setLoading(false);return}
@@ -35,10 +36,12 @@ export function useCommunityVotes(entries:Entry[], version:string) {
     }
 
     if(activeUser){
+      const profile=await supabase.from('profiles').select('nickname').eq('user_id',activeUser.id).maybeSingle();
+      if(!profile.error)setNickname(profile.data?.nickname||'');
       const own=await supabase.from('votes').select('entry_id,tier').eq('version',version).eq('user_id',activeUser.id);
       if(own.error)setError('내 투표 정보를 불러오지 못했습니다.');
       else setMyVotes(Object.fromEntries(((own.data||[]) as VoteRow[]).map(row=>[row.entry_id,row.tier])));
-    }else setMyVotes({});
+    }else {setMyVotes({});setNickname('')}
     setLoading(false);
   },[entries,version]);
 
@@ -105,5 +108,17 @@ export function useCommunityVotes(entries:Entry[], version:string) {
     return true;
   }
 
-  return {configured:supabaseConfigured,user,counts,myVotes,loading,saving,error,signIn,signOut,vote,refresh};
+  async function saveNickname(value:string){
+    if(!supabase||!user)return {ok:false,message:'로그인이 필요합니다.'};
+    const next=value.trim();
+    if(next.length<2||next.length>20)return {ok:false,message:'닉네임은 2~20자로 입력해주세요.'};
+    const result=await supabase.from('profiles').upsert({user_id:user.id,nickname:next},{onConflict:'user_id'});
+    if(result.error){
+      return {ok:false,message:result.error.code==='23505'?'이미 사용 중인 닉네임입니다.':'닉네임을 저장하지 못했습니다.'};
+    }
+    setNickname(next);
+    return {ok:true,message:''};
+  }
+
+  return {configured:supabaseConfigured,user,nickname,counts,myVotes,loading,saving,error,signIn,signOut,vote,saveNickname,refresh};
 }
