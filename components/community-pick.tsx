@@ -32,7 +32,10 @@ export function CommunityPick({weapons,version,blocked,result,renderArt,onOpen}:
     return()=>{media.removeEventListener('change',update);document.removeEventListener('visibilitychange',visibility)};
   },[]);
   useEffect(()=>{if(!active||weapons.length<2)return;const timer=setTimeout(()=>setIndex(i=>(i+1)%weapons.length),5000);return()=>clearTimeout(timer)},[active,index,weapons.length]);
-  if(!current)return null;
+  if(!current)return <section className="spotlight community-carousel empty-pick" aria-label="커뮤니티 픽">
+    <div className="spotlight-top"><span><Sparkles size={14}/> COMMUNITY PICK</span></div>
+    <div className="empty"><h3>등록된 무기가 없습니다</h3><p>관리자가 검증한 무기 정보를 등록하면 이곳에서 순환해 보여줍니다.</p></div>
+  </section>;
   const score=result(current);
 
   return <section className="spotlight community-carousel" aria-label="커뮤니티 픽" aria-roledescription="캐러셀" onMouseEnter={()=>setHovered(true)} onMouseLeave={()=>setHovered(false)} onFocusCapture={()=>setFocused(true)} onBlurCapture={e=>{if(!e.currentTarget.contains(e.relatedTarget as Node))setFocused(false)}}>
