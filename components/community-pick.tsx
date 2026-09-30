@@ -34,7 +34,7 @@ export function CommunityPick({weapons,version,blocked,result,renderArt,onOpen}:
   useEffect(()=>{if(!active||weapons.length<2)return;const timer=setTimeout(()=>setIndex(i=>(i+1)%weapons.length),5000);return()=>clearTimeout(timer)},[active,index,weapons.length]);
   if(!current)return <section className="spotlight community-carousel empty-pick" aria-label="커뮤니티 픽">
     <div className="spotlight-top"><span><Sparkles size={14}/> COMMUNITY PICK</span></div>
-    <div className="empty"><h3>등록된 항목이 없습니다</h3><p>무기·직업·유물을 등록하면 이곳에서 순환해 보여줍니다.</p></div>
+    <div className="empty"><h3>최근 투표된 항목이 없습니다</h3><p>무기나 직업에 첫 투표가 들어오면 이곳에 표시됩니다.</p></div>
   </section>;
   const score=result(current);
 

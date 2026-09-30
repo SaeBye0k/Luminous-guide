@@ -55,7 +55,7 @@ GitHub Pages만으로는 여러 사용자가 공유하는 투표·댓글·좋아
 이 프로젝트는 Supabase Google 로그인과 계정당 한 표 투표 구조를 포함합니다.
 
 1. Supabase에서 프로젝트를 생성합니다.
-2. Supabase **SQL Editor**에서 `supabase/schema.sql`, `supabase/nickname-comments.sql`, `supabase/guide-posts.sql`을 차례로 실행합니다.
+2. Supabase **SQL Editor**에서 `supabase/schema.sql`, `supabase/nickname-comments.sql`, `supabase/guide-posts.sql`, `supabase/recent-votes.sql`을 차례로 실행합니다.
 3. **Authentication → Providers → Google**에서 Google 로그인을 활성화합니다.
 4. **Authentication → URL Configuration**의 Site URL을
    `https://saebye0k.github.io/Luminous-guide/`로 설정하고 같은 주소를 Redirect URLs에도 추가합니다.
