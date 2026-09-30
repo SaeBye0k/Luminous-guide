@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { Suspense, useEffect, useRef, useState, type ReactNode } from 'react';
 import { Sword, Swords, WandSparkles, BowArrow, Flame, Zap, Hammer, Shield, Compass, Heart, Castle, Trees, Search, BookOpen, LayoutGrid, Trophy, Plus, X, GripVertical, MessageSquare, ThumbsUp, Check, Sparkles, Users, SlidersHorizontal, ChevronRight, Info, Download, Gem, PanelTop, Menu } from 'lucide-react';
 import { guides, TIERS, VERSIONS, baseCounts, stats, type Entry, type Tier, type Category } from '@/lib/game-data';
 
@@ -25,12 +26,25 @@ function Badge({tier}:{tier:Tier}) {return <span className={`tier-badge tier-${t
 function Modal({title,onClose,children}:{title:string;onClose:()=>void;children:ReactNode}) {const ref=useRef<HTMLDialogElement>(null);useEffect(()=>{const d=ref.current;d?.showModal();return()=>d?.close();},[]);return <dialog ref={ref} onCancel={onClose} onClick={e=>{if(e.target===e.currentTarget)onClose();}} className="modal"><div className="modal-header"><h2>{title}</h2><button className="icon-button" onClick={onClose} aria-label="닫기"><X/></button></div>{children}</dialog>}
 
 export function GuideApp({page}:{page:Page}) {
+ return <Suspense fallback={<div className="empty"><p>화면을 불러오는 중입니다.</p></div>}><GuideAppContent page={page}/></Suspense>;
+}
+
+function GuideAppContent({page}:{page:Page}) {
+ const searchParams=useSearchParams();
+ const urlCategory=searchParams.get('category');
+ const urlTab=searchParams.get('tab');
  const catalog=useCatalog();const entries=catalog.entries;
  const [version,setVersion]=useState(VERSIONS[0]);const [category,setCategory]=useState<Category>('무기');const [query,setQuery]=useState('');const [element,setElement]=useState('전체 속성');const [tab,setTab]=useState('커뮤니티 티어');const [local,setLocal]=useState<LocalData>(initial);const [ready,setReady]=useState(false);const [notice,setNotice]=useState('');const [selectedEntry,setSelected]=useState<Entry|null>(null);const [article,setArticle]=useState<typeof guides[number]|null>(null);const [showFormula,setShowFormula]=useState(false);const [showNickname,setShowNickname]=useState(false);const [nicknameDraft,setNicknameDraft]=useState('');const [nicknameError,setNicknameError]=useState('');const [menu,setMenu]=useState(false);const [sort,setSort]=useState('평균 점수순');const [comment,setComment]=useState('');const [viewSaved,setViewSaved]=useState<Saved|null>(null);
  const community=useCommunityVotes(entries,version);
  const selected=selectedEntry?(entries.find(e=>e.id===selectedEntry.id)||selectedEntry):null;
  const relatedGuide=selected?(guides.find(g=>g.id===selected.id)||guides[0]):undefined;
- useEffect(()=>{if(new URLSearchParams(location.search).get('tab')==='users')setTab('유저 티어표')},[]);
+ useEffect(()=>{setTab(urlTab==='users'?'유저 티어표':'커뮤니티 티어')},[urlTab]);
+ useEffect(()=>{
+   if(page!=='database')return;
+   setCategory(['무기','직업','유물','던전'].includes(urlCategory||'')?urlCategory as Category:'무기');
+   setQuery('');
+   setElement('전체 속성');
+ },[page,urlCategory]);
  useEffect(()=>{try{const raw=window.localStorage.getItem(storageKey);if(raw){const parsed=JSON.parse(raw);if(parsed&&typeof parsed==='object'&&Array.isArray(parsed.saved))setLocal({...initial,...parsed});}const params=new URLSearchParams(location.search);const cat=params.get('category');if(['무기','직업','유물','던전'].includes(cat||''))setCategory(cat as Category);const v=params.get('version');if(VERSIONS.includes(v||''))setVersion(v!);const id=params.get('item');if(id)setSelected(entries.find(e=>e.id===id)||null);}catch{setNotice('저장한 데이터를 읽지 못했습니다. 이번 화면에서 계속 사용할 수 있습니다.');}setReady(true);},[]);
  useEffect(()=>{if(!ready)return;try{window.localStorage.setItem(storageKey,JSON.stringify(local));}catch{setNotice('브라우저 저장 공간을 사용할 수 없습니다. 변경 내용은 현재 화면에서만 유지됩니다.');}},[local,ready]);
  useEffect(()=>{if(!notice)return;const t=setTimeout(()=>setNotice(''),4500);return()=>clearTimeout(t)},[notice]);
