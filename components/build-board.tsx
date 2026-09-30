@@ -1,7 +1,7 @@
 'use client';
 
 import {useCallback,useEffect,useRef,useState,type ReactNode,type FormEvent} from 'react';
-import {Plus,X,Trash2,Layers,UtensilsCrossed} from 'lucide-react';
+import {Plus,X,Trash2,Pencil,Layers,UtensilsCrossed} from 'lucide-react';
 import type {Entry} from '@/lib/game-data';
 import {supabase} from '@/lib/supabase';
 import {BuildEntryPicker} from './build-entry-picker';
@@ -23,6 +23,8 @@ export function BuildBoard({entries,version,userId,nickname,onLogin,onNickname,r
  const [error,setError]=useState('');
  const [formError,setFormError]=useState('');
  const [writing,setWriting]=useState(false);
+ const [editing,setEditing]=useState<BuildPost|null>(null);
+ const [deleting,setDeleting]=useState(false);const deleteLock=useRef(false);
  const [saving,setSaving]=useState(false);const submitLock=useRef(false);
  const [selected,setSelected]=useState<BuildPost|null>(null);
  const [title,setTitle]=useState('');
@@ -50,8 +52,10 @@ export function BuildBoard({entries,version,userId,nickname,onLogin,onNickname,r
  useEffect(()=>{void load()},[load]);
  function start(){
    // Composition is available before login; authentication is required to publish.
-   setFormError('');setPicking(null);setWriting(true);
+   if(editing){setTitle('');setJob('');setArmor('');setTraitIds([]);setSlots(Array(6).fill(''));setTags([]);setContent('')}
+   setEditing(null);setFormError('');setPicking(null);setWriting(true);
  }
+ function edit(p:BuildPost){if(p.user_id!==userId)return;setEditing(p);setTitle(p.title);setJob(p.job_id);setArmor(p.armor_id||'');setTraitIds([...(p.trait_ids||[])]);setSlots([...p.inventory_ids]);setTags([...p.tags]);setContent(p.content);setFormError('');setPicking(null);setSelected(null);setWriting(true)}
  const valid=!!title.trim()&&jobs.some(e=>e.id===job)&&(armor===''||armors.some(e=>e.id===armor))&&slots.length===6&&slots.every(id=>id===''||id===FOOD_SLOT||items.some(e=>e.id===id))&&traitIds.length<=3&&new Set(traitIds).size===traitIds.length&&traitIds.every(id=>availableTraits.some(t=>t.id===id))&&tags.length>0&&!!content.trim();
  async function submit(e:FormEvent){
    e.preventDefault();if(submitLock.current)return;setFormError('');
@@ -60,15 +64,19 @@ export function BuildBoard({entries,version,userId,nickname,onLogin,onNickname,r
    if(!nickname){setFormError('게시하려면 닉네임을 설정해주세요.');return}
    if(!supabase){setFormError('빌드 공유 연결이 아직 설정되지 않았습니다.');return}
    submitLock.current=true;setSaving(true);
-   try{const r=await supabase.from('build_posts').insert({user_id:userId,title:title.trim(),job_id:job,armor_id:armor,trait_ids:traitIds,inventory_ids:slots,tags,content:content.trim(),version});
+   try{if(editing&&editing.user_id!==userId){setFormError('본인이 작성한 빌드만 수정할 수 있습니다.');return}
+   const values={title:title.trim(),job_id:job,armor_id:armor,trait_ids:traitIds,inventory_ids:slots,tags,content:content.trim(),version:editing?.version||version};
+   const r=editing?await supabase.from('build_posts').update(values).eq('id',editing.id).eq('user_id',userId).select('id').single():await supabase.from('build_posts').insert({...values,user_id:userId}).select('id').single();
    if(r.error){setFormError('등록하지 못했습니다. 작성 내용은 유지됩니다. 연결 설정을 확인해주세요.');return}
-   setWriting(false);setTitle('');setJob('');setArmor('');setTraitIds([]);setPicking(null);setSlots(Array(6).fill(''));setTags([]);setContent('');await load();}catch{setFormError('등록하지 못했습니다. 작성 내용은 유지됩니다. 다시 시도해주세요.')}finally{submitLock.current=false;setSaving(false)}
+   setWriting(false);setEditing(null);setTitle('');setJob('');setArmor('');setTraitIds([]);setPicking(null);setSlots(Array(6).fill(''));setTags([]);setContent('');await load();}catch{setFormError('등록하지 못했습니다. 작성 내용은 유지됩니다. 다시 시도해주세요.')}finally{submitLock.current=false;setSaving(false)}
  }
  async function remove(p:BuildPost){
-   if(!supabase||p.user_id!==userId||!window.confirm('내 빌드를 삭제할까요?'))return;
-   const r=await supabase.from('build_posts').delete().eq('id',p.id).eq('user_id',userId!);
-   if(r.error){setError('빌드를 삭제하지 못했습니다.');return}
+   if(!supabase||p.user_id!==userId||deleteLock.current||!window.confirm('내 빌드를 삭제할까요? 삭제한 빌드는 복구할 수 없습니다.'))return;
+   deleteLock.current=true;setDeleting(true);setError('');
+   try{const r=await supabase.from('build_posts').delete().eq('id',p.id).eq('user_id',userId!).select('id').single();
+   if(r.error){setError('빌드를 삭제하지 못했습니다. 다시 시도해주세요.');return}
    setSelected(null);setPosts(prev=>prev.filter(b=>b.id!==p.id));
+   }catch{setError('빌드를 삭제하지 못했습니다. 다시 시도해주세요.')}finally{deleteLock.current=false;setDeleting(false)}
  }
  function Loadout({ids}:{ids:string[]}){
    return <div className="build-loadout">{ids.map((id,i)=>{const item=entry(id);return <div className="build-slot" key={i}><span className="slot-number">{i+1}</span>{id===FOOD_SLOT?<UtensilsCrossed size={28}/>:item?renderArt(item):<Layers size={22}/>}<strong>{id===FOOD_SLOT?'음식':item?.name||(id?'등록되지 않은 항목':'빈 칸')}</strong><small>{id===FOOD_SLOT?'음식 칸':item?.category||(id?'확인 필요':'미장착')}</small></div>})}</div>;
@@ -79,8 +87,8 @@ export function BuildBoard({entries,version,userId,nickname,onLogin,onNickname,r
    <div className="build-filters"><input aria-label="빌드 검색" placeholder="제목, 직업, 공략 검색" value={search} onChange={e=>setSearch(e.target.value)}/><div className="build-tags">{['전체',...TAGS].map(t=><button key={t} className={filter===t?'active':''} onClick={()=>setFilter(t)}>{t}</button>)}</div></div>
    {error&&<div className="editor-error" role="alert">{error} <button className="text-button" onClick={()=>void load()}>다시 불러오기</button></div>}
    {loading?<div className="empty"><p>빌드를 불러오는 중입니다.</p></div>:!visible.length?<div className="empty"><Layers/><h3>{posts.length?'조건에 맞는 빌드가 없습니다':'첫 번째 빌드를 만들어보세요'}</h3><p>직업과 6칸의 장비 구성에 나만의 운용 방법을 더해보세요.</p><button className="primary" onClick={start}>빌드 구성하기</button></div>:<div className="build-list">{visible.map(p=><button className="build-row-card" key={p.id} onClick={()=>setSelected(p)}><div className="build-row-title"><strong>{p.title}</strong><span>{p.profiles?.nickname||'모험가'} · {p.version}</span></div><div className="build-tags">{p.tags.map(t=><span key={t}>[{t}]</span>)}</div><p className="build-job-name">직업 · {entry(p.job_id)?.name||'등록되지 않은 직업'} · 갑옷 {entry(p.armor_id)?.name||'미장착'}</p><Loadout ids={p.inventory_ids}/></button>)}</div>}
-   {writing&&<BuildModal title="나만의 빌드 구성" onClose={()=>{if(!saving)setWriting(false)}}>{picking?<BuildEntryPicker title={picking.kind==='job'?'직업 검색':picking.kind==='armor'?'갑옷 검색':`인벤토리 ${picking.index!+1} 검색`} items={picking.kind==='job'?jobs:picking.kind==='armor'?armors:items} renderArt={renderArt} onSelect={choose} onCancel={()=>setPicking(null)}/>:<form className="guide-write-form" onSubmit={submit}>
-     <p className="tiny muted">{version} · 직업 1개 · 특성 최대 3개 · 무기·유물·음식 인벤토리 6칸</p>
+   {writing&&<BuildModal title={editing?'내 빌드 수정':'나만의 빌드 구성'} onClose={()=>{if(!saving)setWriting(false)}}>{picking?<BuildEntryPicker title={picking.kind==='job'?'직업 검색':picking.kind==='armor'?'갑옷 검색':`인벤토리 ${picking.index!+1} 검색`} items={picking.kind==='job'?jobs:picking.kind==='armor'?armors:items} renderArt={renderArt} onSelect={choose} onCancel={()=>setPicking(null)}/>:<form className="guide-write-form" onSubmit={submit}>
+     <p className="tiny muted">{editing?.version||version} · 직업 1개 · 특성 최대 3개 · 무기·유물·음식 인벤토리 6칸</p>
      <label>빌드 제목<input required maxLength={100} value={title} onChange={e=>setTitle(e.target.value)} placeholder="이 빌드의 특징을 알려주세요"/></label>
      <div className="build-selection-field"><span>직업</span><button type="button" className="secondary" onClick={()=>setPicking({kind:'job'})}>{entry(job)?.name||'직업 검색해서 선택'}</button></div>
      {job&&<fieldset className="build-traits"><legend>직업 특성 · {traitIds.length} / 3 선택</legend><p className="tiny muted">최대 3개까지 선택할 수 있습니다.</p><div className="build-trait-options">{availableTraits.map((t,i)=><button type="button" key={t.id} className={traitIds.includes(t.id)?'active':''} aria-pressed={traitIds.includes(t.id)} disabled={!traitIds.includes(t.id)&&traitIds.length>=3} onClick={()=>setTraitIds(prev=>prev.includes(t.id)?prev.filter(id=>id!==t.id):[...prev,t.id])}><span>특성 {i+1}</span>{t.description}</button>)}</div>{!availableTraits.length&&<p className="empty-mini">이 직업의 특성 정보가 아직 없습니다.</p>}</fieldset>}
@@ -89,9 +97,9 @@ export function BuildBoard({entries,version,userId,nickname,onLogin,onNickname,r
      <fieldset className="build-purpose"><legend>목적 태그 · 1개 이상 선택</legend><div className="build-tags">{TAGS.map(t=><button type="button" key={t} className={tags.includes(t)?'active':''} aria-pressed={tags.includes(t)} onClick={()=>setTags(prev=>prev.includes(t)?prev.filter(v=>v!==t):[...prev,t])}>[{t}]</button>)}</div></fieldset>
      <label>간단한 공략<textarea required rows={6} maxLength={5000} value={content} onChange={e=>setContent(e.target.value)} placeholder="조합의 핵심, 운용 순서와 주의할 점을 알려주세요."/></label>
      {formError&&<p role="alert" className="editor-error">{formError}</p>}
-     <div className="editor-actions">{!userId?<button type="button" className="secondary" onClick={onLogin}>Google 로그인</button>:!nickname?<button type="button" className="secondary" onClick={()=>{setWriting(false);onNickname()}}>닉네임 설정</button>:null}<button type="button" className="secondary" disabled={saving} onClick={()=>setWriting(false)}>닫기</button><button className="primary" disabled={saving||!valid}>{saving?'게시 중':'빌드 게시'}</button></div>
+     <div className="editor-actions">{!userId?<button type="button" className="secondary" onClick={onLogin}>Google 로그인</button>:!nickname?<button type="button" className="secondary" onClick={()=>{setWriting(false);onNickname()}}>닉네임 설정</button>:null}<button type="button" className="secondary" disabled={saving} onClick={()=>setWriting(false)}>닫기</button><button className="primary" disabled={saving||!valid}>{saving?'저장 중':editing?'수정 저장':'빌드 게시'}</button></div>
    </form>}</BuildModal>}
-   {selected&&<BuildModal title="빌드 상세" onClose={()=>setSelected(null)}><article className="community-guide"><span className="overline">ADVENTURER BUILD</span><h1>{selected.title}</h1><div className="guide-byline"><span>{selected.profiles?.nickname||'모험가'} · {selected.version}</span>{selected.user_id===userId&&<button className="text-button danger-button" onClick={()=>void remove(selected)}><Trash2 size={14}/> 내 빌드 삭제</button>}</div><div className="build-tags">{selected.tags.map(t=><span key={t}>[{t}]</span>)}</div><div className="build-job-detail">{entry(selected.job_id)&&renderArt(entry(selected.job_id)!)}<span>직업<strong>{entry(selected.job_id)?.name||'등록되지 않은 직업'}</strong></span></div>{!!selected.trait_ids?.length&&<section className="build-selected-traits"><h3>직업 특성</h3>{selected.trait_ids.map(id=><p key={id}>{jobTraits[entry(selected.job_id)?.name||'']?.traits.find(t=>t.id===id)?.description||'등록되지 않은 특성'}</p>)}</section>}{selected.armor_id&&<div className="build-job-detail">{entry(selected.armor_id)&&renderArt(entry(selected.armor_id)!)}<span>갑옷<strong>{entry(selected.armor_id)?.name||'등록되지 않은 갑옷'}</strong>{entry(selected.armor_id)?.description}</span></div>}<Loadout ids={selected.inventory_ids}/><div className="guide-content">{selected.content}</div></article><CommunityDiscussion targetKey={`build-post:${selected.id}`} userId={userId} nickname={nickname} onLogin={onLogin} onNickname={onNickname}/></BuildModal>}
+   {selected&&<BuildModal title="빌드 상세" onClose={()=>setSelected(null)}>{error&&<p role="alert" className="editor-error">{error}</p>}<article className="community-guide"><span className="overline">ADVENTURER BUILD</span><h1>{selected.title}</h1><div className="guide-byline"><span>{selected.profiles?.nickname||'모험가'} · {selected.version}</span>{selected.user_id===userId&&<><button className="text-button" disabled={deleting} onClick={()=>edit(selected)}><Pencil size={14}/> 내 빌드 수정</button><button className="text-button danger-button" disabled={deleting} onClick={()=>void remove(selected)}><Trash2 size={14}/> {deleting?'삭제 중':'내 빌드 삭제'}</button></>}</div><div className="build-tags">{selected.tags.map(t=><span key={t}>[{t}]</span>)}</div><div className="build-job-detail">{entry(selected.job_id)&&renderArt(entry(selected.job_id)!)}<span>직업<strong>{entry(selected.job_id)?.name||'등록되지 않은 직업'}</strong></span></div>{!!selected.trait_ids?.length&&<section className="build-selected-traits"><h3>직업 특성</h3>{selected.trait_ids.map(id=><p key={id}>{jobTraits[entry(selected.job_id)?.name||'']?.traits.find(t=>t.id===id)?.description||'등록되지 않은 특성'}</p>)}</section>}{selected.armor_id&&<div className="build-job-detail">{entry(selected.armor_id)&&renderArt(entry(selected.armor_id)!)}<span>갑옷<strong>{entry(selected.armor_id)?.name||'등록되지 않은 갑옷'}</strong>{entry(selected.armor_id)?.description}</span></div>}<Loadout ids={selected.inventory_ids}/><div className="guide-content">{selected.content}</div></article><CommunityDiscussion targetKey={`build-post:${selected.id}`} userId={userId} nickname={nickname} onLogin={onLogin} onNickname={onNickname}/></BuildModal>}
  </section>;
 }
 
