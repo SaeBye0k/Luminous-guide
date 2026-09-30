@@ -19,3 +19,6 @@ create policy "Delete own tier lists" on public.tier_lists for delete to authent
 grant select on public.tier_lists to anon,authenticated;
 grant insert,delete on public.tier_lists to authenticated;
 create index if not exists tier_lists_version_created_idx on public.tier_lists(version,created_at desc);
+
+-- Preserve card order without changing existing tier assignments.
+alter table public.tier_lists add column if not exists item_order text[] not null default '{}';
