@@ -12,10 +12,10 @@ const FOOD_SLOT='slot_food';
 const TAGS=['보스','던전','회랑','PVP','예능'] as const;
 type BuildPost={id:number;user_id:string;title:string;job_id:string;armor_id:string;trait_ids:string[];inventory_ids:string[];tags:string[];content:string;version:string;created_at:string;profiles:{nickname:string}|null};
 type Props={entries:Entry[];version:string;userId?:string;nickname:string;onLogin:()=>void;onNickname:()=>void;renderArt:(entry:Entry)=>ReactNode};
-function BuildModal({title,onClose,children}:{title:string;onClose:()=>void;children:ReactNode}){
+function BuildModal({title,onClose,children,className=''}:{title:string;onClose:()=>void;children:ReactNode;className?:string}){
  const ref=useRef<HTMLDialogElement>(null);
  useEffect(()=>{const d=ref.current;d?.showModal();return()=>d?.close()},[]);
- return <dialog ref={ref} className="modal build-modal" onCancel={onClose} onClick={e=>{if(e.target===e.currentTarget)onClose()}}><div className="modal-header"><h2>{title}</h2><button type="button" className="icon-button" aria-label="닫기" onClick={onClose}><X/></button></div>{children}</dialog>;
+ return <dialog ref={ref} className={`modal build-modal ${className}`} onCancel={onClose} onClick={e=>{if(e.target===e.currentTarget)onClose()}}><div className="modal-header"><h2>{title}</h2><button type="button" className="icon-button" aria-label="닫기" onClick={onClose}><X/></button></div>{children}</dialog>;
 }
 export function BuildBoard({entries,version,userId,nickname,onLogin,onNickname,renderArt}:Props){
  const [posts,setPosts]=useState<BuildPost[]>([]);
@@ -79,7 +79,7 @@ export function BuildBoard({entries,version,userId,nickname,onLogin,onNickname,r
    }catch{setError('빌드를 삭제하지 못했습니다. 다시 시도해주세요.')}finally{deleteLock.current=false;setDeleting(false)}
  }
  function Loadout({ids}:{ids:string[]}){
-   return <div className="build-loadout">{ids.map((id,i)=>{const item=entry(id);return <div className="build-slot" key={i}><span className="slot-number">{i+1}</span>{id===FOOD_SLOT?<UtensilsCrossed size={28}/>:item?renderArt(item):<Layers size={22}/>}<strong>{id===FOOD_SLOT?'음식':item?.name||(id?'등록되지 않은 항목':'빈 칸')}</strong><small>{id===FOOD_SLOT?'음식 칸':item?.category||(id?'확인 필요':'미장착')}</small></div>})}</div>;
+   return <div className="build-loadout">{ids.map((id,i)=>{const item=entry(id);return <div className={`build-slot ${!id?'is-empty':''}`} key={i}><span className="slot-number">{i+1}</span>{id===FOOD_SLOT?<UtensilsCrossed size={28}/>:item?renderArt(item):<Layers size={22}/>}<strong>{id===FOOD_SLOT?'음식':item?.name||(id?'등록되지 않은 항목':'빈 칸')}</strong><small>{id===FOOD_SLOT?'음식 칸':item?.category||(id?'확인 필요':'미장착')}</small></div>})}</div>;
  }
  const visible=posts.filter(p=>(filter==='전체'||p.tags.includes(filter))&&[p.title,p.content,entry(p.job_id)?.name||''].some(t=>t.includes(search)));
  return <section className="build-board">
@@ -99,7 +99,14 @@ export function BuildBoard({entries,version,userId,nickname,onLogin,onNickname,r
      {formError&&<p role="alert" className="editor-error">{formError}</p>}
      <div className="editor-actions">{!userId?<button type="button" className="secondary" onClick={onLogin}>Google 로그인</button>:!nickname?<button type="button" className="secondary" onClick={()=>{setWriting(false);onNickname()}}>닉네임 설정</button>:null}<button type="button" className="secondary" disabled={saving} onClick={()=>setWriting(false)}>닫기</button><button className="primary" disabled={saving||!valid}>{saving?'저장 중':editing?'수정 저장':'빌드 게시'}</button></div>
    </form>}</BuildModal>}
-   {selected&&<BuildModal title="빌드 상세" onClose={()=>setSelected(null)}>{error&&<p role="alert" className="editor-error">{error}</p>}<article className="community-guide"><span className="overline">ADVENTURER BUILD</span><h1>{selected.title}</h1><div className="guide-byline"><span>{selected.profiles?.nickname||'모험가'} · {selected.version}</span>{selected.user_id===userId&&<><button className="text-button" disabled={deleting} onClick={()=>edit(selected)}><Pencil size={14}/> 내 빌드 수정</button><button className="text-button danger-button" disabled={deleting} onClick={()=>void remove(selected)}><Trash2 size={14}/> {deleting?'삭제 중':'내 빌드 삭제'}</button></>}</div><div className="build-tags">{selected.tags.map(t=><span key={t}>[{t}]</span>)}</div><div className="build-job-detail">{entry(selected.job_id)&&renderArt(entry(selected.job_id)!)}<span>직업<strong>{entry(selected.job_id)?.name||'등록되지 않은 직업'}</strong></span></div>{!!selected.trait_ids?.length&&<section className="build-selected-traits"><h3>직업 특성</h3>{selected.trait_ids.map(id=><p key={id}>{jobTraits[entry(selected.job_id)?.name||'']?.traits.find(t=>t.id===id)?.description||'등록되지 않은 특성'}</p>)}</section>}{selected.armor_id&&<div className="build-job-detail">{entry(selected.armor_id)&&renderArt(entry(selected.armor_id)!)}<span>갑옷<strong>{entry(selected.armor_id)?.name||'등록되지 않은 갑옷'}</strong>{entry(selected.armor_id)?.description}</span></div>}<Loadout ids={selected.inventory_ids}/><div className="guide-content">{selected.content}</div></article><CommunityDiscussion targetKey={`build-post:${selected.id}`} userId={userId} nickname={nickname} onLogin={onLogin} onNickname={onNickname}/></BuildModal>}
+   {selected&&<BuildModal title="빌드 상세" className="build-detail-modal" onClose={()=>setSelected(null)}>{error&&<p role="alert" className="editor-error">{error}</p>}
+     <article className="build-detail">
+       <header className="build-detail-heading"><div><h1>{selected.title}</h1><p className="build-detail-meta">{selected.profiles?.nickname||'모험가'} <span>· {selected.version}</span></p></div>{selected.user_id===userId&&<div className="build-owner-actions"><button className="secondary" disabled={deleting} onClick={()=>edit(selected)}><Pencil size={14}/> 수정</button><button className="secondary danger-button" disabled={deleting} onClick={()=>void remove(selected)}><Trash2 size={14}/> {deleting?'삭제 중':'삭제'}</button></div>}</header>
+       <div className="build-tags">{selected.tags.map(t=><span key={t}>{t}</span>)}</div>
+       <div className="build-overview"><section className="build-character-summary" aria-label="직업과 갑옷">{[{label:'직업',id:selected.job_id},{label:'갑옷',id:selected.armor_id}].map(({label,id})=><div className="build-summary-entry" key={label}>{entry(id)?renderArt(entry(id)!):<Layers size={24}/>}<div><span>{label}</span><strong>{entry(id)?.name||(id?'등록되지 않은 항목':'미장착')}</strong>{label==='갑옷'&&entry(id)&&<p>{entry(id)!.description}</p>}</div></div>)}</section><section className="build-trait-summary"><h2>직업 특성 <span>{selected.trait_ids?.length||0} / 3</span></h2>{selected.trait_ids?.length?<ul>{selected.trait_ids.map(id=><li key={id}>{jobTraits[entry(selected.job_id)?.name||'']?.traits.find(t=>t.id===id)?.description||'등록되지 않은 특성'}</li>)}</ul>:<p className="muted">선택한 특성이 없습니다.</p>}</section></div>
+       <section className="build-detail-inventory"><h2>인벤토리 <span>{selected.inventory_ids.filter(Boolean).length} / 6칸</span></h2><Loadout ids={selected.inventory_ids}/></section>
+       <section className="build-detail-guide"><h2>운용 공략</h2><div className="guide-content">{selected.content}</div></section>
+     </article><CommunityDiscussion targetKey={`build-post:${selected.id}`} userId={userId} nickname={nickname} onLogin={onLogin} onNickname={onNickname}/></BuildModal>}
  </section>;
 }
 
