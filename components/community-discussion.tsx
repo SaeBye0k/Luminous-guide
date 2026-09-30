@@ -13,9 +13,10 @@ type CommentRow = {
 };
 
 export function CommunityDiscussion({
-  targetKey,userId,nickname,onLogin,onNickname,
+  targetKey,userId,nickname,onLogin,onNickname,label='모험가의 의견',
 }:{
   targetKey:string;
+  label?:string;
   userId?:string;
   nickname:string;
   onLogin:()=>void;
@@ -64,7 +65,7 @@ export function CommunityDiscussion({
   }
 
   return <section className="discussion">
-    <div className="section-heading"><h3>모험가의 의견 <span className="muted">{comments.length}</span></h3></div>
+    <div className="section-heading"><h3>{label} <span className="muted">{comments.length}</span></h3></div>
     {loading&&<p className="empty-mini">의견을 불러오는 중입니다.</p>}
     {!loading&&!comments.length&&<p className="empty-mini">첫 의견을 남겨보세요.</p>}
     {comments.map(comment=><div className="comment" key={comment.id}><span className="avatar">{comment.profiles?.nickname?.slice(0,1)||'?'}</span><div className="comment-copy"><strong>{comment.profiles?.nickname||'모험가'}</strong><p>{comment.content}</p></div>{comment.user_id===userId&&<button className="comment-delete" onClick={()=>void remove(comment)} aria-label="내 의견 삭제" title="삭제"><Trash2 size={14}/></button>}</div>)}
