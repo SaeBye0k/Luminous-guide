@@ -45,10 +45,10 @@ export function BuildBoard({entries,version,userId,nickname,onLogin,onNickname,r
    // Composition is available before login; authentication is required to publish.
    setFormError('');setWriting(true);
  }
- const valid=!!title.trim()&&jobs.some(e=>e.id===job)&&slots.length===6&&slots.every(id=>items.some(e=>e.id===id))&&tags.length>0&&!!content.trim();
+ const valid=!!title.trim()&&jobs.some(e=>e.id===job)&&slots.length===6&&slots.every(id=>id===''||items.some(e=>e.id===id))&&tags.length>0&&!!content.trim();
  async function submit(e:FormEvent){
    e.preventDefault();if(submitLock.current)return;setFormError('');
-   if(!valid){setFormError('직업, 인벤토리 6칸, 제목, 목적 태그와 공략을 모두 채워주세요.');return}
+   if(!valid){setFormError('직업, 제목, 목적 태그와 공략을 채워주세요.');return}
    if(!userId){setFormError('게시하려면 Google 로그인이 필요합니다.');return}
    if(!nickname){setFormError('게시하려면 닉네임을 설정해주세요.');return}
    if(!supabase){setFormError('빌드 공유 연결이 아직 설정되지 않았습니다.');return}
@@ -64,7 +64,7 @@ export function BuildBoard({entries,version,userId,nickname,onLogin,onNickname,r
    setSelected(null);setPosts(prev=>prev.filter(b=>b.id!==p.id));
  }
  function Loadout({ids}:{ids:string[]}){
-   return <div className="build-loadout">{ids.map((id,i)=>{const item=entry(id);return <div className="build-slot" key={i}><span className="slot-number">{i+1}</span>{item?renderArt(item):<Layers size={22}/>}<strong>{item?.name||'등록되지 않은 항목'}</strong><small>{item?.category||'확인 필요'}</small></div>})}</div>;
+   return <div className="build-loadout">{ids.map((id,i)=>{const item=entry(id);return <div className="build-slot" key={i}><span className="slot-number">{i+1}</span>{item?renderArt(item):<Layers size={22}/>}<strong>{item?.name||(id?'등록되지 않은 항목':'빈 칸')}</strong><small>{item?.category||(id?'확인 필요':'미장착')}</small></div>})}</div>;
  }
  const visible=posts.filter(p=>(filter==='전체'||p.tags.includes(filter))&&[p.title,p.content,entry(p.job_id)?.name||''].some(t=>t.includes(search)));
  return <section className="build-board">
@@ -76,7 +76,7 @@ export function BuildBoard({entries,version,userId,nickname,onLogin,onNickname,r
      <p className="tiny muted">{version} · 직업 1개 + 무기·유물 인벤토리 6칸</p>
      <label>빌드 제목<input required maxLength={100} value={title} onChange={e=>setTitle(e.target.value)} placeholder="이 빌드의 특징을 알려주세요"/></label>
      <label>직업<select required aria-label="빌드 직업" value={job} onChange={e=>setJob(e.target.value)}><option value="">직업 선택</option>{jobs.map(e=><option key={e.id} value={e.id}>{e.name} · {e.type}</option>)}</select></label>
-     <fieldset className="build-inventory"><legend>인벤토리 · 6칸 모두 채워주세요</legend><div className="build-loadout">{slots.map((id,i)=>{const chosen=entry(id);return <label className="build-slot build-slot-editor" key={i}><span className="slot-number">{i+1}</span>{chosen?renderArt(chosen):<Layers size={28}/>}<select aria-label={`인벤토리 ${i+1}`} required value={id} onChange={e=>setSlots(prev=>prev.map((v,n)=>n===i?e.target.value:v))}><option value="">무기 / 유물 선택</option>{(['무기','유물'] as const).map(c=><optgroup label={c} key={c}>{items.filter(e=>e.category===c).map(e=><option key={e.id} value={e.id}>{e.name}</option>)}</optgroup>)}</select></label>})}</div></fieldset>
+     <fieldset className="build-inventory"><legend>인벤토리 · 필요한 칸만 채워주세요</legend><div className="build-loadout">{slots.map((id,i)=>{const chosen=entry(id);return <label className="build-slot build-slot-editor" key={i}><span className="slot-number">{i+1}</span>{chosen?renderArt(chosen):<Layers size={28}/>}<select aria-label={`인벤토리 ${i+1}`} value={id} onChange={e=>setSlots(prev=>prev.map((v,n)=>n===i?e.target.value:v))}><option value="">빈 칸 / 무기·유물 선택</option>{(['무기','유물'] as const).map(c=><optgroup label={c} key={c}>{items.filter(e=>e.category===c).map(e=><option key={e.id} value={e.id}>{e.name}</option>)}</optgroup>)}</select></label>})}</div></fieldset>
      <fieldset className="build-purpose"><legend>목적 태그 · 1개 이상 선택</legend><div className="build-tags">{TAGS.map(t=><button type="button" key={t} className={tags.includes(t)?'active':''} aria-pressed={tags.includes(t)} onClick={()=>setTags(prev=>prev.includes(t)?prev.filter(v=>v!==t):[...prev,t])}>[{t}]</button>)}</div></fieldset>
      <label>간단한 공략<textarea required rows={6} maxLength={5000} value={content} onChange={e=>setContent(e.target.value)} placeholder="조합의 핵심, 운용 순서와 주의할 점을 알려주세요."/></label>
      {formError&&<p role="alert" className="editor-error">{formError}</p>}

@@ -4,7 +4,7 @@ create table if not exists public.build_posts (
   user_id uuid not null references public.profiles(user_id) on delete cascade,
   title text not null check (char_length(title) between 1 and 100),
   job_id text not null check (char_length(job_id) > 0),
-  inventory_ids text[] not null check (cardinality(inventory_ids) = 6 and array_position(inventory_ids, null) is null and array_position(inventory_ids, '') is null),
+  inventory_ids text[] not null check (cardinality(inventory_ids) = 6 and array_position(inventory_ids, null) is null),
   tags text[] not null check (cardinality(tags) between 1 and 5 and tags <@ array['보스','던전','회랑','PVP','예능']::text[]),
   content text not null check (char_length(content) between 1 and 5000),
   version text not null,
@@ -21,3 +21,8 @@ create policy "Users delete own builds" on public.build_posts for delete to auth
 grant select on public.build_posts to anon, authenticated;
 grant insert, delete on public.build_posts to authenticated;
 grant usage, select on sequence public.build_posts_id_seq to authenticated;
+
+-- Allow empty inventory slots in existing installations without changing saved builds.
+alter table public.build_posts drop constraint if exists build_posts_inventory_ids_check;
+alter table public.build_posts add constraint build_posts_inventory_ids_check
+  check (cardinality(inventory_ids) = 6 and array_position(inventory_ids, null) is null);
