@@ -1,16 +1,16 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useRef } from 'react';
 import type { User } from '@supabase/supabase-js';
 import { supabase, supabaseConfigured } from '@/lib/supabase';
-import { TIERS, type Entry, type Tier } from '@/lib/game-data';
+import { TIERS, type Entry, type Tier, type GameMode } from '@/lib/game-data';
 
 type Counts = Record<string, number[]>;
 type VoteRow = { entry_id:string; tier:Tier };
 type CountRow = { entry_id:string; tier:Tier; vote_count:number };
 type RecentRow = { entry_id:string; last_voted_at:string };
 
-export function useCommunityVotes(entries:Entry[], version:string) {
+export function useCommunityVotes(entries:Entry[], version:string, mode:GameMode='PVE') {
   const [user,setUser]=useState<User|null>(null);
   const [counts,setCounts]=useState<Counts>({});
   const [myVotes,setMyVotes]=useState<Record<string,Tier>>({});
@@ -20,11 +20,13 @@ export function useCommunityVotes(entries:Entry[], version:string) {
   const [nickname,setNickname]=useState('');
   const [recentEntryIds,setRecentEntryIds]=useState<string[]>([]);
 
+  const request=useRef(0);
   const refresh=useCallback(async(activeUser:User|null)=>{
     if(!supabase){setLoading(false);return}
-    setLoading(true);setError('');
+    const ticket=++request.current;setLoading(true);setError('');
 
-    const aggregate=await supabase.rpc('get_vote_counts',{p_version:version});
+    const aggregate=await supabase.rpc('get_vote_counts_by_mode',{p_version:version,p_mode:mode});
+    if(ticket!==request.current)return;
     if(aggregate.error)setError('투표 결과를 불러오지 못했습니다.');
     else {
       const next:Counts={};
@@ -37,22 +39,25 @@ export function useCommunityVotes(entries:Entry[], version:string) {
       setCounts(next);
     }
 
-    const recent=await supabase.rpc('get_recent_voted_entries',{p_version:version,p_limit:100});
+    const recent=await supabase.rpc('get_recent_voted_entries_by_mode',{p_version:version,p_mode:mode,p_limit:100});
+    if(ticket!==request.current)return;
     if(recent.error)setRecentEntryIds([]);
     else setRecentEntryIds(((recent.data||[]) as RecentRow[]).map(row=>row.entry_id));
 
     if(activeUser){
       const profile=await supabase.from('profiles').select('nickname').eq('user_id',activeUser.id).maybeSingle();
       if(!profile.error)setNickname(profile.data?.nickname||'');
-      const own=await supabase.from('votes').select('entry_id,tier').eq('version',version).eq('user_id',activeUser.id);
+      const own=await supabase.from('votes').select('entry_id,tier').eq('version',version).eq('mode',mode).eq('user_id',activeUser.id);
+      if(ticket!==request.current)return;
       if(own.error)setError('내 투표 정보를 불러오지 못했습니다.');
       else setMyVotes(Object.fromEntries(((own.data||[]) as VoteRow[]).map(row=>[row.entry_id,row.tier])));
     }else {setMyVotes({});setNickname('')}
     setLoading(false);
-  },[entries,version]);
+  },[entries,version,mode]);
 
   useEffect(()=>{
     if(!supabase){setLoading(false);return}
+    setCounts({});setMyVotes({});setRecentEntryIds([]);
     let active=true;
     const timers=new Set<ReturnType<typeof setTimeout>>();
     const schedule=(nextUser:User|null)=>{
@@ -79,7 +84,7 @@ export function useCommunityVotes(entries:Entry[], version:string) {
     });
 
     return()=>{
-      active=false;
+      active=false;request.current++;
       for(const timer of timers)clearTimeout(timer);
       data.subscription.unsubscribe();
     };
@@ -90,7 +95,7 @@ export function useCommunityVotes(entries:Entry[], version:string) {
     setError('');
     const {error:signInError}=await supabase.auth.signInWithOAuth({
       provider:'google',
-      options:{redirectTo:window.location.origin+window.location.pathname},
+      options:{redirectTo:window.location.origin+window.location.pathname+window.location.search},
     });
     if(signInError)setError('Google 로그인을 시작하지 못했습니다.');
   }
@@ -105,8 +110,8 @@ export function useCommunityVotes(entries:Entry[], version:string) {
     if(!supabase||!user)return false;
     setSaving(entryId);setError('');
     const result=await supabase.from('votes').upsert({
-      user_id:user.id,entry_id:entryId,version,tier,updated_at:new Date().toISOString(),
-    },{onConflict:'user_id,entry_id,version'});
+      user_id:user.id,entry_id:entryId,version,mode,tier,updated_at:new Date().toISOString(),
+    },{onConflict:'user_id,entry_id,version,mode'});
     setSaving('');
     if(result.error){setError('투표를 저장하지 못했습니다.');return false}
     setMyVotes(previous=>({...previous,[entryId]:tier}));

@@ -1,11 +1,13 @@
+import { notionArmor } from './notion-armor';
 import { notionItems } from './notion-items';
 import { notionJobs } from './notion-jobs';
 
 export const TIERS = ['S', 'A', 'B', 'C', 'D'] as const;
+export type GameMode = 'PVE' | 'PVP';
 export type Tier = typeof TIERS[number];
 
 export const VERSIONS = ['26-09-30'];
-export type Category = '무기' | '직업' | '유물' | '던전';
+export type Category = '무기' | '직업' | '유물' | '갑옷' | '던전';
 
 export type Entry = {
   id: string;
@@ -40,6 +42,7 @@ export type Guide = {
 export const entries: Entry[] = [
   ...notionJobs,
   ...notionItems,
+  ...notionArmor,
 ];
 export const guides: Guide[] = [];
 
