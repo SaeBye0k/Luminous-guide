@@ -1,11 +1,60 @@
-# 루미너스 공략 페이지
+<div align="center">
 
-# 루미너스 공략 페이지
+# LUMINOUS GUIDE
 
-Node.js / SQL 사용
-구글 로그인 기반 티어리스트 투표
+### 모험가의 경험이 다음 공략이 되는 곳
 
-Next.js App Router 기반의 정적 사이트입니다. GitHub Pages에 배포할 수 있으며 홈, 게임 데이터베이스, 버전별 티어, 개인 티어표 제작, 공략 화면을 포함합니다.
+루미너스의 무기·직업·유물을 한곳에서 살펴보고,<br />
+직접 투표하고 공략을 나누며 함께 완성하는 커뮤니티 가이드입니다.
+
+**[루미너스 가이드 바로가기](https://saebye0k.github.io/Luminous-guide/)**
+
+</div>
+
+---
+
+## 루미너스 가이드
+
+루미너스 가이드는 게임 정보를 일방적으로 보여주는 위키를 넘어, 모험가들이 직접 평가와 경험을 더해 가는 참여형 공략 사이트입니다.
+
+어떤 무기가 좋은지, 어떤 직업이 나와 맞는지 고민될 때 다른 모험가들의 평가를 확인할 수 있습니다. 직접 사용해 본 장비와 직업에는 티어를 투표하고, 자신만의 노하우는 공략 게시판에 남길 수 있습니다.
+
+## 주요 기능
+
+- **게임 데이터베이스** — 무기, 직업, 유물의 등급·속성·설명과 이미지를 탐색할 수 있습니다.
+- **커뮤니티 티어** — 로그인한 모험가의 S~D 투표를 모아 평균 점수, 분포, 의견 일치도를 보여줍니다.
+- **최근 커뮤니티 픽** — 최근 투표를 받은 무기와 직업을 순환해서 소개합니다.
+- **계정당 한 표** — 같은 버전과 항목에는 계정당 한 표만 반영되며, 선택을 바꾸면 기존 표가 갱신됩니다.
+- **공략 게시판** — 자신만의 공략을 작성하고 다른 모험가와 댓글로 의견을 나눌 수 있습니다.
+- **개인 티어표** — 카드를 직접 배치해 나만의 티어표를 만들고 브라우저에 저장할 수 있습니다.
+- **버전별 기록** — 패치 버전마다 투표를 분리해 현재 환경에 맞는 평가를 확인할 수 있습니다.
+- **모험가 닉네임** — Google 로그인 후 설정한 닉네임으로 댓글과 공략 활동을 할 수 있습니다.
+
+## 현재 수록 데이터
+
+공개된 루미너스 RPG 자료를 바탕으로 완성된 데이터만 선별해 등록했습니다.
+
+| 분류 | 수록 항목 | 표시 정보 |
+| --- | ---: | --- |
+| 무기 | 40개 | 이미지, 이름, 무기 등급, 속성, 설명 |
+| 유물 | 49개 | 이미지, 이름, 희귀도, 속성, 설명 |
+| 직업 | 50개 | 클래스 아이콘, 이름, 역할, 속성, 설명 |
+
+현재 커뮤니티 평가 버전은 **26-09-30**입니다. `(미완)` 또는 `(추가 전)`으로 표시된 자료는 정확한 정보 제공을 위해 제외했습니다.
+
+## 커뮤니티 운영 원칙
+
+- 커뮤니티 티어는 운영자의 임의 평가가 아니라 실제 사용자 투표로 만들어집니다.
+- 아직 표를 받지 않은 항목은 임의의 등급 대신 **평가 대기**로 표시됩니다.
+- 본인이 작성한 댓글과 공략은 직접 삭제할 수 있습니다.
+- 장비 이름과 이미지 같은 공식 데이터는 저장소 관리자만 수정할 수 있습니다.
+- 패치가 적용되면 새 버전의 투표를 시작하고 이전 기록은 구분해 보존합니다.
+
+## 기술 구성
+
+- **Next.js · React · TypeScript**
+- **Supabase** — Google 로그인, 닉네임, 투표, 댓글, 공략 데이터
+- **GitHub Pages · GitHub Actions** — 정적 사이트 빌드와 자동 배포
 
 ## 로컬 실행
 
@@ -16,71 +65,59 @@ npm ci
 npm run dev
 ```
 
-정적 배포 결과 확인:
+배포 결과를 미리 확인하려면 다음 명령을 사용합니다.
 
 ```sh
 npm run build
 npm start
 ```
 
-빌드 결과는 `out/`에 생성됩니다.
+정적 빌드 결과는 `out/`에 생성됩니다.
 
 ## GitHub Pages 배포
 
-1. 이 폴더의 내용을 GitHub 저장소 `main` 브랜치에 올립니다.
-2. 저장소 **Settings → Pages → Build and deployment**에서 Source를 **GitHub Actions**로 선택합니다.
-3. `main`에 push하면 `.github/workflows/deploy-pages.yml`이 자동으로 빌드하고 배포합니다.
+1. 저장소의 `main` 브랜치에 변경 사항을 올립니다.
+2. **Settings → Pages → Build and deployment**에서 Source를 **GitHub Actions**로 선택합니다.
+3. 이후 `main`에 변경 사항을 올릴 때마다 `.github/workflows/deploy-pages.yml`이 사이트를 자동으로 빌드하고 배포합니다.
 
-워크플로는 사용자/조직 사이트(`계정.github.io`)와 프로젝트 사이트(`계정.github.io/저장소명`)의 경로를 자동으로 구분합니다.
+워크플로는 사용자 사이트와 프로젝트 사이트의 경로를 자동으로 구분합니다.
 
-## 관리자 콘텐츠 수정
+## Supabase 설정
 
-GitHub Pages는 서버나 비공개 관리자 세션을 제공하지 않습니다. 사이트 안에서 직접 저장하는 관리자 편집 기능은 배포판에서 제거했습니다. 실제 수정 권한은 GitHub 저장소 쓰기 권한으로 제한됩니다.
+Google 로그인과 커뮤니티 기능을 사용하려면 아래 순서로 설정합니다.
 
-- 무기 이름, 설명, 등급, 집계 데이터: `lib/game-data.ts`
-- 무기 이미지: `public/`에 파일을 추가한 뒤 해당 항목의 `imageUrl`을 설정
-- 사이트 문구와 화면: `components/guide-app.tsx`
-
-저장소 관리자만 변경을 `main`에 반영할 수 있으므로 일반 방문자는 무기 정보나 이미지를 바꿀 수 없습니다. 변경 후 push하면 Pages가 자동 갱신됩니다.
-
-현재 기본 데이터에는 루미너스 RPG 공개 Notion 문서를 기준으로 완성된 무기 40개, 유물 49개, 직업 50개가 등록되어 있습니다. `(미완)` 또는 `(추가 전)`으로 표시된 항목은 제외했습니다. 장비와 유물 이미지는 `public/game-assets/`에 보관되어 Notion 주소가 바뀌어도 사이트에서 계속 표시됩니다. Notion 직업 문서에는 별도의 직업 이미지가 없어 클래스별 아이콘으로 표시합니다.
-
-## 배포판 동작
-
-- 커뮤니티 픽은 등록된 무기를 5초마다 순환합니다.
-- 이전/다음, 일시정지, 항목 선택을 지원합니다.
-- 마우스를 올리거나 키보드 포커스가 있으면 자동 순환이 잠시 멈춥니다.
-- 동작 줄이기 설정을 사용하는 기기에서는 자동 순환을 끕니다.
-- 개인 티어표 초안과 저장본은 방문자의 브라우저에만 저장됩니다.
-
-GitHub Pages만으로는 여러 사용자가 공유하는 투표·댓글·좋아요를 안전하게 저장할 수 없습니다. 해당 기능을 실제로 운영하려면 별도의 인증·데이터베이스 API가 필요합니다.
-
-## Google 로그인과 투표 설정
-
-이 프로젝트는 Supabase Google 로그인과 계정당 한 표 투표 구조를 포함합니다.
-
-1. Supabase에서 프로젝트를 생성합니다.
-2. Supabase **SQL Editor**에서 `supabase/schema.sql`, `supabase/nickname-comments.sql`, `supabase/guide-posts.sql`, `supabase/recent-votes.sql`을 차례로 실행합니다.
+1. Supabase 프로젝트를 생성합니다.
+2. **SQL Editor**에서 아래 파일을 순서대로 실행합니다.
+   - `supabase/schema.sql`
+   - `supabase/nickname-comments.sql`
+   - `supabase/guide-posts.sql`
+   - `supabase/recent-votes.sql`
 3. **Authentication → Providers → Google**에서 Google 로그인을 활성화합니다.
-4. **Authentication → URL Configuration**의 Site URL을
-   `https://saebye0k.github.io/Luminous-guide/`로 설정하고 같은 주소를 Redirect URLs에도 추가합니다.
-5. GitHub 저장소 **Settings → Secrets and variables → Actions**에 다음 Repository secret을 추가합니다.
+4. **Authentication → URL Configuration**의 Site URL과 Redirect URL에 `https://saebye0k.github.io/Luminous-guide/`를 등록합니다.
+5. GitHub 저장소의 **Settings → Secrets and variables → Actions**에 다음 Repository secret을 추가합니다.
    - `NEXT_PUBLIC_SUPABASE_URL`
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-6. 새 커밋을 Push하거나 Actions에서 배포 작업을 다시 실행합니다.
+6. 새 변경 사항을 올리거나 Actions에서 배포 작업을 다시 실행합니다.
 
-공개용 anon 키는 브라우저에 포함되는 값입니다. `service_role` 키는 절대 GitHub나 프론트엔드에 넣지 마세요. 중복 투표는 데이터베이스 기본 키 `(user_id, entry_id, version)`로 차단하며, 다시 투표하면 기존 행을 갱신합니다.
+공개용 `anon` 키는 브라우저에서 사용하는 값입니다. 관리자 권한이 담긴 `service_role` 키는 프론트엔드나 GitHub에 등록하지 않습니다. 중복 투표는 데이터베이스의 `(user_id, entry_id, version)` 조합으로 차단됩니다.
 
-## 닉네임과 댓글
+## 콘텐츠 관리
 
-- 로그인한 사용자는 상단의 **닉네임 설정**에서 2~20자의 고유 닉네임을 등록할 수 있습니다.
-- 무기·직업·유물·던전 상세 화면과 공략, 저장한 티어표의 **모험가의 의견**에 댓글을 남길 수 있습니다.
-- 댓글에는 이메일 대신 설정한 닉네임이 표시됩니다.
-- 닉네임과 댓글은 Supabase에 저장되며, Row Level Security로 본인의 닉네임과 댓글만 작성·수정할 수 있습니다.
+GitHub Pages 배포판에서는 방문자가 게임 데이터를 수정할 수 없습니다. 저장소 쓰기 권한이 있는 관리자만 아래 파일을 수정하고 배포할 수 있습니다.
 
-## 공략 게시판
+- 게임 데이터: `lib/game-data.ts`
+- 게임 이미지: `public/game-assets/`
+- 사이트 화면과 문구: `components/guide-app.tsx`
+- 데이터베이스 구성: `supabase/`
 
-- 로그인하고 닉네임을 설정한 사용자는 공략 게시판에 제목과 본문을 작성할 수 있습니다.
-- 게시물과 게시물별 댓글은 Supabase에 저장되며 모든 방문자가 읽을 수 있습니다.
-- 배포 전 `supabase/guide-posts.sql`을 Supabase SQL Editor에서 실행해야 합니다.
+개인 티어표와 초안은 각 방문자의 브라우저에 저장됩니다. 로그인 기반 투표, 댓글, 닉네임, 공략은 Supabase에 저장됩니다.
 
+---
+
+<div align="center">
+
+**당신의 한 표와 한 줄의 공략이 루미너스의 다음 모험을 밝힙니다.**
+
+루미너스 가이드는 팬이 만들고 모험가들이 함께 채워 가는 비공식 커뮤니티 프로젝트입니다.
+
+</div>
