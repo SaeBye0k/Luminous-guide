@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./archive-theme.css";
 
 export const metadata: Metadata = {
   title: "LUMINOUS | 루미너스 공략 아카이브",
