@@ -10,13 +10,18 @@ const jobGroups = {
 
 const classIcons:Record<keyof typeof jobGroups,string>={전사:'sword',수호자:'shield',저격수:'bow',지원가:'heart',공통:'compass'};
 
+const jobElements:Record<string,string>={
+  칼리우드:'대지',
+  선포자:'대지',
+};
+
 export const notionJobs:Entry[]=Object.entries(jobGroups).flatMap(([jobClass,names])=>
   names.map((name,index)=>({
     id:`job_${jobClass}_${index+1}`,
     name,
     category:'직업' as const,
     type:`${jobClass} 계열`,
-    element:'무속성',
+    element:jobElements[name] ?? '무속성',
     rarity:'직업',
     icon:classIcons[jobClass as keyof typeof jobGroups],
     description:`${jobClass} 클래스에서 선택할 수 있는 직업입니다.`,
