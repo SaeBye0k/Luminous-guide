@@ -4,7 +4,7 @@ import { notionJobs } from './notion-jobs';
 export const TIERS = ['S', 'A', 'B', 'C', 'D'] as const;
 export type Tier = typeof TIERS[number];
 
-export const VERSIONS = ['1.0'];
+export const VERSIONS = ['26-09-30'];
 export type Category = '무기' | '직업' | '유물' | '던전';
 
 export type Entry = {

@@ -39,7 +39,7 @@ export function CommunityPick({weapons,version,blocked,result,renderArt,onOpen}:
   const score=result(current);
 
   return <section className="spotlight community-carousel" aria-label="커뮤니티 픽" aria-roledescription="캐러셀" onMouseEnter={()=>setHovered(true)} onMouseLeave={()=>setHovered(false)} onFocusCapture={()=>setFocused(true)} onBlurCapture={e=>{if(!e.currentTarget.contains(e.relatedTarget as Node))setFocused(false)}}>
-    <div className="spotlight-top"><span><Sparkles size={14}/> COMMUNITY PICK</span><div className="spotlight-tools"><span>v{version}</span></div></div>
+    <div className="spotlight-top"><span><Sparkles size={14}/> COMMUNITY PICK</span><div className="spotlight-tools"><span>{version}</span></div></div>
     <div key={current.id} className="pick-slide" aria-live={active?'off':'polite'}>
       <div className="spotlight-main"><div className="pick-art">{renderArt(current)}</div><div className="pick-copy"><span className="eyebrow">{current.category}{current.category==='무기'?` · ${current.rarity}`:''} · {current.element} · {current.type}</span><h2>{current.name}</h2><p>{current.tagline||current.description}</p><button className="text-button" onClick={()=>onOpen(current)}>상세 정보 <ChevronRight size={15}/></button></div><span className="giant-tier" aria-label={`${score.tier} 티어`}>{score.tier}</span></div>
       <div className="spotlight-stats"><span>커뮤니티 점수 <b>{score.average.toFixed(2)}<small> / 5</small></b></span><span>평가 참여 <b>{score.total}<small>명</small></b></span><span>의견 일치도 <b>{score.agreement}<small>%</small></b></span></div>
