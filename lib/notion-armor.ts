@@ -3,7 +3,7 @@ import type { Entry } from './game-data';
 // Source: https://luminous-rpg.notion.site/3a6f741d045e804b850cd9031561fd52
 // The source lists favored elements; no weapon rarity is assigned to armor.
 export const notionArmor: Entry[] = [
-  // Resource-pack image; effects and favored element provided by the site owner.
+  // Pack references vanilla copper_chestplate; icon from Mojang/bedrock-samples. Effects provided by the owner.
   {
     id: 'armor_copper',
     name: '구리 갑옷',
@@ -16,7 +16,7 @@ export const notionArmor: Entry[] = [
     power: 0,
     team: 'D',
     counts: [0, 0, 0, 0, 0],
-    imageUrl: '/game-assets/armor/copper.png',
+    imageUrl: '/game-assets/armor/copper-chestplate.png',
   },
   {
     "id": "notion_3a6f741d045e8025aaeff01f83a0f850",
