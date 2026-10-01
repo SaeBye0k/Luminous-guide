@@ -3,6 +3,21 @@ import type { Entry } from './game-data';
 // Source: https://luminous-rpg.notion.site/3a6f741d045e804b850cd9031561fd52
 // The source lists favored elements; no weapon rarity is assigned to armor.
 export const notionArmor: Entry[] = [
+  // Resource-pack image; effects and favored element provided by the site owner.
+  {
+    id: 'armor_copper',
+    name: '구리 갑옷',
+    category: '갑옷',
+    type: '갑옷',
+    element: '어둠',
+    rarity: '갑옷',
+    icon: 'shield',
+    description: '에너지 최대치 +160pt, 에너지 회복 효율 +30%',
+    power: 0,
+    team: 'D',
+    counts: [0, 0, 0, 0, 0],
+    imageUrl: '/game-assets/armor/copper.png',
+  },
   {
     "id": "notion_3a6f741d045e8025aaeff01f83a0f850",
     "name": "낡은 가죽 갑옷",
