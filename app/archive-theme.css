@@ -123,3 +123,9 @@ body:has(.app-shell[data-mode=PVP]){background:radial-gradient(ellipse at 75% 0%
 .community-carousel .giant-tier.tier-S{color:#ff8d9c}.community-carousel .giant-tier.tier-A{color:#ffc080}.community-carousel .giant-tier.tier-B-plus{color:#c6ee98;font-size:60px}.community-carousel .giant-tier.tier-B{color:#f3df83}.community-carousel .giant-tier.tier-C{color:#91d4ab}.community-carousel .giant-tier.tier-D{color:#9bb9ef}.community-carousel .giant-tier.tier-F{color:#c2c8d6}
 .community-carousel .pick-pending{position:absolute;right:4px;top:26px;font-size:11px}
 @media(max-width:760px){.community-carousel .spotlight-main{padding-right:66px}.community-carousel .giant-tier{font-size:50px;top:30px;right:2px}.community-carousel .giant-tier.tier-B-plus{font-size:40px}.community-carousel .pick-pending{font-size:10px;right:0}}
+
+/* Pending ratings use a compact icon instead of wrapping text. */
+.tier-badge.tier-pending{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;min-width:28px;padding:0;flex-shrink:0;line-height:1;box-sizing:border-box;color:#b9c6d8;background:#242c38}
+.tier-pending svg{width:18px;height:18px;flex-shrink:0}
+.community-carousel .pick-pending{width:36px;height:36px;min-width:36px}.community-carousel .pick-pending svg{width:24px;height:24px}
+@media(max-width:760px){.community-carousel .pick-pending{width:30px;height:30px;min-width:30px}.community-carousel .pick-pending svg{width:20px;height:20px}}
