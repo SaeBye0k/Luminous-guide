@@ -74,6 +74,6 @@ export function PatchNotes({compact=false,userId,nickname,onLogin,onNickname}:Pr
       </article>{rating}
       {!compact&&<CommunityDiscussion key={patch.id} targetKey={`patch:${patch.id}`} label="이번 패치에 대한 의견" userId={userId} nickname={nickname} onLogin={onLogin} onNickname={onNickname}/>}
     </>}
-    {compact&&<Link className="text-button patch-more" href="/patch-notes/">패치노트 전체 보기 · 의견 남기기 <ArrowRight size={15}/></Link>}
+    {compact&&<Link className="secondary patch-more" href="/patch-notes/">패치 상세·댓글 보기 <ArrowRight size={15}/></Link>}
   </section>;
 }
