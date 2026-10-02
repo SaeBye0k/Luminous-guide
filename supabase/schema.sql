@@ -2,7 +2,7 @@ create table if not exists public.votes (
   user_id uuid not null references auth.users(id) on delete cascade,
   entry_id text not null,
   version text not null,
-  tier text not null check (tier in ('S','A','B','C','D')),
+  tier text not null check (tier in ('S','A','B+','B','C','D','F')),
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
   primary key (user_id, entry_id, version)

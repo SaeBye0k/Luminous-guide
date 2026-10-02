@@ -94,3 +94,11 @@ body:has(.app-shell[data-mode=PVP]){background:radial-gradient(ellipse at 75% 0%
 /* All slot art, including food and empty slots, shares the same baseline. */
 .build-slot-art{width:100%;height:62px;display:flex;align-items:center;justify-content:center;flex-shrink:0}.build-detail-inventory .build-slot-art{height:52px}.build-slot.is-empty .build-slot-art{opacity:.4}
 .build-transcend-badge{font-size:10px;color:var(--accent);background:#a8b5ff14;border:1px solid #a8b5ff40;border-radius:3px;padding:2px 6px}.build-compose-form .build-transcend-select{display:flex;align-items:center;justify-content:space-between;gap:6px;width:100%;font-size:11px;color:var(--muted)}.build-compose-form .build-transcend-select select{width:auto;flex:1;min-height:34px;font-size:12px}
+
+/* Extended tiers share the same styles across boards, badges and votes. */
+.tier-B-plus{color:#bbd999;background:#293526}.text-B-plus{color:#bbd999}
+.tier-F{color:#a4a9b6;background:#282b34}.text-F{color:#a4a9b6}
+.tier-label .tier-plea{font-size:10px;line-height:1.4;white-space:normal;padding:0 4px;margin-top:6px}
+.vote-buttons{grid-template-columns:repeat(7,minmax(0,1fr))}
+.distribution-row b{width:24px;flex-shrink:0}
+@media(max-width:760px){.tier-label .tier-plea{font-size:9px}.vote-buttons{gap:4px}.vote-buttons button{font-size:16px;padding:9px 2px}}

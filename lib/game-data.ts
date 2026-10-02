@@ -2,9 +2,14 @@ import { notionArmor } from './notion-armor';
 import { notionItems } from './notion-items';
 import { notionJobs } from './notion-jobs';
 
-export const TIERS = ['S', 'A', 'B', 'C', 'D'] as const;
+export const TIERS = ['S', 'A', 'B+', 'B', 'C', 'D', 'F'] as const;
 export type GameMode = 'PVE' | 'PVP';
 export type Tier = typeof TIERS[number];
+export const TIER_SCORES: Record<Tier, number> = { S: 5, A: 4, 'B+': 3.5, B: 3, C: 2, D: 1, F: 0 };
+export const TIER_THRESHOLDS: Record<Tier, number> = { S: 4.5, A: 3.75, 'B+': 3.25, B: 2.5, C: 1.5, D: 0.5, F: 0 };
+export const TIER_RANGES: Record<Tier, string> = { S: '4.50+', A: '3.75+', 'B+': '3.25+', B: '2.50+', C: '1.50+', D: '0.50+', F: '< 0.50' };
+export const tierClass = (tier: string) => tier === 'B+' ? 'B-plus' : tier;
+export const emptyCounts = () => TIERS.map(() => 0);
 
 export const VERSIONS = ['26-09-30'];
 export type Category = '무기' | '직업' | '유물' | '갑옷' | '던전';
@@ -47,23 +52,26 @@ export const entries: Entry[] = [
 export const guides: Guide[] = [];
 
 export function baseCounts(entry: Entry, _version: string) {
-  return [...entry.counts];
+  // Existing catalog data uses the original S/A/B/C/D order.
+  return entry.counts.length === 5
+    ? [entry.counts[0], entry.counts[1], 0, entry.counts[2], entry.counts[3], entry.counts[4], 0]
+    : [...entry.counts];
 }
 
 export function stats(counts: number[]) {
   const total = counts.reduce((sum, count) => sum + count, 0);
   const average = total
-    ? counts.reduce((sum, count, index) => sum + count * (5 - index), 0) / total
+    ? counts.reduce((sum, count, index) => sum + count * TIER_SCORES[TIERS[index]], 0) / total
     : 0;
   const variance = total
-    ? counts.reduce((sum, count, index) => sum + count * ((5 - index) - average) ** 2, 0) / total
+    ? counts.reduce((sum, count, index) => sum + count * (TIER_SCORES[TIERS[index]] - average) ** 2, 0) / total
     : 0;
 
   return {
     total,
     average,
-    agreement: total ? Math.round(100 * (1 - Math.sqrt(variance) / 2)) : 0,
-    tier: (average >= 4.5 ? 'S' : average >= 3.5 ? 'A' : average >= 2.5 ? 'B' : average >= 1.5 ? 'C' : 'D') as Tier,
+    agreement: total ? Math.round(100 * (1 - Math.sqrt(variance) / 2.5)) : 0,
+    tier: TIERS.find(tier => average >= TIER_THRESHOLDS[tier]) || 'F',
   };
 }
 
