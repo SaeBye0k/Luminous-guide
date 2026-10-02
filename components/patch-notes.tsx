@@ -18,21 +18,29 @@ export function PatchNotes({compact=false,userId,nickname,onLogin,onNickname}:Pr
   const [mine,setMine]=useState<Record<string,Reaction>>({});
   const [loading,setLoading]=useState(true);
   const [saving,setSaving]=useState(false);
+  const [ratingsReady,setRatingsReady]=useState(false);
   const [error,setError]=useState('');
   const request=useRef(0);
   const refresh=useCallback(async()=>{
-    if(!supabase){setLoading(false);return}
+    if(!supabase){setError('사이트의 Supabase 연결이 설정되지 않아 패치노트를 불러올 수 없습니다.');setLoading(false);return}
     const ticket=++request.current;
-    setLoading(true);setError('');
+    setLoading(true);setRatingsReady(false);setError('');
     const [notes,totals,own]=await Promise.all([
       supabase.from('patch_notes').select('id,title,version,published_on,summary,highlights,content,source_url').order('published_on',{ascending:false}).order('created_at',{ascending:false}),
       supabase.rpc('get_patch_reaction_counts'),
       userId?supabase.from('patch_reactions').select('patch_id,reaction').eq('user_id',userId):Promise.resolve({data:[],error:null}),
     ]);
     if(ticket!==request.current)return;
-    if(notes.error||totals.error||own.error){setError('패치노트와 평가를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.');setLoading(false);return}
-    setPatches(notes.data||[]);setCounts(totals.data||[]);
-    setMine(Object.fromEntries((own.data||[]).map(row=>[row.patch_id,row.reaction])));
+    if(notes.error){setError('패치노트를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.');setLoading(false);return}
+    setPatches(notes.data||[]);
+    if(totals.error||own.error){
+      setCounts([]);setMine({});
+      setError('패치 내용은 불러왔지만 평가를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.');
+    }else{
+      setCounts(totals.data||[]);
+      setMine(Object.fromEntries((own.data||[]).map(row=>[row.patch_id,row.reaction])));
+      setRatingsReady(true);
+    }
     setLoading(false);
   },[userId]);
   useEffect(()=>{
@@ -43,7 +51,7 @@ export function PatchNotes({compact=false,userId,nickname,onLogin,onNickname}:Pr
   const patch=compact?patches[0]:patches.find(p=>p.id===selected)||patches[0];
   const count=(reaction:Reaction)=>Number(counts.find(row=>row.patch_id===patch?.id&&row.reaction===reaction)?.vote_count||0);
   async function vote(reaction:Reaction){
-    if(!supabase||!patch||saving)return;
+    if(!supabase||!patch||saving||!ratingsReady)return;
     if(!userId){onLogin();return}
     setSaving(true);setError('');
     const ticket=request.current;
@@ -53,7 +61,7 @@ export function PatchNotes({compact=false,userId,nickname,onLogin,onNickname}:Pr
     else await refresh();
     setSaving(false);
   }
-  const rating=patch&&<div className="patch-rating"><p>이번 패치, 어떻게 느끼셨나요?</p><div className="patch-reactions">{(['like','dislike'] as Reaction[]).map(reaction=><button key={reaction} type="button" className={`secondary ${mine[patch.id]===reaction?'chosen':''}`} disabled={!supabase||loading||saving} aria-pressed={!!userId&&mine[patch.id]===reaction} onClick={()=>void vote(reaction)}>{reaction==='like'?<ThumbsUp size={15}/>:<ThumbsDown size={15}/>}<span>{reaction==='like'?'좋아요':'아쉬워요'}</span><b>{count(reaction).toLocaleString()}</b></button>)}</div><small>{saving?'평가 저장 중…':userId?'계정당 한 표 · 다시 선택해 변경할 수 있어요.':'로그인 후 평가에 참여할 수 있어요.'}</small></div>;
+  const rating=patch&&<div className="patch-rating"><p>이번 패치, 어떻게 느끼셨나요?</p><div className="patch-reactions">{(['like','dislike'] as Reaction[]).map(reaction=><button key={reaction} type="button" className={`secondary ${mine[patch.id]===reaction?'chosen':''}`} disabled={!supabase||!ratingsReady||loading||saving} aria-pressed={!!userId&&mine[patch.id]===reaction} onClick={()=>void vote(reaction)}>{reaction==='like'?<ThumbsUp size={15}/>:<ThumbsDown size={15}/>}<span>{reaction==='like'?'좋아요':'아쉬워요'}</span><b>{ratingsReady?count(reaction).toLocaleString():'—'}</b></button>)}</div><small>{saving?'평가 저장 중…':userId?'계정당 한 표 · 다시 선택해 변경할 수 있어요.':'로그인 후 평가에 참여할 수 있어요.'}</small></div>;
   return <section className={compact?'patch-feature':'patch-page'} aria-label={compact?'최신 패치노트':'패치노트 목록'}>
     {!compact&&<div className="page-title"><span className="overline">PATCH NOTES</span><h1>패치노트</h1><p>무엇이 달라졌는지 읽고, 이번 패치에 대한 의견을 나눠보세요.</p></div>}
     {loading&&!patch&&<p className="empty-mini">패치노트를 불러오는 중입니다.</p>}
