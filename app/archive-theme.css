@@ -98,7 +98,8 @@ body:has(.app-shell[data-mode=PVP]){background:radial-gradient(ellipse at 75% 0%
 /* Extended tiers share the same styles across boards, badges and votes. */
 .tier-B-plus{color:#bbd999;background:#293526}.text-B-plus{color:#bbd999}
 .tier-F{color:#a4a9b6;background:#282b34}.text-F{color:#a4a9b6}
-.tier-label .tier-plea{font-size:10px;line-height:1.4;white-space:normal;padding:0 4px;margin-top:6px}
+.tier-label .tier-plea{font-size:8px;font-weight:400;line-height:1.5;letter-spacing:0;text-align:center;max-width:100%;padding:0 3px;margin-top:4px}
+.tier-plea>span{display:block;white-space:nowrap}
 .vote-buttons{grid-template-columns:repeat(7,minmax(0,1fr))}
 .distribution-row b{width:24px;flex-shrink:0}
-@media(max-width:760px){.tier-label .tier-plea{font-size:9px}.vote-buttons{gap:4px}.vote-buttons button{font-size:16px;padding:9px 2px}}
+@media(max-width:760px){.tier-label .tier-plea{font-size:7px;line-height:1.5;padding:0 2px;margin-top:3px}.vote-buttons{gap:4px}.vote-buttons button{font-size:16px;padding:9px 2px}}
