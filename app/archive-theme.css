@@ -129,3 +129,6 @@ body:has(.app-shell[data-mode=PVP]){background:radial-gradient(ellipse at 75% 0%
 .tier-pending svg{width:18px;height:18px;flex-shrink:0}
 .community-carousel .pick-pending{width:36px;height:36px;min-width:36px}.community-carousel .pick-pending svg{width:24px;height:24px}
 @media(max-width:760px){.community-carousel .pick-pending{width:30px;height:30px;min-width:30px}.community-carousel .pick-pending svg{width:20px;height:20px}}
+
+.footer-brand{flex-shrink:0}.footer-logo{display:block;width:132px;height:auto;object-fit:contain}
+@media(max-width:760px){.footer-logo{width:112px}}
