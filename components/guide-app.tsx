@@ -22,7 +22,7 @@ type Saved = Draft & {id:string;version:string;mode?:GameMode;user_id?:string;pr
 type LocalData = {votes:Record<string,Tier>;likes:Record<string,boolean>;comments:Record<string,string[]>;drafts:Record<string,Draft>;saved:Saved[]};
 const initial:LocalData={votes:{},likes:{},comments:{},drafts:{},saved:[]};
 const storageKey='luminous-personal-v1';
-const icons:Record<string,typeof Sword>={sword:Sword,swords:Swords,wand:WandSparkles,bow:BowArrow,flame:Flame,zap:Zap,hammer:Hammer,shield:Shield,compass:Compass,heart:Heart,castle:Castle,tree:Trees};
+const icons:Record<string,typeof Sword>={sword:Sword,swords:Swords,wand:WandSparkles,bow:BowArrow,flame:Flame,zap:Zap,hammer:Hammer,shield:Shield,compass:Compass,heart:Heart,castle:Castle,tree:Trees,gem:Gem};
 const navigation:{href:string;page:Page;label:string;icon:typeof Sword}[]=[{href:'/',page:'home',label:'홈',icon:PanelTop},{href:'/database/',page:'database',label:'데이터베이스',icon:LayoutGrid},{href:'/tiers/',page:'tiers',label:'티어리스트',icon:Trophy},{href:'/patch-notes/',page:'patches',label:'패치노트',icon:BookOpen},{href:'/guides/',page:'guides',label:'공략',icon:BookOpen},{href:'/builds/',page:'builds',label:'빌드',icon:LayoutGrid}];
 const rarityOrder:Record<string,number>={'일반':1,'희귀':2,'신화':3,'전설':4};
 const emptyDraft=():Draft=>({title:'나의 티어리스트',description:'',slots:{}});

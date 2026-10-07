@@ -813,7 +813,13 @@ export const notionItems: Entry[] = [
     "description": "장검 성향의 번개 무기입니다.",
     "power": 0,
     "team": "D",
-    "counts": [0, 0, 0, 0, 0],
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
     "imageUrl": "/game-assets/weapons/17e28bd87b07455eb948c30987459bd4.webp"
   },
   {
@@ -827,7 +833,13 @@ export const notionItems: Entry[] = [
     "description": "장검 성향의 무속성 무기입니다.",
     "power": 0,
     "team": "D",
-    "counts": [0, 0, 0, 0, 0],
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
     "imageUrl": "/game-assets/weapons/3b2f741d045e80de9eece668ed3a711f.webp"
   },
   {
@@ -841,7 +853,13 @@ export const notionItems: Entry[] = [
     "description": "총기 성향의 무속성 무기입니다.",
     "power": 0,
     "team": "D",
-    "counts": [0, 0, 0, 0, 0],
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
     "imageUrl": "/game-assets/weapons/198d39564e144e09879cdad82cbe2c71.webp"
   },
   {
@@ -855,7 +873,13 @@ export const notionItems: Entry[] = [
     "description": "장검 성향의 대지 무기입니다.",
     "power": 0,
     "team": "D",
-    "counts": [0, 0, 0, 0, 0],
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
     "imageUrl": "/game-assets/weapons/9e7a12a870504ac49a4572650b0be94e.webp"
   },
   {
@@ -869,7 +893,13 @@ export const notionItems: Entry[] = [
     "description": "장검 성향의 어둠 무기입니다.",
     "power": 0,
     "team": "D",
-    "counts": [0, 0, 0, 0, 0],
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
     "imageUrl": "/game-assets/weapons/394f741d045e807a9ec3cfef6f74dbc7.webp"
   },
   {
@@ -883,7 +913,13 @@ export const notionItems: Entry[] = [
     "description": "장검 성향의 물 무기입니다.",
     "power": 0,
     "team": "D",
-    "counts": [0, 0, 0, 0, 0],
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
     "imageUrl": "/game-assets/weapons/3a9f741d045e80b0bfbbdf7a36226e1d.webp"
   },
   {
@@ -1865,5 +1901,105 @@ export const notionItems: Entry[] = [
       0
     ],
     "imageUrl": "/game-assets/relics/3e7f741d045e80649aefcdccb6f7ec8c.webp"
+  },
+  {
+    "id": "notion_3f1f741d045e8069b513d0364a87750b",
+    "name": "대형 망치",
+    "category": "무기",
+    "type": "장병기",
+    "element": "대지",
+    "rarity": "희귀",
+    "icon": "sword",
+    "description": "장병기 성향의 대지 무기입니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "imageUrl": "https://luminous-rpg.notion.site/image/attachment%3A6f278e6f-d41b-4d72-8317-2b6afd40eb78%3AGiantttt_hammer.png?table=block&id=3f1f741d-045e-8069-b513-d0364a87750b&width=256&cache=v2"
+  },
+  {
+    "id": "notion_3f1f741d045e809c8f47db8553abb4e2",
+    "name": "아크",
+    "category": "무기",
+    "type": "단검",
+    "element": "어둠",
+    "rarity": "희귀",
+    "icon": "sword",
+    "description": "단검 성향의 어둠 무기입니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "imageUrl": "https://luminous-rpg.notion.site/image/attachment%3A2b9791ae-5c24-4713-b891-3d11d2291fae%3AKakaoTalk_20220919_083612626_20.png?table=block&id=3f1f741d-045e-809c-8f47-db8553abb4e2&width=256&cache=v2"
+  },
+  {
+    "id": "notion_3ebf741d045e806fb083dd7a781cbf2f",
+    "name": "황금 고블린",
+    "category": "유물",
+    "type": "특수",
+    "element": "빛",
+    "rarity": "유물",
+    "icon": "gem",
+    "description": "특수 성향의 빛 유물입니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "imageUrl": "https://luminous-rpg.notion.site/image/attachment%3Ad6118ab2-526f-41f8-84c6-4133f0bce6f4%3A096e7eec958951f4.png?table=block&id=3ebf741d-045e-806f-b083-dd7a781cbf2f&width=256&cache=v2"
+  },
+  {
+    "id": "notion_3ebf741d045e80fa8925d27916f243f3",
+    "name": "가상심장",
+    "category": "유물",
+    "type": "특수 · 유틸 · 버프",
+    "element": "번개",
+    "rarity": "유물",
+    "icon": "gem",
+    "description": "특수 · 유틸 · 버프 성향의 번개 유물입니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "imageUrl": "https://luminous-rpg.notion.site/image/attachment%3Abc51f1af-42c8-4ecd-99e7-c556f57ee919%3Ac5e6768a59ab1227.png?table=block&id=3ebf741d-045e-80fa-8925-d27916f243f3&width=256&cache=v2"
+  },
+  {
+    "id": "notion_3ebf741d045e80a9ae93d2b4f20b8819",
+    "name": "현랑의 송곳니",
+    "category": "유물",
+    "type": "버프",
+    "element": "무속성",
+    "rarity": "유물",
+    "icon": "gem",
+    "description": "버프 성향의 무속성 유물입니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "imageUrl": "https://luminous-rpg.notion.site/image/attachment%3A630bc73d-d559-468a-964b-2ea75315606d%3A8430e54c48cafcf3.png?table=block&id=3ebf741d-045e-80a9-ae93-d2b4f20b8819&width=256&cache=v2"
   }
 ];
