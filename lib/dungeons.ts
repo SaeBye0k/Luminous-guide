@@ -153,9 +153,50 @@ export const dungeonEntries: Entry[] = [
       ],
     },
   },
+  {
+    id: 'dungeon_beast_lair',
+    name: '괴수의 보금자리',
+    category: '던전',
+    type: '웨이브 던전',
+    element: '어둠',
+    elements: ['무속성', '어둠'],
+    rarity: '던전',
+    icon: 'castle',
+    description: '최소 입장 명성 40레벨. 총 4웨이브로 진행되며 좀비·스켈레톤·아기 파괴수·뮤턴트 좀비와 50레벨 보스 파괴수가 등장합니다.',
+    power: 0,
+    team: 'D',
+    counts: [0, 0, 0, 0, 0, 0, 0],
+    tagline: '으윽.. 과연 안에는 무엇이 기다리고 있을까요...',
+    dropTable: {
+      draws: 2,
+      items: [
+        { name: '파괴수의 뿔', quantity: '1개', probability: '10.81%' },
+        { name: '멸살검', quantity: '1개', probability: '9.26%' },
+        { name: '에메랄드 반지', quantity: '1개', probability: '6.00%' },
+        { name: '발광석 가루', quantity: '1~3개', probability: '25.25%' },
+        { name: '꽝', quantity: '—', probability: '48.68%' },
+      ],
+    },
+  },
 ];
 
 export const dungeonDetails: Record<string, EntryDetail> = {
+  dungeon_beast_lair: {
+    sourceUrl: '',
+    checkedOn: '2026-10-24',
+    stats: [
+      '권장 명성: 40레벨',
+      '평균 레벨: 34',
+      '추천 속성: 무속성 · 어둠',
+      '최대 입장 가능 인원: 6명',
+    ],
+    abilities: [
+      { name: '1웨이브', description: '좀비 · 30레벨 · 3마리' },
+      { name: '2웨이브', description: '스켈레톤 · 30레벨 · 6마리' },
+      { name: '3웨이브', description: '아기 파괴수 · 35레벨 · 4마리\n뮤턴트 좀비 · 36레벨 · 3마리' },
+      { name: '4웨이브', description: '파괴수 · 50레벨', boss: true },
+    ],
+  },
   dungeon_alicia: {
     sourceUrl: '',
     checkedOn: '2026-10-24',

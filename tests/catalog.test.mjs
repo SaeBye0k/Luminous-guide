@@ -31,14 +31,14 @@ test('dungeon entries retain their wave details and each provided drop table exa
  const supplements=load('lib/catalog-supplements.ts','catalogSupplements');
  const all=[...entries,...dungeons,...supplements];
  assert.equal(new Set(all.map(entry=>entry.id)).size,all.length);
- assert.equal(dungeons.length,6);
- assert.deepEqual(dungeons.map(d=>d.id),['dungeon_gloomy_cave','dungeon_slime_cave','dungeon_russell_battle','dungeon_suspicious_church','dungeon_chicken_farm','dungeon_alicia']);
+ assert.equal(dungeons.length,7);
+ assert.deepEqual(dungeons.map(d=>d.id),['dungeon_gloomy_cave','dungeon_slime_cave','dungeon_russell_battle','dungeon_suspicious_church','dungeon_chicken_farm','dungeon_alicia','dungeon_beast_lair']);
  assert.equal(dungeonDetails.dungeon_slime_cave.abilities[2].boss,true);
  for(const dungeon of dungeons){
   const isRussell=dungeon.id==='dungeon_russell_battle';
   assert.equal(dungeon.dropTable.draws,isRussell?1:2);
-  assert.equal(dungeon.dropTable.items.length,isRussell?3:dungeon.id==='dungeon_alicia'?4:7);
-  assert.equal(dungeonDetails[dungeon.id].abilities.length,(isRussell||dungeon.id==='dungeon_alicia')?1:dungeon.id==='dungeon_suspicious_church'?4:3);
+  assert.equal(dungeon.dropTable.items.length,isRussell?3:dungeon.id==='dungeon_alicia'?4:dungeon.id==='dungeon_beast_lair'?5:7);
+  assert.equal(dungeonDetails[dungeon.id].abilities.length,(isRussell||dungeon.id==='dungeon_alicia')?1:['dungeon_suspicious_church','dungeon_beast_lair'].includes(dungeon.id)?4:3);
   assert.deepEqual(dungeonDetails[dungeon.id].stats.map(stat=>stat.split(':')[0]),['권장 명성','평균 레벨','추천 속성','최대 입장 가능 인원']);
  }
  assert.equal(dungeons.find(d=>d.id==='dungeon_slime_cave').dropTable.items.find(i=>i.name==='탐색의 흔적').probability,'확정');
