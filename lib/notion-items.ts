@@ -109,7 +109,8 @@ export const notionItems: Entry[] = [
       0,
       0,
       0
-    ]
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3A4def9daa-a120-4e5b-b5e2-315cd799df95%3Aohamma.png?table=block&id=3f6f741d-045e-80ce-9587-cba5917460b7&width=256&cache=v2"
   },
   {
     "id": "notion_3a9f741d045e803792c5d37eb4260148",
@@ -175,7 +176,7 @@ export const notionItems: Entry[] = [
       0,
       0
     ],
-    "imageUrl": "https://luminous-rpg.notion.site/image/attachment%3A6f278e6f-d41b-4d72-8317-2b6afd40eb78%3AGiantttt_hammer.png?table=block&id=3f1f741d-045e-8069-b513-d0364a87750b&width=256&cache=v2"
+    "imageUrl": "https://www.notion.so/image/attachment%3A6f278e6f-d41b-4d72-8317-2b6afd40eb78%3AGiantttt_hammer.png?table=block&id=3f1f741d-045e-8069-b513-d0364a87750b&width=256&cache=v2"
   },
   {
     "id": "notion_3f1f741d045e809c8f47db8553abb4e2",
@@ -197,7 +198,7 @@ export const notionItems: Entry[] = [
       0,
       0
     ],
-    "imageUrl": "https://luminous-rpg.notion.site/image/attachment%3A2b9791ae-5c24-4713-b891-3d11d2291fae%3AKakaoTalk_20220919_083612626_20.png?table=block&id=3f1f741d-045e-809c-8f47-db8553abb4e2&width=256&cache=v2"
+    "imageUrl": "https://www.notion.so/image/attachment%3A2b9791ae-5c24-4713-b891-3d11d2291fae%3AKakaoTalk_20220919_083612626_20.png?table=block&id=3f1f741d-045e-809c-8f47-db8553abb4e2&width=256&cache=v2"
   },
   {
     "id": "notion_cefd8bebc8aa43e9b04f72d7f274edc1",
@@ -570,7 +571,8 @@ export const notionItems: Entry[] = [
       0,
       0,
       0
-    ]
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3Afdcd7333-b95f-4260-ac3e-7c0c3fa90fdf%3AKakaoTalk_20220919_083612626_14.png?table=block&id=3fff741d-045e-808f-9be7-c50c8b07049a&width=256&cache=v2"
   },
   {
     "id": "notion_3fef741d045e808a823fdf8a8a7c8f15",
@@ -591,7 +593,8 @@ export const notionItems: Entry[] = [
       0,
       0,
       0
-    ]
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3A5b93e893-b405-42de-a5a8-a7928f38a0aa%3Aworldtree_branch.png?table=block&id=3fef741d-045e-808a-823f-df8a8a7c8f15&width=256&cache=v2"
   },
   {
     "id": "notion_3a9f741d045e8092b2c7cb135f422f53",
@@ -612,7 +615,8 @@ export const notionItems: Entry[] = [
       0,
       0,
       0
-    ]
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3A2c756e65-271c-48eb-9b2b-8cc02da11457%3Aancient_sword.png?table=block&id=3a9f741d-045e-8092-b2c7-cb135f422f53&width=256&cache=v2"
   },
   {
     "id": "notion_3a5f741d045e80ec8b05d14f1b1b30db",
@@ -831,7 +835,8 @@ export const notionItems: Entry[] = [
       0,
       0,
       0
-    ]
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3A8840f4c4-6673-4e36-af27-15995bad60a3%3Amedius.png?table=block&id=3a9f741d-045e-8085-b61f-d96faff8120a&width=256&cache=v2"
   },
   {
     "id": "notion_3caf741d045e806b9e35cfe3c1fc3f1b",
