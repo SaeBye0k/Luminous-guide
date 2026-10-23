@@ -161,7 +161,7 @@ export function useCommunityVotes(entries:Entry[], version:string, mode:GameMode
   }
 
   async function vote(entryId:string,tier:Tier){
-    if(!supabase||!user||!xboxVerified)return false;
+    if(!supabase||!user||!xboxVerified||!entries.some(entry=>entry.id===entryId&&entry.category!=='던전'))return false;
     setSaving(entryId);setError('');
     const result=await supabase.from('votes').upsert({
       user_id:user.id,entry_id:entryId,version,mode,tier,updated_at:new Date().toISOString(),

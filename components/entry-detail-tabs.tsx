@@ -14,7 +14,7 @@ export function EntryDetailTabs({entry,children}:{entry:Entry;children:ReactNode
   const traits=entry.category==='직업'?jobTraits[entry.name]:undefined;
   const effects=detail?.transcend||[];
   const traitDescriptions=detail?.traits??traits?.traits.map(trait=>trait.description)??[];
-  const tabs:{id:Tab;label:string}[]=[{id:'info',label:isDungeon?'던전 정보':'능력 정보'},{id:'reviews',label:'평가·의견'}];
+  const tabs:{id:Tab;label:string}[]=[{id:'info',label:isDungeon?'던전 정보':'능력 정보'},{id:'reviews',label:isDungeon?'공략·한줄평':'평가·의견'}];
   const [tab,setTab]=useState<Tab>('info');
   const id=useId();
   const source=detail?.sourceUrl||traits?.sourceUrl;
@@ -32,6 +32,7 @@ export function EntryDetailTabs({entry,children}:{entry:Entry;children:ReactNode
     <div className="tabs entry-detail-nav" role="tablist" aria-label="항목 상세 정보">{tabs.map((t,index)=><button key={t.id} type="button" id={`${id}-${t.id}-tab`} role="tab" className={tab===t.id?'active':''} aria-selected={tab===t.id} aria-controls={`${id}-${t.id}-panel`} tabIndex={tab===t.id?0:-1} onClick={()=>setTab(t.id)} onKeyDown={event=>navigate(event,index)}>{t.label}</button>)}</div>
     <section hidden={tab!=='info'} role="tabpanel" tabIndex={0} id={`${id}-info-panel`} aria-labelledby={`${id}-info-tab`}>
       {detail&&<><section className="ability-section"><h3>{isDungeon?'입장 정보':entry.category==='직업'?'직업 정보':'기본 능력치'}</h3><ul className="ability-stats">{detail.stats.map((stat,index)=><li key={index}>{stat}</li>)}</ul></section><section className="ability-section"><h3>{isDungeon?'웨이브 구성':entry.category==='직업'?'고유기':'공격·스킬'}</h3>{detail.abilities.map((ability,index)=><article className="ability-card" key={index}><h4>{ability.name}</h4><p>{ability.description}</p>{ability.notes&&<ul>{ability.notes.map(note=><li key={note}>{note}</li>)}</ul>}</article>)}</section></>}
+      {entry.dropTable&&<section className="ability-section"><h3>드랍테이블</h3><p className="ability-note">추첨 {entry.dropTable.draws}회 · 아래 확률은 1회당 확률입니다.</p><div className="drop-table-wrap"><table className="drop-table"><caption>{entry.name} 드랍 수량 및 1회당 확률</caption><thead><tr><th scope="col">아이템</th><th scope="col">수량</th><th scope="col">확률</th></tr></thead><tbody>{entry.dropTable.items.map(item=><tr key={item.name}><th scope="row">{item.name}</th><td>{item.quantity}</td><td>{item.probability}</td></tr>)}</tbody></table></div><p className="ability-note">운영자 제공 이미지 기준</p></section>}
       {!!traitDescriptions.length&&<section className="ability-section"><h3>직업 특성</h3><p className="ability-note">선택 가능한 특성입니다. 모든 효과가 동시에 적용되는 것은 아닙니다.</p><ul className="trait-details">{traitDescriptions.map((description,index)=><li key={index}>{description}</li>)}</ul></section>}
       {!detail&&<p className="ability-empty">{traits?'기본 능력치와 고유기 상세는 확인 후 추가할 예정입니다.':'이 항목의 능력치·스킬 상세는 아직 준비 중입니다. 평가·의견 탭에서 투표할 수 있어요.'}</p>}
       {entry.category!=='직업'&&!!effects.length&&<section className="ability-section"><h3>초월 효과</h3><ul className="trait-details transcend-details">{effects.map(item=><li key={item.name}><strong>{item.name}</strong><p>{item.description}</p></li>)}</ul></section>}

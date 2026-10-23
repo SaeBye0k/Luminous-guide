@@ -140,3 +140,5 @@ body:has(.app-shell[data-mode=PVP]){background:radial-gradient(ellipse at 75% 0%
 @media(max-width:760px){.entry-detail-nav{gap:14px}.entry-detail-nav button{font-size:13px}.ability-card{padding:13px}.ability-stats li{font-size:13px}.trait-details{padding-left:18px}}
 
 .transcend-details li>strong{display:block;font-size:14px;color:var(--accent);margin-bottom:4px}.transcend-details li>p{font-size:14px;line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere}.transcend-details li+li{margin-top:16px}
+
+.drop-table-wrap{overflow-x:auto;margin-top:14px}.drop-table{width:100%;border-collapse:collapse;font-size:14px}.drop-table caption{text-align:left;color:var(--muted);font-size:12px;padding-bottom:10px}.drop-table th,.drop-table td{padding:12px;border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}.drop-table thead{background:var(--panel2)}.drop-table tbody th{font-weight:500}.drop-table td:last-child{text-align:right;font-variant-numeric:tabular-nums;color:var(--accent)}

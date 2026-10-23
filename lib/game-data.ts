@@ -32,6 +32,10 @@ export type Entry = {
   imageUrl?: string;
   tagline?: string;
   revision?: number;
+  dropTable?: {
+    draws: number;
+    items: { name: string; quantity: string; probability: string }[];
+  };
 };
 
 export type Guide = {

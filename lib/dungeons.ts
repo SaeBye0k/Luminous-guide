@@ -16,6 +16,18 @@ export const dungeonEntries: Entry[] = [
     team: 'D',
     counts: [0, 0, 0, 0, 0, 0, 0],
     tagline: '꼬끼오~! 꼬꼬!',
+    dropTable: {
+      draws: 2,
+      items: [
+        { name: '깃털', quantity: '0~24개', probability: '13.788%' },
+        { name: '뼈', quantity: '1~3개', probability: '13.453%' },
+        { name: '씨앗', quantity: '2~5개', probability: '13.788%' },
+        { name: '농부의 석판', quantity: '1개', probability: '1.103%' },
+        { name: '경험의 봉우리', quantity: '4~6개', probability: '34.728%' },
+        { name: '바람의 깃털', quantity: '1개', probability: '1.103%' },
+        { name: '꽝', quantity: '—', probability: '22.073%' },
+      ],
+    },
   },
   {
     id: 'dungeon_gloomy_cave',
@@ -30,6 +42,18 @@ export const dungeonEntries: Entry[] = [
     team: 'D',
     counts: [0, 0, 0, 0, 0, 0, 0],
     tagline: '오우.. 꽤 으스스한걸요?',
+    dropTable: {
+      draws: 2,
+      items: [
+        { name: '썩은 고기', quantity: '1~6개', probability: '28.222%' },
+        { name: '좀비의 팔', quantity: '1개', probability: '7.20%' },
+        { name: '당근', quantity: '3~6개', probability: '21.418%' },
+        { name: '점토', quantity: '3~6개', probability: '21.418%' },
+        { name: '경험의 봉우리', quantity: '1~2개', probability: '8.48%' },
+        { name: '점토 석판', quantity: '1개', probability: '0.928%' },
+        { name: '꽝', quantity: '—', probability: '12.378%' },
+      ],
+    },
   },
   {
     id: 'dungeon_slime_cave',
@@ -44,6 +68,18 @@ export const dungeonEntries: Entry[] = [
     team: 'D',
     counts: [0, 0, 0, 0, 0, 0, 0],
     tagline: '찐득 찐득 불쾌한 동굴이다...',
+    dropTable: {
+      draws: 2,
+      items: [
+        { name: '경험의 봉우리', quantity: '1~6개', probability: '23.79%' },
+        { name: '탐색의 흔적', quantity: '3~6개', probability: '확정' },
+        { name: '슬라임 친구', quantity: '1개', probability: '6.028%' },
+        { name: '슬라임 석판', quantity: '1개', probability: '5.093%' },
+        { name: '슬라임 볼', quantity: '1~3개', probability: '23.79%' },
+        { name: '자수정 조각', quantity: '1~3개', probability: '14.343%' },
+        { name: '꽝', quantity: '—', probability: '26.963%' },
+      ],
+    },
   },
 ];
 

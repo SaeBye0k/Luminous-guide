@@ -23,3 +23,19 @@ test('trait selections have unique references and preserve unchanged legacy trai
  for(const job of jobs){const jobTraits=traits[job.name]?.traits;assert.ok(jobTraits?.length,job.name);assert.equal(new Set(jobTraits.map(t=>t.id)).size,jobTraits.length,job.name)}
  assert.equal(traits['사냥꾼'].traits[0].id,'trait_3e6f741d045e8109947ec8b98f1a443e');
 });
+
+
+test('dungeon entries retain their wave details and each provided drop table exactly once',()=>{
+ const dungeons=load('lib/dungeons.ts','dungeonEntries');
+ const dungeonDetails=load('lib/dungeons.ts','dungeonDetails');
+ const supplements=load('lib/catalog-supplements.ts','catalogSupplements');
+ const all=[...entries,...dungeons,...supplements];
+ assert.equal(new Set(all.map(entry=>entry.id)).size,all.length);
+ assert.equal(dungeons.length,3);
+ for(const dungeon of dungeons){
+  assert.equal(dungeon.dropTable.draws,2);
+  assert.equal(dungeon.dropTable.items.length,7);
+  assert.equal(dungeonDetails[dungeon.id].abilities.length,3);
+ }
+ assert.equal(dungeons.find(d=>d.id==='dungeon_slime_cave').dropTable.items.find(i=>i.name==='탐색의 흔적').probability,'확정');
+});

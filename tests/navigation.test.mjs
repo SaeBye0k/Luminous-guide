@@ -8,7 +8,7 @@ function fixture(initialUrl){
  let url=new URL(initialUrl),cursor=0;const states=[];
  const jsx=(type,props)=>({type,props:props||{}});
  const icon=()=>null;
- const catalog=[{id:'sword',name:'검',category:'무기',type:'장검',element:'빛',rarity:'일반',counts:[0]},{id:'job',name:'기사',category:'직업',type:'전사',element:'빛',rarity:'일반',counts:[0]}];
+ const catalog=[{id:'sword',name:'검',category:'무기',type:'장검',element:'빛',rarity:'일반',counts:[0]},{id:'job',name:'기사',category:'직업',type:'전사',element:'빛',rarity:'일반',counts:[0]},{id:'dungeon',name:'슬라임 굴',category:'던전',type:'웨이브 던전',element:'무속성',rarity:'던전',counts:[0],description:'슬라임이 등장합니다.'}];
  const community={counts:{},myVotes:{},recentEntryIds:[],loading:true,configured:true,hasSession:true,user:null,error:''};
  const context={exports:{},URLSearchParams,process:{env:{}},
   require:name=>{
@@ -45,4 +45,27 @@ test('user tiers open directly on first render and tabs update the URL',()=>{
  assert.equal(text(nodes(first).find(n=>n.props?.role==='tab'&&n.props['aria-selected'])),'유저 티어표');
  nodes(first).find(n=>n.props?.role==='tab'&&text(n)==='커뮤니티 티어').props.onClick();
  assert.equal(text(nodes(f.render('tiers')).find(n=>n.props?.role==='tab'&&n.props['aria-selected'])),'커뮤니티 티어');
+});
+
+
+test('dungeons offer guides and short comments without tier controls or scores',()=>{
+ const f=fixture('https://guide.example/database/?category=던전&mode=PVP');
+ const tree=f.render('database');
+ assert.equal(nodes(tree).some(n=>n.props?.['aria-label']==='정렬'),false);
+ assert.equal(nodes(tree).some(n=>n.props?.['aria-label']==='평가 구분'),false);
+ const card=nodes(tree).find(n=>n.props?.entry?.id==='dungeon');
+ assert.ok(card);
+ const button=card.type(card.props);
+ assert.equal(nodes(button).some(n=>n.props?.className==='card-meta'),false);
+ assert.doesNotMatch(text(button),/5\.00|초기 결과/);
+ button.props.onClick();
+ const selected=f.render('database');
+ assert.equal(nodes(selected).some(n=>['detail-stats','vote-panel','distribution'].includes(n.props?.className)),false);
+ assert.ok(nodes(selected).some(n=>n.props?.dungeonName==='슬라임 굴'));
+ assert.ok(nodes(selected).some(n=>n.props?.label==='던전 한줄평'&&n.props.targetKey==='dungeon:dungeon'));
+ const weaponsFixture=fixture('https://guide.example/database/?category=무기');
+ const weapons=weaponsFixture.render('database');
+ const weapon=nodes(weapons).find(n=>n.props?.entry?.id==='sword');
+ weapon.type(weapon.props).props.onClick();
+ assert.ok(nodes(weaponsFixture.render('database')).some(n=>n.props?.className==='vote-panel'));
 });
