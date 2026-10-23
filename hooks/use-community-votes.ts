@@ -62,9 +62,23 @@ export function useCommunityVotes(entries:Entry[], version:string, mode:GameMode
     if(!supabase)return;
     let active=true;
     const timers=new Set<ReturnType<typeof setTimeout>>();
-    if(!xboxCallback.current)xboxCallback.current=new URLSearchParams(window.location.search);
+    if(!xboxCallback.current){
+      const params=new URLSearchParams(window.location.search);
+      const hash=new URLSearchParams(window.location.hash.slice(1));
+      for(const key of ['error','error_code','error_description']){
+        if(hash.has(key))params.set(key,hash.get(key)!);
+      }
+      xboxCallback.current=params;
+    }
     const callback=xboxCallback.current;
+    const authError=callback.has('error')||callback.has('error_code')
+      ?(callback.get('error_description')?.includes('issuer')
+        ?'Microsoft 인증 설정이 일치하지 않아 로그인하지 못했습니다. 운영자에게 문의해주세요.'
+        :'Microsoft 로그인을 완료하지 못했습니다. 다시 시도해주세요.')
+      :'';
     const clean=new URL(window.location.href);
+    if(new URLSearchParams(clean.hash.slice(1)).has('error'))clean.hash='';
+    for(const key of ['error','error_code','error_description'])clean.searchParams.delete(key);
     clean.searchParams.delete('xbox_code');clean.searchParams.delete('xbox_state');
     window.history.replaceState(null,'',clean.toString());
     let lastToken:string|null|undefined;
@@ -81,7 +95,11 @@ export function useCommunityVotes(entries:Entry[], version:string, mode:GameMode
         if(!active)return;
         const nextUser=session?.user||null;
         setUser(nextUser);
-        if(!nextUser){void refresh(null);return}
+        if(!nextUser){
+          await refresh(null);
+          if(active&&ticket===authTicket&&authError)setError(authError);
+          return;
+        }
         try{
           const linked=await supabase!.from('xbox_accounts').select('user_id').eq('user_id',nextUser.id).maybeSingle();
           if(!active||ticket!==authTicket)return;

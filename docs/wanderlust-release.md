@@ -25,7 +25,7 @@ Supabase Google 공급자는 대시보드에서 비활성화합니다.
 Supabase Auth 정책에 따르며, 별도의 수동 병합은 수행하지 않습니다.
 
 - Microsoft 앱 Client ID: `3e0076e5-bf57-4ba2-9377-c9f87b63c796`
-- Azure Tenant URL: `https://login.microsoftonline.com/consumers`
+- Azure Tenant URL: `https://login.microsoftonline.com/common` (Supabase 기본 발급자 검증 경로). 앱은 개인 계정만 허용하며, 별도 Xbox OAuth는 consumers 엔드포인트를 사용합니다.
 - Web redirect URI: `https://ymmwzujuhwvmadynkerc.supabase.co/auth/v1/callback`
 - Web redirect URI: `https://ymmwzujuhwvmadynkerc.supabase.co/functions/v1/verify-xbox`
 - Edge Secrets: `XBOX_CLIENT_ID`, `XBOX_CLIENT_SECRET`, `XBOX_SITE_URL`
