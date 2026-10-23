@@ -11,7 +11,7 @@ export const dungeonEntries: Entry[] = [
     element: '무속성',
     rarity: '던전',
     icon: 'castle',
-    description: '최소 입장 명성 20레벨. 총 3웨이브에 걸쳐 웨이브당 닭 12마리, 총 36마리가 등장합니다.',
+    description: '최소 입장 명성 20레벨. 총 3웨이브에 걸쳐 웨이브당 20레벨 닭 12마리, 총 36마리가 등장합니다.',
     power: 0,
     team: 'D',
     counts: [0, 0, 0, 0, 0, 0, 0],
@@ -26,6 +26,7 @@ export const dungeonDetails: Record<string, EntryDetail> = {
     stats: [
       '권장 명성 / 최소 입장 명성: 20레벨',
       '평균 레벨: 20',
+      '등장 몬스터: 20레벨 닭',
       '최대 인원: 8명',
       '추천 속성: 무속성',
       '총 웨이브: 3',
@@ -34,9 +35,9 @@ export const dungeonDetails: Record<string, EntryDetail> = {
       '극한 도전 불가',
     ],
     abilities: [
-      { name: '1웨이브', description: '닭 12마리 등장' },
-      { name: '2웨이브', description: '닭 12마리 등장' },
-      { name: '3웨이브', description: '닭 12마리 등장' },
+      { name: '1웨이브', description: '등장 몬스터: 닭 · 20레벨 · 12마리' },
+      { name: '2웨이브', description: '등장 몬스터: 닭 · 20레벨 · 12마리' },
+      { name: '3웨이브', description: '등장 몬스터: 닭 · 20레벨 · 12마리' },
     ],
   },
 };
