@@ -30,6 +30,7 @@ export function DungeonGuideHub({dungeons,dungeonId,onSelect,tagCounts={},onPost
 
   return <>
     <div className="page-title"><span className="overline">DUNGEON FIELD NOTES</span><h1>던전 공략</h1><p>도전할 던전을 고르고, 공략과 짧은 경험을 나눠보세요. 던전의 태그는 모험가들이 작성한 공략에서 모입니다.</p></div>
+    <div className="dungeon-world-heading"><span className="dungeon-world-label">월드 1</span></div>
     <div className="dungeon-guide-selector" role="group" aria-label="공략을 볼 던전 선택">
       {dungeons.map(dungeon=><button type="button" key={dungeon.id} aria-pressed={selected.id===dungeon.id} className={selected.id===dungeon.id?'active':''} onClick={()=>onSelect(dungeon.id)}><Castle size={19} aria-hidden="true"/><span><strong>{dungeon.name}</strong><small>{dungeonDetails[dungeon.id]?.stats[0]}</small><DungeonTagBadges tags={tagCounts[dungeon.id]}/></span><ChevronRight size={16} aria-hidden="true"/></button>)}
     </div>

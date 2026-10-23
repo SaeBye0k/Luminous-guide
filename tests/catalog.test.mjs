@@ -32,7 +32,7 @@ test('dungeon entries retain their wave details and each provided drop table exa
  const all=[...entries,...dungeons,...supplements];
  assert.equal(new Set(all.map(entry=>entry.id)).size,all.length);
  assert.equal(dungeons.length,7);
- assert.deepEqual(dungeons.map(d=>d.id),['dungeon_gloomy_cave','dungeon_slime_cave','dungeon_russell_battle','dungeon_suspicious_church','dungeon_chicken_farm','dungeon_alicia','dungeon_beast_lair']);
+ assert.deepEqual(dungeons.map(d=>d.id),['dungeon_gloomy_cave','dungeon_slime_cave','dungeon_suspicious_church','dungeon_russell_battle','dungeon_chicken_farm','dungeon_alicia','dungeon_beast_lair']);
  assert.equal(dungeonDetails.dungeon_slime_cave.abilities[2].boss,true);
  for(const dungeon of dungeons){
   const isRussell=dungeon.id==='dungeon_russell_battle';

@@ -214,3 +214,8 @@ button.guide-tag:hover{border-color:#6d9d8f;color:var(--text)}
 .guide-build-loadout .build-slot .secondary{font-size:10px;min-height:30px;padding:5px 7px;width:100%}.guide-build-loadout .build-slot .text-button{font-size:10px;min-height:24px}.guide-build-loadout .build-slot label{font-size:10px;display:block;width:100%}.guide-build-loadout .build-slot select{margin-top:4px}
 .guide-build-indicator{display:inline-flex;font-size:10px;line-height:1.5;margin-top:7px;color:var(--accent)}
 @media(max-width:600px){.guide-build-attachment{padding:12px}.guide-build-traits{grid-template-columns:1fr}.guide-build-character{gap:9px}.guide-build-character .guide-build-art{width:32px;height:38px;flex-basis:32px}.guide-build-character strong{font-size:12px}}
+
+.dungeon-world-badge,.dungeon-world-label{display:inline-flex;align-items:center;padding:5px 10px;border:1px solid #5b786d;border-radius:4px;background:#142820;color:#a5dfc6;font-size:11px;font-weight:650;letter-spacing:.2px;line-height:1.4}
+.dungeon-world-badge{position:absolute;top:10px;left:10px;z-index:1}
+.dungeon-world-heading{margin:0 0 12px}
+.dungeon-modal .detail-intro .dungeon-world-label{margin-bottom:9px}
