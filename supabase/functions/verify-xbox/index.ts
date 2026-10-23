@@ -92,8 +92,22 @@ Deno.serve(async (request: Request) => {
       });
       const claim = xsts.DisplayClaims?.xui?.[0];
       if (!claim || typeof claim.xid !== 'string' || !/^\d{1,20}$/.test(claim.xid)) return reply({error: 'Xbox 프로필을 확인하지 못했습니다.'}, 400);
-      const linked = await admin.rpc('complete_xbox_link', {p_user_id: pending.data.user_id, p_xuid: claim.xid});
-      return linked.error ? reply({error: '이미 연결된 Xbox 계정이거나 연동에 실패했습니다.'}, 409) : reply({ok: true});
+      // Use Xbox-authenticated claims or the official profile API, never a browser-supplied nickname.
+      let gamertag = claim.gtg;
+      if (typeof gamertag !== 'string' || !gamertag.trim()) {
+        if (typeof claim.uhs !== 'string' || typeof xsts.Token !== 'string') return reply({error: 'Xbox 게이머태그를 확인하지 못했습니다.'}, 400);
+        const profileResponse = await fetch(`https://profile.xboxlive.com/users/xuid(${claim.xid})/profile/settings?settings=Gamertag`, {
+          headers: {'Authorization': `XBL3.0 x=${claim.uhs};${xsts.Token}`, 'x-xbl-contract-version': '2'},
+          signal: AbortSignal.timeout(15000),
+        });
+        if (!profileResponse.ok) return reply({error: 'Xbox 게이머태그를 불러오지 못했습니다.'}, 400);
+        const profile = await profileResponse.json();
+        const owner = profile.profileUsers?.find((item: {id?: string}) => item.id === claim.xid);
+        gamertag = owner?.settings?.find((setting: {id?: string}) => setting.id === 'Gamertag')?.value;
+      }
+      if (typeof gamertag !== 'string' || gamertag !== gamertag.trim() || gamertag.length < 2 || gamertag.length > 20) return reply({error: 'Xbox 게이머태그를 확인하지 못했습니다.'}, 400);
+      const linked = await admin.rpc('complete_xbox_link', {p_user_id: pending.data.user_id, p_xuid: claim.xid, p_gamertag: gamertag});
+      return linked.error ? reply({error: 'Xbox 계정 또는 게이머태그가 기존 기록과 중복되어 저장하지 못했습니다.'}, 409) : reply({ok: true});
     }
     return reply({error: 'Method not allowed'}, 405);
   } catch {

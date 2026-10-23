@@ -25,7 +25,7 @@ Supabase Google 공급자는 대시보드에서 비활성화합니다.
 Supabase Auth 정책에 따르며, 별도의 수동 병합은 수행하지 않습니다.
 
 - Microsoft 앱 Client ID: `3e0076e5-bf57-4ba2-9377-c9f87b63c796`
-- Azure Tenant URL: `https://login.microsoftonline.com/common` (Supabase 기본 발급자 검증 경로). 앱은 개인 계정만 허용하며, 별도 Xbox OAuth는 consumers 엔드포인트를 사용합니다.
+- Azure Tenant URL: `https://login.microsoftonline.com/common` (Supabase 기본 발급자 검증 경로). 앱의 지원 계정 유형은 모든 Entra 테넌트 + 개인 Microsoft 계정으로 설정하며, 별도 Xbox OAuth는 consumers 엔드포인트를 사용합니다.
 - Web redirect URI: `https://ymmwzujuhwvmadynkerc.supabase.co/auth/v1/callback`
 - Web redirect URI: `https://ymmwzujuhwvmadynkerc.supabase.co/functions/v1/verify-xbox`
 - Edge Secrets: `XBOX_CLIENT_ID`, `XBOX_CLIENT_SECRET`, `XBOX_SITE_URL`
@@ -60,3 +60,14 @@ SQL 마지막 검증 결과가 초기 실행 직후 두 항목 모두 0인지 �
 - 첫 데이터 배포는 Google 로그인을 유지했으며, 후속 인증 배포는 Xbox 전용으로 전환합니다.
 - 공개 집계 백업: `docs/backups/vote-counts-before-wanderlust-2026-10-23.txt`.
   이 파일은 계정과 개별 투표 시각을 포함하지 않으며, 원본 백업은 비공개 DB에 보관합니다.
+
+## Xbox 닉네임 자동 동기화
+
+`supabase/xbox-gamertag.sql`을 기본 Xbox 스키마 이후 적용합니다.
+서버가 Xbox 토큰의 게이머태그 또는 공식 Xbox 프로필의 Gamertag를 확인하여
+계정 연결과 프로필 닉네임 저장을 하나의 트랜잭션에서 처리합니다.
+새 Microsoft 로그인마다 Xbox 확인을 다시 수행하여 이름을 갱신합니다.
+기존 연결은 닉네임 동기화 배포 이후 첫 접속에서 Xbox 확인을 다시 진행합니다.
+사이트에서 닉네임 수동 변경을 제공하지 않으며 XUID가 계정의 고유 식별자입니다.
+기존 닉네임 중복·길이 제약은 유지합니다. 충돌 시 저장을 거절하며 기존 기록을 덮어쓰지 않습니다.
+베드락 Xbox 게이머태그 기준이며 Java 에디션 프로필명은 별도입니다.

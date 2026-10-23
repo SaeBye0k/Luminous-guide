@@ -6,7 +6,7 @@ import {webcrypto} from 'node:crypto';
 import ts from 'typescript';
 
 const source=fs.readFileSync(new URL('../supabase/functions/verify-xbox/index.ts',import.meta.url),'utf8').replace(/^import .*?;\n/m,'');
-function fixture({user={id:'user-1',identities:[{provider:'azure'}]},pending={user_id:'user-1'},linkError=null,claim={xid:'2533274790000000'}}={}) {
+function fixture({user={id:'user-1',identities:[{provider:'azure'}]},pending={user_id:'user-1'},linkError=null,claim={xid:'2533274790000000',gtg:'LuminousPlayer'},profileOwner='2533274790000000'}={}) {
   let handler; const calls=[]; const requests=[];
   const admin={auth:{getUser:async()=>({data:{user},error:null})},
     rpc:async(name,args)=>{calls.push({name,args});return {error:name==='complete_xbox_link'?linkError:null}},
@@ -25,7 +25,7 @@ function fixture({user={id:'user-1',identities:[{provider:'azure'}]},pending={us
   const context={exports:{},Request,Response,URL,URLSearchParams,TextEncoder,Uint8Array,AbortSignal,crypto:webcrypto,
     createClient:()=>admin,
     Deno:{env:{get:name=>vars[name]},serve:fn=>{handler=fn}},
-    fetch:async(url,options)=>{requests.push({url,options});return Response.json(url.includes('/token')?{access_token:'microsoft-access'}:url.includes('user.auth')?{Token:'xbox-user-token'}:{DisplayClaims:{xui:[claim]}})},
+    fetch:async(url,options)=>{requests.push({url,options});return Response.json(url.includes('/token')?{access_token:'microsoft-access'}:url.includes('user.auth')?{Token:'xbox-user-token'}:url.includes('profile.xboxlive')?{profileUsers:[{id:profileOwner,settings:[{id:'Gamertag',value:'LuminousPlayer'}]}]}:{Token:'xsts-token',DisplayClaims:{xui:[claim]}})},
   };
   vm.runInNewContext(ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS}}).outputText,context);
   return {handle:request=>handler(request),calls,requests};
@@ -54,7 +54,7 @@ test('denied consent returns a fixed error redirect without linking',async()=>{
 test('successful callback links only Xbox-verified XUID to the state owner',async()=>{
   const f=fixture();const response=await f.handle(complete());assert.equal(response.status,200);assert.equal((await response.json()).ok,true);assert.equal(f.requests.length,3);
   assert.equal(JSON.parse(f.requests[1].options.body).Properties.RpsTicket,'d=microsoft-access');assert.equal(JSON.parse(f.requests[2].options.body).Properties.UserTokens[0],'xbox-user-token');
-  const link=f.calls.find(c=>c.name==='complete_xbox_link');assert.equal(link.args.p_user_id,'user-1');assert.equal(link.args.p_xuid,'2533274790000000');
+  const link=f.calls.find(c=>c.name==='complete_xbox_link');assert.equal(link.args.p_user_id,'user-1');assert.equal(link.args.p_xuid,'2533274790000000');assert.equal(link.args.p_gamertag,'LuminousPlayer');
 });
 test('missing Xbox claims and duplicate-XUID database conflicts fail closed',async()=>{
   for(const args of [{claim:{uhs:'hash'}},{linkError:{code:'23505'}}]){
@@ -66,4 +66,15 @@ test('callback redirects only to the configured site and cannot link without the
  const f=fixture();const response=await f.handle(callback());const destination=new URL(response.headers.get('location'));
  assert.equal(destination.origin,'https://guide.example');assert.equal(destination.searchParams.get('xbox_code'),'oauth-code');assert.equal(f.requests.length,0);assert.equal(f.calls.length,0);
  const foreign=fixture({pending:{user_id:'victim'}});assert.equal((await foreign.handle(complete())).status,400);assert.equal(foreign.requests.length,0);
+});
+
+test('gamertag fallback uses the authenticated XUID and rejects a different profile owner',async()=>{
+ for(const owner of ['2533274790000000','999']){
+  const f=fixture({claim:{xid:'2533274790000000',uhs:'userhash'},profileOwner:owner});
+  const response=await f.handle(complete());
+  assert.equal(response.status,owner==='999'?400:200);
+  const profile=f.requests.find(r=>r.url.includes('profile.xboxlive'));
+  assert.equal(profile.options.headers.Authorization,'XBL3.0 x=userhash;xsts-token');
+  assert.equal(f.calls.filter(c=>c.name==='complete_xbox_link').length,owner==='999'?0:1);
+ }
 });

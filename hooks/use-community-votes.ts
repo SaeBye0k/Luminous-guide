@@ -101,10 +101,10 @@ export function useCommunityVotes(entries:Entry[], version:string, mode:GameMode
           return;
         }
         try{
-          const linked=await supabase!.from('xbox_accounts').select('user_id').eq('user_id',nextUser.id).maybeSingle();
+          const linked=await supabase!.from('xbox_accounts').select('user_id,verified_at').eq('user_id',nextUser.id).maybeSingle();
           if(!active||ticket!==authTicket)return;
           if(linked.error)throw new Error('Xbox 계정 연동 정보를 불러오지 못했습니다.');
-          if(!linked.data){
+          if(!linked.data||Date.parse(linked.data.verified_at)<Math.max(Date.parse(nextUser.last_sign_in_at||'9999-01-01'),Date.parse('2026-10-23T08:12:15Z'))){
             if(callback.has('xbox_error'))throw new Error('Xbox 인증을 완료하지 못했습니다. 다시 로그인해주세요.');
             if(!nextUser.identities?.some(i=>i.provider==='azure'))throw new Error('Xbox 계정으로 다시 로그인해주세요.');
             const code=callback.get('xbox_code'),state=callback.get('xbox_state');
@@ -173,15 +173,8 @@ export function useCommunityVotes(entries:Entry[], version:string, mode:GameMode
   }
 
   async function saveNickname(value:string){
-    if(!supabase||!user||!xboxVerified)return {ok:false,message:'Xbox 로그인이 필요합니다.'};
-    const next=value.trim();
-    if(next.length<2||next.length>20)return {ok:false,message:'닉네임은 2~20자로 입력해주세요.'};
-    const result=await supabase.from('profiles').upsert({user_id:user.id,nickname:next},{onConflict:'user_id'});
-    if(result.error){
-      return {ok:false,message:result.error.code==='23505'?'이미 사용 중인 닉네임입니다.':'닉네임을 저장하지 못했습니다.'};
-    }
-    setNickname(next);
-    return {ok:true,message:''};
+    void value;
+    return {ok:false,message:'닉네임은 Xbox 게이머태그와 자동 동기화됩니다.'};
   }
 
   return {configured:supabaseConfigured,hasSession:Boolean(user),user:xboxVerified?user:null,nickname,counts,myVotes,recentEntryIds,loading,saving,error,signIn,signOut,vote,saveNickname,refresh};
