@@ -20,3 +20,20 @@ test('OAuth failure survives the signed-out refresh and is removed from the URL'
   assert.match(states[6],/인증 설정이 일치하지 않아/);
   assert.equal(replaced,'https://guide.example/');
 });
+
+
+test('a new sign-in never copies OAuth tokens or prior query parameters into redirectTo',async()=>{
+ let options;
+ const source=fs.readFileSync(new URL('../hooks/use-community-votes.ts',import.meta.url),'utf8');
+ const context={exports:{},URL,URLSearchParams,
+  window:{location:{href:'https://guide.example/Luminous-guide/?xbox_code=old&error=previous#access_token='+('s'.repeat(15000))+'&provider_token=private'}},
+  require:name=>name==='react'?{useState:value=>[value,()=>{}],useRef:current=>({current}),useCallback:fn=>fn,useEffect(){}}
+   :name==='@/lib/supabase'?{supabaseConfigured:true,supabase:{auth:{signInWithOAuth:async value=>{options=value;return {error:null}}}}}
+   :{TIERS:['S'],emptyCounts:()=>[0]},
+ };
+ vm.runInNewContext(ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS}}).outputText,context);
+ await context.exports.useCommunityVotes([],'version').signIn();
+ assert.equal(options.provider,'azure');
+ assert.equal(options.options.redirectTo,'https://guide.example/Luminous-guide/');
+ assert.doesNotMatch(JSON.stringify(options),/access_token|provider_token|xbox_code|previous|private/);
+});

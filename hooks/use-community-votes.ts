@@ -142,8 +142,9 @@ export function useCommunityVotes(entries:Entry[], version:string, mode:GameMode
     if(!supabase)return;
     setError('');
     const clean=new URL(window.location.href);
-    for(const key of ['xbox_code','xbox_state','xbox_error'])clean.searchParams.delete(key);
-    const options={redirectTo:clean.toString(),scopes:'email'};
+    // OAuth fragments can contain large access/provider tokens. Never put those
+    // fragments or prior query parameters into the next authorization request.
+    const options={redirectTo:clean.origin+clean.pathname,scopes:'email'};
     // Discard a legacy provider session; no manual Google identity linking.
     if(user&&!user.identities?.some(i=>i.provider==='azure')){
       const signedOut=await supabase.auth.signOut({scope:'local'});
