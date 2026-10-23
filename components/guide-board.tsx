@@ -4,6 +4,9 @@ import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 import Link from 'next/link';
 import { BookOpen, ChevronRight, PenLine, Trash2, X } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
+import { GAME_VERSION } from '@/lib/game-data';
+import { GuideItemBuild } from '@/components/guide-item-build';
+import { emptyGuideBuild, parseGuideBuild, type GuideItemBuild as ItemBuild } from '@/lib/guide-item-build';
 import { DUNGEON_GUIDE_TAGS, type DungeonGuideTag } from '@/lib/dungeon-guides';
 import { CommunityDiscussion } from '@/components/community-discussion';
 
@@ -16,6 +19,7 @@ type GuidePost = {
   profiles:{nickname:string}|null;
   dungeon_id:string|null;
   tags:string[];
+  build_snapshot:unknown;
 };
 
 type Props = {
@@ -29,10 +33,10 @@ type Props = {
   onPostsChanged?:()=>void;
 };
 
-function BoardModal({title,onClose,children}:{title:string;onClose:()=>void;children:ReactNode}){
+function BoardModal({title,onClose,children,className=''}:{title:string;onClose:()=>void;children:ReactNode;className?:string}){
   const ref=useRef<HTMLDialogElement>(null);
   useEffect(()=>{const dialog=ref.current;dialog?.showModal();return()=>dialog?.close()},[]);
-  return <dialog ref={ref} className="modal guide-post-modal" onCancel={onClose} onClick={event=>{if(event.target===event.currentTarget)onClose()}}><div className="modal-header"><h2>{title}</h2><button className="icon-button" onClick={onClose} aria-label="닫기"><X/></button></div>{children}</dialog>;
+  return <dialog ref={ref} className={`modal guide-post-modal ${className}`} onCancel={onClose} onClick={event=>{if(event.target===event.currentTarget)onClose()}}><div className="modal-header"><h2>{title}</h2><button className="icon-button" onClick={onClose} aria-label="닫기"><X/></button></div>{children}</dialog>;
 }
 
 export function GuideBoard({userId,nickname,onLogin,onNickname,preview=false,dungeonName,dungeonId,onPostsChanged}:Props){
@@ -48,14 +52,17 @@ export function GuideBoard({userId,nickname,onLogin,onNickname,preview=false,dun
   const [error,setError]=useState('');
   const [selectedTags,setSelectedTags]=useState<DungeonGuideTag[]>([]);
   const [activeTag,setActiveTag]=useState<DungeonGuideTag|null>(null);
+  const [attachBuild,setAttachBuild]=useState(false);
+  const [build,setBuild]=useState<ItemBuild>(()=>emptyGuideBuild(GAME_VERSION));
   const request=useRef(0);
+  const selectedBuild=parseGuideBuild(selected?.build_snapshot);
 
   const load=useCallback(async()=>{
     if(!supabase){setError('게시판 연결 설정이 필요합니다.');setLoading(false);return}
     const ticket=++request.current;
     setLoading(true);setError('');
     let query=supabase.from('guide_posts')
-      .select('id,user_id,title,content,created_at,dungeon_id,tags,profiles!guide_posts_user_id_fkey(nickname)')
+      .select('id,user_id,title,content,created_at,dungeon_id,tags,build_snapshot,profiles!guide_posts_user_id_fkey(nickname)')
       .order('created_at',{ascending:false})
       .limit(preview?3:100);
     if(dungeonId)query=query.or(`dungeon_id.eq.${dungeonId},and(dungeon_id.is.null,title.like.${titlePrefix}%)`);
@@ -79,14 +86,16 @@ export function GuideBoard({userId,nickname,onLogin,onNickname,preview=false,dun
   async function submit(event:React.FormEvent){
     event.preventDefault();
     if(!supabase||!userId||!nickname||!title.trim()||!content.trim())return;
+    if(attachBuild&&!parseGuideBuild(build)){setError('첨부할 빌드의 직업과 장비를 한 칸 이상 선택해주세요.');return}
+    if(saving)return;
     setSaving(true);setError('');
     const result=await supabase.from('guide_posts').insert({
       user_id:userId,title:titlePrefix+title.trim().slice(0,titleLimit),content:content.trim(),
-      ...(dungeonId?{dungeon_id:dungeonId,tags:selectedTags}:{}),
+      ...(dungeonId?{dungeon_id:dungeonId,tags:selectedTags,build_snapshot:attachBuild?build:null}:{}),
     });
     setSaving(false);
     if(result.error){setError('공략을 등록하지 못했습니다.');return}
-    setTitle('');setContent('');setSelectedTags([]);setWriting(false);await load();onPostsChanged?.();
+    setTitle('');setContent('');setSelectedTags([]);setAttachBuild(false);setBuild(emptyGuideBuild(GAME_VERSION));setWriting(false);await load();onPostsChanged?.();
   }
 
   async function removePost(post:GuidePost){
@@ -102,11 +111,11 @@ export function GuideBoard({userId,nickname,onLogin,onNickname,preview=false,dun
   return <section className={preview?'section guide-board':'guide-board'}>
     <div className="section-heading"><div>{preview&&<span className="overline">ADVENTURER GUIDES</span>}<h2>{preview?'새로 올라온 모험가 공략':dungeonName?`${dungeonName} 공략`:'공략 게시판'}</h2></div>{preview?<Link href="/guides/" className="text-button">모든 공략 <ChevronRight size={16}/></Link>:<button className="primary" onClick={startWriting}><PenLine size={16}/> 공략 작성</button>}</div>
     {dungeonName&&!preview&&<div className="guide-tag-filter" role="group" aria-label="공략 태그 필터"><button type="button" className={`guide-tag${activeTag===null?' active':''}`} aria-pressed={activeTag===null} onClick={()=>setActiveTag(null)}>전체</button>{DUNGEON_GUIDE_TAGS.map(tag=><button key={tag} type="button" className={`guide-tag${activeTag===tag?' active':''}`} aria-pressed={activeTag===tag} onClick={()=>setActiveTag(activeTag===tag?null:tag)}>#{tag}</button>)}</div>}
-    {error&&<p className="editor-error" role="alert">{error}</p>}
+    {error&&!writing&&<p className="editor-error" role="alert">{error}</p>}
     {loading&&<div className="empty"><BookOpen/><h3>공략을 불러오는 중입니다</h3></div>}
     {!loading&&!error&&!posts.length&&<div className="empty"><BookOpen/><h3>{activeTag?'이 태그의 공략이 아직 없습니다':'아직 등록된 공략이 없습니다'}</h3><p>첫 번째 공략을 작성해 모험가들과 경험을 나눠보세요.</p>{!preview&&<button className="primary" onClick={startWriting}>첫 공략 작성하기</button>}</div>}
-    {!loading&&!!posts.length&&<div className="board-list">{posts.map(post=><button className="board-row" key={post.id} onClick={()=>setSelected(post)}><span className="board-icon"><BookOpen size={19}/></span><span className="board-copy"><strong>{titlePrefix&&post.title.startsWith(titlePrefix)?post.title.slice(titlePrefix.length):post.title}</strong><small>{post.content}</small>{!!post.tags?.length&&<span className="guide-post-tags">{post.tags.map(tag=><span className="guide-tag" key={tag}>#{tag}</span>)}</span>}</span><span className="board-meta"><b>{post.profiles?.nickname||'모험가'}</b><time>{new Date(post.created_at).toLocaleDateString('ko-KR')}</time></span><ChevronRight size={17}/></button>)}</div>}
-    {writing&&<BoardModal title={dungeonName?`${dungeonName} 공략 작성`:"새 공략 작성"} onClose={()=>setWriting(false)}><form className="guide-write-form" onSubmit={submit}><label>제목<input autoFocus required maxLength={titleLimit} value={title} onChange={e=>setTitle(e.target.value)} placeholder="공략 제목을 입력하세요"/></label>{dungeonId&&<fieldset className="guide-tag-editor"><legend>공략 태그 <span className="muted">여러 개 선택할 수 있어요</span></legend><div className="guide-tag-filter">{DUNGEON_GUIDE_TAGS.map(tag=><button key={tag} type="button" className={`guide-tag${selectedTags.includes(tag)?' active':''}`} aria-pressed={selectedTags.includes(tag)} onClick={()=>setSelectedTags(previous=>previous.includes(tag)?previous.filter(value=>value!==tag):[...previous,tag])}>#{tag}</button>)}</div></fieldset>}<label>공략 내용<textarea required maxLength={10000} rows={14} value={content} onChange={e=>setContent(e.target.value)} placeholder="장비 구성, 운영 방법, 주의할 점 등을 자유롭게 작성하세요."/></label><div className="editor-actions"><button type="button" className="secondary" onClick={()=>setWriting(false)}>취소</button><button className="primary" disabled={saving||!title.trim()||!content.trim()}>{saving?'등록 중':'공략 등록'}</button></div></form></BoardModal>}
-    {selected&&<BoardModal title="모험가 공략" onClose={()=>setSelected(null)}><article className="community-guide"><span className="overline">ADVENTURER FIELD NOTE</span><h1>{selected.title}</h1>{!!selected.tags?.length&&<div className="guide-post-tags">{selected.tags.map(tag=><span className="guide-tag" key={tag}>#{tag}</span>)}</div>}<div className="guide-byline"><span>{selected.profiles?.nickname||'모험가'} · {new Date(selected.created_at).toLocaleDateString('ko-KR')}</span>{selected.user_id===userId&&<button className="text-button danger-button" onClick={()=>void removePost(selected)}><Trash2 size={14}/> 내 공략 삭제</button>}</div><div className="guide-content">{selected.content}</div></article><CommunityDiscussion targetKey={`guide-post:${selected.id}`} userId={userId} nickname={nickname} onLogin={onLogin} onNickname={onNickname}/></BoardModal>}
+    {!loading&&!!posts.length&&<div className="board-list">{posts.map(post=><button className="board-row" key={post.id} onClick={()=>setSelected(post)}><span className="board-icon"><BookOpen size={19}/></span><span className="board-copy"><strong>{titlePrefix&&post.title.startsWith(titlePrefix)?post.title.slice(titlePrefix.length):post.title}</strong><small>{post.content}</small>{parseGuideBuild(post.build_snapshot)&&<span className="guide-build-indicator">아이템 빌드 첨부</span>}{!!post.tags?.length&&<span className="guide-post-tags">{post.tags.map(tag=><span className="guide-tag" key={tag}>#{tag}</span>)}</span>}</span><span className="board-meta"><b>{post.profiles?.nickname||'모험가'}</b><time>{new Date(post.created_at).toLocaleDateString('ko-KR')}</time></span><ChevronRight size={17}/></button>)}</div>}
+    {writing&&<BoardModal className={attachBuild?'guide-build-modal':''} title={dungeonName?`${dungeonName} 공략 작성`:"새 공략 작성"} onClose={()=>setWriting(false)}><form className="guide-write-form" onSubmit={submit}><label>제목<input autoFocus required maxLength={titleLimit} value={title} onChange={e=>setTitle(e.target.value)} placeholder="공략 제목을 입력하세요"/></label>{dungeonId&&<fieldset className="guide-tag-editor"><legend>공략 태그 <span className="muted">여러 개 선택할 수 있어요</span></legend><div className="guide-tag-filter">{DUNGEON_GUIDE_TAGS.map(tag=><button key={tag} type="button" className={`guide-tag${selectedTags.includes(tag)?' active':''}`} aria-pressed={selectedTags.includes(tag)} onClick={()=>setSelectedTags(previous=>previous.includes(tag)?previous.filter(value=>value!==tag):[...previous,tag])}>#{tag}</button>)}</div></fieldset>}<label>공략 내용<textarea required maxLength={10000} rows={14} value={content} onChange={e=>setContent(e.target.value)} placeholder="장비 구성, 운영 방법, 주의할 점 등을 자유롭게 작성하세요."/></label>{dungeonId&&<div className="guide-build-option"><label className="guide-build-toggle"><input type="checkbox" checked={attachBuild} onChange={event=>setAttachBuild(event.target.checked)}/>아이템 빌드 첨부 <span className="muted">선택</span></label>{attachBuild&&<GuideItemBuild value={build} onChange={setBuild}/>}</div>}{error&&<p className="editor-error" role="alert">{error}</p>}<div className="editor-actions"><button type="button" className="secondary" onClick={()=>setWriting(false)}>취소</button><button className="primary" disabled={saving||!title.trim()||!content.trim()}>{saving?'등록 중':'공략 등록'}</button></div></form></BoardModal>}
+    {selected&&<BoardModal className={selectedBuild?'guide-build-modal':''} title="모험가 공략" onClose={()=>setSelected(null)}><article className="community-guide"><span className="overline">ADVENTURER FIELD NOTE</span><h1>{selected.title}</h1>{!!selected.tags?.length&&<div className="guide-post-tags">{selected.tags.map(tag=><span className="guide-tag" key={tag}>#{tag}</span>)}</div>}<div className="guide-byline"><span>{selected.profiles?.nickname||'모험가'} · {new Date(selected.created_at).toLocaleDateString('ko-KR')}</span>{selected.user_id===userId&&<button className="text-button danger-button" onClick={()=>void removePost(selected)}><Trash2 size={14}/> 내 공략 삭제</button>}</div><div className="guide-content">{selected.content}</div>{selectedBuild&&<GuideItemBuild value={selectedBuild}/>}</article><CommunityDiscussion targetKey={`guide-post:${selected.id}`} userId={userId} nickname={nickname} onLogin={onLogin} onNickname={onNickname}/></BoardModal>}
   </section>;
 }
