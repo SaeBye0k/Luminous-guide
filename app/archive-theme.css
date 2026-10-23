@@ -221,7 +221,7 @@ button.guide-tag:hover{border-color:#6d9d8f;color:var(--text)}
 .dungeon-modal .detail-intro .dungeon-world-label{margin-bottom:9px}
 
 .drop-item-name{display:inline-flex;align-items:center;gap:9px}
-.drop-table .mythic-drop{background:linear-gradient(90deg,#aa78ec20,#aa78ec08)}
-.drop-table .mythic-drop th{box-shadow:inset 3px 0 #b784f0;color:#e2c7ff;font-weight:650}
-.drop-table .mythic-drop td:last-child{color:#dfc0ff;font-weight:650}
-.mythic-drop-badge{display:inline-flex;align-items:center;gap:4px;border:1px solid #b784f070;border-radius:4px;padding:3px 6px;background:#a96bea20;color:#e0c1ff;font-size:10px;line-height:1.3;font-weight:600}
+.drop-table .mythic-drop{background:linear-gradient(90deg,#ef444424,#ef444409)}
+.drop-table .mythic-drop th{box-shadow:inset 3px 0 #ef5350;color:#ffaaaa;font-weight:650}
+.drop-table .mythic-drop td:last-child{color:#ffaaaa;font-weight:650}
+.mythic-drop-badge{display:inline-flex;align-items:center;gap:4px;border:1px solid #ef535080;border-radius:4px;padding:3px 6px;background:#ef444426;color:#ffaaaa;font-size:10px;line-height:1.3;font-weight:600}
