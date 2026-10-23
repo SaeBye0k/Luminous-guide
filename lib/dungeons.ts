@@ -60,14 +60,14 @@ export const dungeonDetails: Record<string, EntryDetail> = {
     stats: [
       '권장 명성 / 최소 입장 명성: 1레벨',
       '평균 레벨: 3',
-      '등장 몬스터: 좀비, 뮤턴트 좀비',
+      '등장 몬스터: 좀비, 뮤턴트 좀비 · 총 8마리',
       '최대 인원: 6명',
       '추천 속성: 어둠',
       '총 웨이브: 3',
       '극한 도전 불가',
     ],
     abilities: [
-      { name: '1웨이브', description: '등장 몬스터: 좀비 · 1레벨' },
+      { name: '1웨이브', description: '등장 몬스터: 좀비 · 1레벨 · 1마리' },
       { name: '2웨이브', description: '좀비 · 3레벨 · 2마리\n좀비 · 5레벨 · 1마리' },
       { name: '3웨이브', description: '좀비 · 3레벨 · 2마리\n좀비 · 4레벨 · 1마리\n뮤턴트 좀비 · 3레벨 · 1마리' },
     ],
