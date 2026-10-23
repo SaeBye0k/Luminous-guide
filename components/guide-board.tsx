@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 import Link from 'next/link';
 import { BookOpen, ChevronRight, PenLine, Trash2, X } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
+import { DUNGEON_GUIDE_TAGS, type DungeonGuideTag } from '@/lib/dungeon-guides';
 import { CommunityDiscussion } from '@/components/community-discussion';
 
 type GuidePost = {
@@ -13,6 +14,8 @@ type GuidePost = {
   content:string;
   created_at:string;
   profiles:{nickname:string}|null;
+  dungeon_id:string|null;
+  tags:string[];
 };
 
 type Props = {
@@ -22,6 +25,7 @@ type Props = {
   onNickname:()=>void;
   preview?:boolean;
   dungeonName?:string;
+  dungeonId?:string;
 };
 
 function BoardModal({title,onClose,children}:{title:string;onClose:()=>void;children:ReactNode}){
@@ -30,7 +34,7 @@ function BoardModal({title,onClose,children}:{title:string;onClose:()=>void;chil
   return <dialog ref={ref} className="modal guide-post-modal" onCancel={onClose} onClick={event=>{if(event.target===event.currentTarget)onClose()}}><div className="modal-header"><h2>{title}</h2><button className="icon-button" onClick={onClose} aria-label="닫기"><X/></button></div>{children}</dialog>;
 }
 
-export function GuideBoard({userId,nickname,onLogin,onNickname,preview=false,dungeonName}:Props){
+export function GuideBoard({userId,nickname,onLogin,onNickname,preview=false,dungeonName,dungeonId}:Props){
   const titlePrefix=dungeonName?`[${dungeonName}] `:'';
   const titleLimit=100-titlePrefix.length;
   const [posts,setPosts]=useState<GuidePost[]>([]);
@@ -41,21 +45,29 @@ export function GuideBoard({userId,nickname,onLogin,onNickname,preview=false,dun
   const [loading,setLoading]=useState(true);
   const [saving,setSaving]=useState(false);
   const [error,setError]=useState('');
+  const [selectedTags,setSelectedTags]=useState<DungeonGuideTag[]>([]);
+  const [activeTag,setActiveTag]=useState<DungeonGuideTag|null>(null);
+  const request=useRef(0);
 
   const load=useCallback(async()=>{
     if(!supabase){setError('게시판 연결 설정이 필요합니다.');setLoading(false);return}
+    const ticket=++request.current;
+    setLoading(true);setError('');
     let query=supabase.from('guide_posts')
-      .select('id,user_id,title,content,created_at,profiles!guide_posts_user_id_fkey(nickname)')
+      .select('id,user_id,title,content,created_at,dungeon_id,tags,profiles!guide_posts_user_id_fkey(nickname)')
       .order('created_at',{ascending:false})
       .limit(preview?3:100);
-    if(titlePrefix)query=query.like('title',`${titlePrefix}%`);
+    if(dungeonId)query=query.or(`dungeon_id.eq.${dungeonId},and(dungeon_id.is.null,title.like.${titlePrefix}%)`);
+    else if(titlePrefix)query=query.like('title',`${titlePrefix}%`);
+    if(activeTag)query=query.contains('tags',[activeTag]);
     const result=await query;
+    if(ticket!==request.current)return;
     if(result.error)setError('공략을 불러오지 못했습니다. Supabase 게시판 설정을 확인해주세요.');
     else setPosts((result.data||[]) as unknown as GuidePost[]);
     setLoading(false);
-  },[preview,titlePrefix]);
+  },[preview,titlePrefix,dungeonId,activeTag]);
 
-  useEffect(()=>{void load()},[load]);
+  useEffect(()=>{void load();return()=>{request.current++}},[load]);
 
   function startWriting(){
     if(!userId){onLogin();return}
@@ -69,10 +81,11 @@ export function GuideBoard({userId,nickname,onLogin,onNickname,preview=false,dun
     setSaving(true);setError('');
     const result=await supabase.from('guide_posts').insert({
       user_id:userId,title:titlePrefix+title.trim().slice(0,titleLimit),content:content.trim(),
+      ...(dungeonId?{dungeon_id:dungeonId,tags:selectedTags}:{}),
     });
     setSaving(false);
     if(result.error){setError('공략을 등록하지 못했습니다.');return}
-    setTitle('');setContent('');setWriting(false);await load();
+    setTitle('');setContent('');setSelectedTags([]);setWriting(false);await load();
   }
 
   async function removePost(post:GuidePost){
@@ -87,11 +100,12 @@ export function GuideBoard({userId,nickname,onLogin,onNickname,preview=false,dun
 
   return <section className={preview?'section guide-board':'guide-board'}>
     <div className="section-heading"><div>{preview&&<span className="overline">ADVENTURER GUIDES</span>}<h2>{preview?'새로 올라온 모험가 공략':dungeonName?`${dungeonName} 공략`:'공략 게시판'}</h2></div>{preview?<Link href="/guides/" className="text-button">모든 공략 <ChevronRight size={16}/></Link>:<button className="primary" onClick={startWriting}><PenLine size={16}/> 공략 작성</button>}</div>
+    {dungeonName&&!preview&&<div className="guide-tag-filter" role="group" aria-label="공략 태그 필터"><button type="button" className={`guide-tag${activeTag===null?' active':''}`} aria-pressed={activeTag===null} onClick={()=>setActiveTag(null)}>전체</button>{DUNGEON_GUIDE_TAGS.map(tag=><button key={tag} type="button" className={`guide-tag${activeTag===tag?' active':''}`} aria-pressed={activeTag===tag} onClick={()=>setActiveTag(activeTag===tag?null:tag)}>#{tag}</button>)}</div>}
     {error&&<p className="editor-error" role="alert">{error}</p>}
     {loading&&<div className="empty"><BookOpen/><h3>공략을 불러오는 중입니다</h3></div>}
-    {!loading&&!posts.length&&<div className="empty"><BookOpen/><h3>아직 등록된 공략이 없습니다</h3><p>첫 번째 공략을 작성해 모험가들과 경험을 나눠보세요.</p>{!preview&&<button className="primary" onClick={startWriting}>첫 공략 작성하기</button>}</div>}
-    {!!posts.length&&<div className="board-list">{posts.map(post=><button className="board-row" key={post.id} onClick={()=>setSelected(post)}><span className="board-icon"><BookOpen size={19}/></span><span className="board-copy"><strong>{titlePrefix&&post.title.startsWith(titlePrefix)?post.title.slice(titlePrefix.length):post.title}</strong><small>{post.content}</small></span><span className="board-meta"><b>{post.profiles?.nickname||'모험가'}</b><time>{new Date(post.created_at).toLocaleDateString('ko-KR')}</time></span><ChevronRight size={17}/></button>)}</div>}
-    {writing&&<BoardModal title={dungeonName?`${dungeonName} 공략 작성`:"새 공략 작성"} onClose={()=>setWriting(false)}><form className="guide-write-form" onSubmit={submit}><label>제목<input autoFocus required maxLength={titleLimit} value={title} onChange={e=>setTitle(e.target.value)} placeholder="공략 제목을 입력하세요"/></label><label>공략 내용<textarea required maxLength={10000} rows={14} value={content} onChange={e=>setContent(e.target.value)} placeholder="장비 구성, 운영 방법, 주의할 점 등을 자유롭게 작성하세요."/></label><div className="editor-actions"><button type="button" className="secondary" onClick={()=>setWriting(false)}>취소</button><button className="primary" disabled={saving||!title.trim()||!content.trim()}>{saving?'등록 중':'공략 등록'}</button></div></form></BoardModal>}
-    {selected&&<BoardModal title="모험가 공략" onClose={()=>setSelected(null)}><article className="community-guide"><span className="overline">ADVENTURER FIELD NOTE</span><h1>{selected.title}</h1><div className="guide-byline"><span>{selected.profiles?.nickname||'모험가'} · {new Date(selected.created_at).toLocaleDateString('ko-KR')}</span>{selected.user_id===userId&&<button className="text-button danger-button" onClick={()=>void removePost(selected)}><Trash2 size={14}/> 내 공략 삭제</button>}</div><div className="guide-content">{selected.content}</div></article><CommunityDiscussion targetKey={`guide-post:${selected.id}`} userId={userId} nickname={nickname} onLogin={onLogin} onNickname={onNickname}/></BoardModal>}
+    {!loading&&!error&&!posts.length&&<div className="empty"><BookOpen/><h3>{activeTag?'이 태그의 공략이 아직 없습니다':'아직 등록된 공략이 없습니다'}</h3><p>첫 번째 공략을 작성해 모험가들과 경험을 나눠보세요.</p>{!preview&&<button className="primary" onClick={startWriting}>첫 공략 작성하기</button>}</div>}
+    {!loading&&!!posts.length&&<div className="board-list">{posts.map(post=><button className="board-row" key={post.id} onClick={()=>setSelected(post)}><span className="board-icon"><BookOpen size={19}/></span><span className="board-copy"><strong>{titlePrefix&&post.title.startsWith(titlePrefix)?post.title.slice(titlePrefix.length):post.title}</strong><small>{post.content}</small>{!!post.tags?.length&&<span className="guide-post-tags">{post.tags.map(tag=><span className="guide-tag" key={tag}>#{tag}</span>)}</span>}</span><span className="board-meta"><b>{post.profiles?.nickname||'모험가'}</b><time>{new Date(post.created_at).toLocaleDateString('ko-KR')}</time></span><ChevronRight size={17}/></button>)}</div>}
+    {writing&&<BoardModal title={dungeonName?`${dungeonName} 공략 작성`:"새 공략 작성"} onClose={()=>setWriting(false)}><form className="guide-write-form" onSubmit={submit}><label>제목<input autoFocus required maxLength={titleLimit} value={title} onChange={e=>setTitle(e.target.value)} placeholder="공략 제목을 입력하세요"/></label>{dungeonId&&<fieldset className="guide-tag-editor"><legend>공략 태그 <span className="muted">여러 개 선택할 수 있어요</span></legend><div className="guide-tag-filter">{DUNGEON_GUIDE_TAGS.map(tag=><button key={tag} type="button" className={`guide-tag${selectedTags.includes(tag)?' active':''}`} aria-pressed={selectedTags.includes(tag)} onClick={()=>setSelectedTags(previous=>previous.includes(tag)?previous.filter(value=>value!==tag):[...previous,tag])}>#{tag}</button>)}</div></fieldset>}<label>공략 내용<textarea required maxLength={10000} rows={14} value={content} onChange={e=>setContent(e.target.value)} placeholder="장비 구성, 운영 방법, 주의할 점 등을 자유롭게 작성하세요."/></label><div className="editor-actions"><button type="button" className="secondary" onClick={()=>setWriting(false)}>취소</button><button className="primary" disabled={saving||!title.trim()||!content.trim()}>{saving?'등록 중':'공략 등록'}</button></div></form></BoardModal>}
+    {selected&&<BoardModal title="모험가 공략" onClose={()=>setSelected(null)}><article className="community-guide"><span className="overline">ADVENTURER FIELD NOTE</span><h1>{selected.title}</h1>{!!selected.tags?.length&&<div className="guide-post-tags">{selected.tags.map(tag=><span className="guide-tag" key={tag}>#{tag}</span>)}</div>}<div className="guide-byline"><span>{selected.profiles?.nickname||'모험가'} · {new Date(selected.created_at).toLocaleDateString('ko-KR')}</span>{selected.user_id===userId&&<button className="text-button danger-button" onClick={()=>void removePost(selected)}><Trash2 size={14}/> 내 공략 삭제</button>}</div><div className="guide-content">{selected.content}</div></article><CommunityDiscussion targetKey={`guide-post:${selected.id}`} userId={userId} nickname={nickname} onLogin={onLogin} onNickname={onNickname}/></BoardModal>}
   </section>;
 }

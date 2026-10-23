@@ -167,3 +167,28 @@ body:has(.app-shell[data-mode=PVP]){background:radial-gradient(ellipse at 75% 0%
 .dungeon-boss-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 8px;border:1px solid #e5b87950;border-radius:4px;color:#edc48d;background:#e5b87912;font-size:11px;font-weight:600;white-space:nowrap}
 @media(max-width:820px){.database-grid.dungeon-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dungeon-admission{grid-template-columns:repeat(2,minmax(0,1fr))}.dungeon-admission>div{padding:13px}.dungeon-admission dd{font-size:18px;margin-top:7px}}
 @media(max-width:480px){.database-grid.dungeon-grid{grid-template-columns:minmax(0,1fr)}.dungeon-card .card-body>p{min-height:0}.dungeon-modal{margin-top:3dvh;max-height:94dvh}}
+
+/* Dungeon community hub */
+.dungeon-guide-selector{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0 0 22px}
+.dungeon-guide-selector>button{display:flex;align-items:center;gap:12px;padding:18px;text-align:left;background:var(--panel);border:1px solid var(--border);border-radius:8px;min-width:0;transition:background .15s,border-color .15s}
+.dungeon-guide-selector>button:hover{background:var(--panel2)}
+.dungeon-guide-selector>button.active{border-color:var(--accent);background:#142722;box-shadow:inset 0 0 0 1px #72e2c31a}
+.dungeon-guide-selector>button>svg:first-child{color:var(--accent);flex-shrink:0}
+.dungeon-guide-selector>button>svg:last-child{margin-left:auto;flex-shrink:0;color:var(--muted)}
+.dungeon-guide-selector strong{display:block;font-size:15px;font-weight:600}
+.dungeon-guide-selector small{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+.dungeon-guide-overview{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:24px;border:1px solid var(--border);border-radius:8px;background:linear-gradient(110deg,#152620,var(--panel) 65%);margin-bottom:20px}
+.dungeon-guide-overview .overline{margin-bottom:5px;color:var(--accent)}
+.dungeon-guide-overview h2{font-size:23px}.dungeon-guide-overview p{font-size:13px;margin-top:6px}
+.dungeon-guide-facts{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px;max-width:450px}
+.dungeon-guide-facts>span{padding:6px 10px;background:#10191c;border:1px solid var(--border);border-radius:4px;font-size:11px;color:#b8c8c4}
+.dungeon-guide-facts>a{flex-basis:100%;justify-content:flex-end;font-size:12px;margin-top:4px}
+.dungeon-guide-tabs{margin:0 0 22px}.dungeon-guide-tabs button{display:inline-flex;gap:7px;align-items:center}
+.guide-tag-filter,.guide-post-tags{display:flex;flex-wrap:wrap;gap:7px}
+.guide-tag-filter{margin:0 0 18px}.guide-tag{display:inline-flex;align-items:center;min-height:30px;padding:5px 10px;border:1px solid #344451;border-radius:5px;background:#17202a;color:#aebfce;font-size:12px;line-height:1.4;white-space:nowrap}
+button.guide-tag:hover{border-color:#6d9d8f;color:var(--text)}
+.guide-tag.active{background:#1b3830;border-color:#72e2c380;color:#91efd3}
+.guide-post-tags{margin-top:10px}.guide-post-tags .guide-tag{font-size:10px;padding:3px 7px;min-height:23px;color:#91cbb9;background:#183029;border-color:#2b5144}
+.guide-tag-editor{min-width:0;border:0;padding:0;margin:0}.guide-tag-editor legend{font-size:13px;margin-bottom:9px;color:#b9c7d8}.guide-tag-editor legend span{margin-left:8px;font-size:11px}.guide-tag-editor .guide-tag-filter{margin:0}
+@media(max-width:820px){.dungeon-guide-selector{gap:8px}.dungeon-guide-selector>button{padding:13px;gap:8px}.dungeon-guide-selector>button>svg:last-child{display:none}.dungeon-guide-selector strong{font-size:13px}.dungeon-guide-overview{padding:18px;align-items:flex-start;flex-direction:column;gap:16px}.dungeon-guide-facts{justify-content:flex-start}.dungeon-guide-facts>a{justify-content:flex-start}}
+@media(max-width:480px){.dungeon-guide-selector{grid-template-columns:minmax(0,1fr);gap:7px}.dungeon-guide-selector>button{padding:13px 15px}.dungeon-guide-selector>button span{display:flex;flex:1;justify-content:space-between;align-items:center;gap:10px}.dungeon-guide-selector small{margin-top:0}.guide-tag{font-size:11px}}
