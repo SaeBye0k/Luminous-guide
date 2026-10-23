@@ -8,7 +8,7 @@ function fixture(initialUrl){
  let url=new URL(initialUrl),cursor=0;const states=[];
  const jsx=(type,props)=>({type,props:props||{}});
  const icon=()=>null;
- const catalog=[{id:'sword',name:'검',category:'무기',type:'장검',element:'빛',rarity:'일반',counts:[0]},{id:'job',name:'기사',category:'직업',type:'전사',element:'빛',rarity:'일반',counts:[0]},{id:'dungeon',name:'슬라임 굴',category:'던전',type:'웨이브 던전',element:'무속성',rarity:'던전',counts:[0],description:'슬라임이 등장합니다.'}];
+ const catalog=[{id:'sword',name:'검',category:'무기',type:'장검',element:'빛',rarity:'일반',counts:[0]},{id:'job',name:'기사',category:'직업',type:'전사',element:'빛',rarity:'일반',counts:[0]},{id:'dungeon',name:'슬라임 굴',category:'던전',type:'웨이브 던전',element:'무속성',elements:['무속성','빛'],rarity:'던전',counts:[0],description:'슬라임이 등장합니다.'}];
  const community={counts:{},myVotes:{},recentEntryIds:[],loading:true,configured:true,hasSession:true,user:null,error:''};
  const context={exports:{},URLSearchParams,process:{env:{}},
   require:name=>{
@@ -70,4 +70,14 @@ test('dungeons offer guides and short comments without tier controls or scores',
  const weapon=nodes(weapons).find(n=>n.props?.entry?.id==='sword');
  weapon.type(weapon.props).props.onClick();
  assert.ok(nodes(weaponsFixture.render('database')).some(n=>n.props?.className==='vote-panel'));
+});
+
+
+test('a dungeon with multiple recommended elements appears under either element filter',()=>{
+ const f=fixture('https://guide.example/database/?category=던전');
+ for(const element of ['빛','무속성','어둠']){
+  const tree=f.render('database');
+  nodes(tree).find(n=>n.props?.['aria-label']==='속성 필터').props.onChange({target:{value:element}});
+  assert.equal(nodes(f.render('database')).some(n=>n.props?.entry?.id==='dungeon'),element!=='어둠');
+ }
 });

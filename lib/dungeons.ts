@@ -78,6 +78,33 @@ export const dungeonEntries: Entry[] = [
     },
   },
   {
+    id: 'dungeon_suspicious_church',
+    name: '수상한 교회',
+    category: '던전',
+    type: '웨이브 던전',
+    element: '빛',
+    elements: ['무속성', '빛'],
+    rarity: '던전',
+    icon: 'castle',
+    description: '최소 입장 명성 15레벨. 총 4웨이브로 진행되며 루미너스 수녀·변명자·루미너스 사제·5급 감시자가 등장합니다.',
+    power: 0,
+    team: 'D',
+    counts: [0, 0, 0, 0, 0, 0, 0],
+    tagline: '교회인데... 뭔가 이상하네요?',
+    dropTable: {
+      draws: 2,
+      items: [
+        { name: '팬텀 멤브레인', quantity: '1~2개', probability: '6.40%' },
+        { name: '거울 방패', quantity: '1개', probability: '8.43%' },
+        { name: '굳건한 의지', quantity: '1개', probability: '8.43%' },
+        { name: '오함마', quantity: '1개', probability: '9.82%' },
+        { name: '경험의 봉우리', quantity: '4~10개', probability: '17.18%' },
+        { name: '철덩이', quantity: '5~12개', probability: '17.18%' },
+        { name: '꽝', quantity: '—', probability: '32.57%' },
+      ],
+    },
+  },
+  {
     id: 'dungeon_chicken_farm',
     name: '닭농장',
     category: '던전',
@@ -106,6 +133,22 @@ export const dungeonEntries: Entry[] = [
 ];
 
 export const dungeonDetails: Record<string, EntryDetail> = {
+  dungeon_suspicious_church: {
+    sourceUrl: '',
+    checkedOn: '2026-10-24',
+    stats: [
+      '권장 명성: 15레벨',
+      '평균 레벨: 12',
+      '추천 속성: 무속성 · 빛',
+      '최대 입장 가능 인원: 8명',
+    ],
+    abilities: [
+      { name: '1웨이브', description: '루미너스 수녀 · 12레벨 · 2명' },
+      { name: '2웨이브', description: '루미너스 수녀 · 12레벨 · 2명\n변명자 · 12레벨 · 2명' },
+      { name: '3웨이브', description: '루미너스 수녀 · 12레벨 · 2명\n루미너스 사제 · 12레벨 · 3명' },
+      { name: '4웨이브', description: '5급 감시자 · 20레벨 · 1명' },
+    ],
+  },
   dungeon_russell_battle: {
     sourceUrl: '',
     checkedOn: '2026-10-24',

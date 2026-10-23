@@ -23,6 +23,7 @@ export type Entry = {
   category: Category;
   type: string;
   element: string;
+  elements?: string[];
   rarity: string;
   icon: string;
   description: string;
