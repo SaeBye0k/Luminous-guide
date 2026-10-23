@@ -31,6 +31,20 @@ export const dungeonEntries: Entry[] = [
     counts: [0, 0, 0, 0, 0, 0, 0],
     tagline: '오우.. 꽤 으스스한걸요?',
   },
+  {
+    id: 'dungeon_slime_cave',
+    name: '슬라임 굴',
+    category: '던전',
+    type: '웨이브 던전',
+    element: '무속성',
+    rarity: '던전',
+    icon: 'castle',
+    description: '최소 입장 명성 3레벨. 총 3웨이브로 진행되며 10레벨 슬라임·자수정 슬라임과 20레벨 슬라임 킹이 등장합니다.',
+    power: 0,
+    team: 'D',
+    counts: [0, 0, 0, 0, 0, 0, 0],
+    tagline: '찐득 찐득 불쾌한 동굴이다...',
+  },
 ];
 
 export const dungeonDetails: Record<string, EntryDetail> = {
@@ -70,6 +84,24 @@ export const dungeonDetails: Record<string, EntryDetail> = {
       { name: '1웨이브', description: '등장 몬스터: 좀비 · 1레벨 · 1마리' },
       { name: '2웨이브', description: '좀비 · 3레벨 · 2마리\n좀비 · 5레벨 · 1마리' },
       { name: '3웨이브', description: '좀비 · 3레벨 · 2마리\n좀비 · 4레벨 · 1마리\n뮤턴트 좀비 · 3레벨 · 1마리' },
+    ],
+  },
+  dungeon_slime_cave: {
+    sourceUrl: '',
+    checkedOn: '2026-10-24',
+    stats: [
+      '권장 명성 / 최소 입장 명성: 3레벨',
+      '평균 레벨: 10',
+      '등장 몬스터: 슬라임, 자수정 슬라임, 슬라임 킹',
+      '최대 인원: 8명',
+      '추천 속성: 무속성',
+      '총 웨이브: 3',
+      '극한 도전 불가',
+    ],
+    abilities: [
+      { name: '1웨이브', description: '슬라임 · 10레벨 · 3마리' },
+      { name: '2웨이브', description: '슬라임 · 10레벨 · 4마리\n자수정 슬라임 · 10레벨 · 4마리' },
+      { name: '3웨이브', description: '슬라임 킹 · 20레벨' },
     ],
   },
 };
