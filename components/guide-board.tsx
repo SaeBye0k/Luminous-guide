@@ -26,6 +26,7 @@ type Props = {
   preview?:boolean;
   dungeonName?:string;
   dungeonId?:string;
+  onPostsChanged?:()=>void;
 };
 
 function BoardModal({title,onClose,children}:{title:string;onClose:()=>void;children:ReactNode}){
@@ -34,7 +35,7 @@ function BoardModal({title,onClose,children}:{title:string;onClose:()=>void;chil
   return <dialog ref={ref} className="modal guide-post-modal" onCancel={onClose} onClick={event=>{if(event.target===event.currentTarget)onClose()}}><div className="modal-header"><h2>{title}</h2><button className="icon-button" onClick={onClose} aria-label="닫기"><X/></button></div>{children}</dialog>;
 }
 
-export function GuideBoard({userId,nickname,onLogin,onNickname,preview=false,dungeonName,dungeonId}:Props){
+export function GuideBoard({userId,nickname,onLogin,onNickname,preview=false,dungeonName,dungeonId,onPostsChanged}:Props){
   const titlePrefix=dungeonName?`[${dungeonName}] `:'';
   const titleLimit=100-titlePrefix.length;
   const [posts,setPosts]=useState<GuidePost[]>([]);
@@ -85,7 +86,7 @@ export function GuideBoard({userId,nickname,onLogin,onNickname,preview=false,dun
     });
     setSaving(false);
     if(result.error){setError('공략을 등록하지 못했습니다.');return}
-    setTitle('');setContent('');setSelectedTags([]);setWriting(false);await load();
+    setTitle('');setContent('');setSelectedTags([]);setWriting(false);await load();onPostsChanged?.();
   }
 
   async function removePost(post:GuidePost){
@@ -95,7 +96,7 @@ export function GuideBoard({userId,nickname,onLogin,onNickname,preview=false,dun
     const result=await supabase.from('guide_posts').delete().eq('id',post.id).eq('user_id',userId);
     if(result.error){setError('공략글을 삭제하지 못했습니다.');return}
     setPosts(previous=>previous.filter(item=>item.id!==post.id));
-    setSelected(null);
+    setSelected(null);onPostsChanged?.();
   }
 
   return <section className={preview?'section guide-board':'guide-board'}>

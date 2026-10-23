@@ -16,6 +16,7 @@ function fixture(initialUrl){
    if(name==='react')return {Suspense:'suspense',useEffect(){},useRef:current=>({current}),useState:initial=>{const i=cursor++;if(!(i in states))states[i]=initial;return [states[i],value=>{states[i]=typeof value==='function'?value(states[i]):value}]}};
    if(name==='next/navigation')return {useSearchParams:()=>url.searchParams,usePathname:()=>url.pathname,useRouter:()=>({replace:next=>{url=new URL(next,url)}})};
    if(name==='@/lib/game-data')return {tierClass:t=>t.toLowerCase(),guides:[],TIERS:['S'],TIER_RANGES:{S:'4.5'},VERSIONS:['version'],GAME_VERSION:'version',emptyCounts:()=>[0],stats:()=>({total:0,average:0,tier:'S'})};
+   if(name==='@/hooks/use-dungeon-guide-tags')return {useDungeonGuideTags:()=>({counts:{dungeon:[{tag:'봉우리 파밍',count:2}]},error:'',refresh(){}})};
    if(name==='@/hooks/use-catalog')return {useCatalog:()=>({entries:catalog})};
    if(name==='@/hooks/use-community-votes')return {useCommunityVotes:()=>community};
    return new Proxy({},{get:()=>icon});
@@ -58,6 +59,7 @@ test('dungeons offer guides and short comments without tier controls or scores',
  const button=card.type(card.props);
  assert.equal(nodes(button).some(n=>n.props?.className==='card-meta'),false);
  assert.doesNotMatch(text(button),/5\.00|초기 결과/);
+ assert.ok(nodes(button).some(node=>node.props?.tags?.[0]?.tag==='봉우리 파밍'));
  button.props.onClick();
  const selected=f.render('database');
  assert.equal(nodes(selected).some(n=>['detail-stats','vote-panel','distribution'].includes(n.props?.className)),false);

@@ -192,3 +192,10 @@ button.guide-tag:hover{border-color:#6d9d8f;color:var(--text)}
 .guide-tag-editor{min-width:0;border:0;padding:0;margin:0}.guide-tag-editor legend{font-size:13px;margin-bottom:9px;color:#b9c7d8}.guide-tag-editor legend span{margin-left:8px;font-size:11px}.guide-tag-editor .guide-tag-filter{margin:0}
 @media(max-width:820px){.dungeon-guide-selector{gap:8px}.dungeon-guide-selector>button{padding:13px;gap:8px}.dungeon-guide-selector>button>svg:last-child{display:none}.dungeon-guide-selector strong{font-size:13px}.dungeon-guide-overview{padding:18px;align-items:flex-start;flex-direction:column;gap:16px}.dungeon-guide-facts{justify-content:flex-start}.dungeon-guide-facts>a{justify-content:flex-start}}
 @media(max-width:480px){.dungeon-guide-selector{grid-template-columns:minmax(0,1fr);gap:7px}.dungeon-guide-selector>button{padding:13px 15px}.dungeon-guide-selector>button span{display:flex;flex:1;justify-content:space-between;align-items:center;gap:10px}.dungeon-guide-selector small{margin-top:0}.guide-tag{font-size:11px}}
+
+.dungeon-community-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.dungeon-community-tag{display:inline-flex;padding:4px 8px;border:1px solid #36614f;border-radius:4px;background:#193329;color:#a2ddc4;font-size:11px;font-weight:500;line-height:1.4;white-space:nowrap}
+.dungeon-guide-selector>button>span{min-width:0}
+.dungeon-guide-selector .dungeon-community-tag{font-size:10px;padding:3px 6px}
+@media(max-width:480px){.dungeon-guide-selector>button>span{display:block}.dungeon-guide-selector small{margin-top:4px}}
+@media(max-width:480px){.dungeon-guide-selector .dungeon-community-tags{display:flex;flex:initial;justify-content:flex-start;gap:6px}.dungeon-guide-selector .dungeon-community-tag{display:inline-flex;flex:initial;justify-content:initial}}

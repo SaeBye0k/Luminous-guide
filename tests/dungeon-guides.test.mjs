@@ -9,7 +9,7 @@ const jsx=(type,props)=>({type,props:props||{}});
 function nodes(tree){if(!tree||typeof tree!=='object')return [];if(Array.isArray(tree))return tree.flatMap(nodes);return [tree,...nodes(tree.props?.children)]}
 function text(tree){if(typeof tree==='string'||typeof tree==='number')return String(tree);if(!tree||typeof tree!=='object')return '';if(Array.isArray(tree))return tree.map(text).join('');return text(tree.props?.children)}
 function fixture(){
- let cursor=0;const states=[],effects=[],queries=[],inserts=[];
+ let cursor=0,changes=0;const states=[],effects=[],queries=[],inserts=[];
  const rows=[
   {id:1,title:'[슬라임 굴] 빠른 레벨업',content:'슬라임 공략',dungeon_id:'dungeon_slime_cave',tags:['렙업용'],user_id:'author',profiles:{nickname:'작성자'}},
   {id:2,title:'[슬라임 굴] 이전 공략',content:'기존 글',dungeon_id:null,tags:[],user_id:'other',profiles:{nickname:'모험가'}},
@@ -24,8 +24,8 @@ function fixture(){
   return new Proxy({},{get:()=>()=>null});
  }};
  vm.runInNewContext(ts.transpileModule(fs.readFileSync(new URL('../components/guide-board.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX}}).outputText,context);
- const props={dungeonId:'dungeon_slime_cave',dungeonName:'슬라임 굴',userId:'author',nickname:'작성자',onLogin(){},onNickname(){}};
- return {queries,inserts,render(){cursor=0;effects.length=0;return context.exports.GuideBoard(props)},async load(){effects[0]();await new Promise(resolve=>setImmediate(resolve))}};
+ const props={dungeonId:'dungeon_slime_cave',dungeonName:'슬라임 굴',userId:'author',nickname:'작성자',onLogin(){},onNickname(){},onPostsChanged(){changes++}};
+ return {queries,inserts,get changes(){return changes},render(){cursor=0;effects.length=0;return context.exports.GuideBoard(props)},async load(){effects[0]();await new Promise(resolve=>setImmediate(resolve))}};
 }
 
 test('dungeon guides retain legacy posts, filter tags, and save multiple purpose tags',async()=>{
@@ -43,6 +43,7 @@ test('dungeon guides retain legacy posts, filter tags, and save multiple purpose
  nodes(editor).find(n=>n.type==='button'&&text(n)==='#봉우리 파밍').props.onClick();
  tree=f.render();editor=nodes(tree).find(n=>n.type==='form');
  await editor.props.onSubmit({preventDefault(){}});
+ assert.equal(f.changes,1);
  assert.equal(f.inserts.length,1);assert.equal(f.inserts[0].dungeon_id,'dungeon_slime_cave');
  assert.deepEqual(Array.from(f.inserts[0].tags),['렙업용','봉우리 파밍']);
  assert.equal(f.inserts[0].title,'[슬라임 굴] 봉우리도 챙기는 레벨업');
@@ -66,4 +67,21 @@ test('dungeon hub supports direct dungeon links, selection, and shared short rev
  nodes(tree).find(n=>n.type==='button'&&text(n)==='한줄평').props.onClick();
  tree=render('farm');assert.ok(nodes(tree).some(n=>n.props?.targetKey==='dungeon:farm'));
  tree=render('unknown');assert.ok(nodes(tree).some(n=>n.props?.targetKey==='dungeon:gloomy'));
+});
+
+
+test('dungeon badges reflect only existing guides and disappear when no counts remain',()=>{
+ const dataContext={exports:{}};
+ vm.runInNewContext(ts.transpileModule(fs.readFileSync(new URL('../lib/dungeon-guides.ts',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS}}).outputText,dataContext);
+ const counts=dataContext.exports.collectDungeonTags([
+  {dungeon_id:'slime',tag:'봉우리 파밍',guide_count:'3'},
+  {dungeon_id:'slime',tag:'렙업용',guide_count:1},
+  {dungeon_id:'farm',tag:'유물파밍',guide_count:0},
+ ]);
+ assert.deepEqual(JSON.parse(JSON.stringify(counts)),{slime:[{tag:'봉우리 파밍',count:3},{tag:'렙업용',count:1}]});
+ const badgeContext={exports:{},require:()=>({jsx,jsxs:jsx})};
+ vm.runInNewContext(ts.transpileModule(fs.readFileSync(new URL('../components/dungeon-tag-badges.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX}}).outputText,badgeContext);
+ assert.equal(text(badgeContext.exports.DungeonTagBadges({tags:counts.slime})),'[봉우리 파밍][렙업용]');
+ assert.equal(badgeContext.exports.DungeonTagBadges({tags:counts.farm}),null);
+ assert.deepEqual(JSON.parse(JSON.stringify(dataContext.exports.collectDungeonTags([]))),{});
 });
