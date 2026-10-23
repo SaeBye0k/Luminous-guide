@@ -1,4 +1,4 @@
-export type Ability = {name:string;description:string;notes?:string[]};
+export type Ability = {name:string;description:string;notes?:string[];boss?:boolean};
 export type EntryDetail = {sourceUrl:string;checkedOn:string;stats:string[];abilities:Ability[];transcend?:Ability[];traits?:string[]};
 
 export const entryDetails:Record<string,EntryDetail> = {

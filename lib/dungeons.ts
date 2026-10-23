@@ -4,32 +4,6 @@ import type { EntryDetail } from './entry-details';
 // Dungeon facts provided by the owner and the in-game entry screen.
 export const dungeonEntries: Entry[] = [
   {
-    id: 'dungeon_chicken_farm',
-    name: '닭농장',
-    category: '던전',
-    type: '웨이브 던전',
-    element: '무속성',
-    rarity: '던전',
-    icon: 'castle',
-    description: '최소 입장 명성 20레벨. 총 3웨이브에 걸쳐 웨이브당 20레벨 닭 12마리, 총 36마리가 등장합니다.',
-    power: 0,
-    team: 'D',
-    counts: [0, 0, 0, 0, 0, 0, 0],
-    tagline: '꼬끼오~! 꼬꼬!',
-    dropTable: {
-      draws: 2,
-      items: [
-        { name: '깃털', quantity: '0~24개', probability: '13.788%' },
-        { name: '뼈', quantity: '1~3개', probability: '13.453%' },
-        { name: '씨앗', quantity: '2~5개', probability: '13.788%' },
-        { name: '농부의 석판', quantity: '1개', probability: '1.103%' },
-        { name: '경험의 봉우리', quantity: '4~6개', probability: '34.728%' },
-        { name: '바람의 깃털', quantity: '1개', probability: '1.103%' },
-        { name: '꽝', quantity: '—', probability: '22.073%' },
-      ],
-    },
-  },
-  {
     id: 'dungeon_gloomy_cave',
     name: '음침한 동굴',
     category: '던전',
@@ -81,6 +55,32 @@ export const dungeonEntries: Entry[] = [
       ],
     },
   },
+  {
+    id: 'dungeon_chicken_farm',
+    name: '닭농장',
+    category: '던전',
+    type: '웨이브 던전',
+    element: '무속성',
+    rarity: '던전',
+    icon: 'castle',
+    description: '최소 입장 명성 20레벨. 총 3웨이브에 걸쳐 웨이브당 20레벨 닭 12마리, 총 36마리가 등장합니다.',
+    power: 0,
+    team: 'D',
+    counts: [0, 0, 0, 0, 0, 0, 0],
+    tagline: '꼬끼오~! 꼬꼬!',
+    dropTable: {
+      draws: 2,
+      items: [
+        { name: '깃털', quantity: '0~24개', probability: '13.788%' },
+        { name: '뼈', quantity: '1~3개', probability: '13.453%' },
+        { name: '씨앗', quantity: '2~5개', probability: '13.788%' },
+        { name: '농부의 석판', quantity: '1개', probability: '1.103%' },
+        { name: '경험의 봉우리', quantity: '4~6개', probability: '34.728%' },
+        { name: '바람의 깃털', quantity: '1개', probability: '1.103%' },
+        { name: '꽝', quantity: '—', probability: '22.073%' },
+      ],
+    },
+  },
 ];
 
 export const dungeonDetails: Record<string, EntryDetail> = {
@@ -88,15 +88,10 @@ export const dungeonDetails: Record<string, EntryDetail> = {
     sourceUrl: '',
     checkedOn: '2026-10-24',
     stats: [
-      '권장 명성 / 최소 입장 명성: 20레벨',
+      '권장 명성: 20레벨',
       '평균 레벨: 20',
-      '등장 몬스터: 20레벨 닭',
-      '최대 인원: 8명',
       '추천 속성: 무속성',
-      '총 웨이브: 3',
-      '웨이브당 닭: 12마리 · 총 36마리',
-      '입장 시간: 13:00~15:00 / 20:00~23:00',
-      '극한 도전 불가',
+      '최대 입장 가능 인원: 8명',
     ],
     abilities: [
       { name: '1웨이브', description: '등장 몬스터: 닭 · 20레벨 · 12마리' },
@@ -108,13 +103,10 @@ export const dungeonDetails: Record<string, EntryDetail> = {
     sourceUrl: '',
     checkedOn: '2026-10-24',
     stats: [
-      '권장 명성 / 최소 입장 명성: 1레벨',
+      '권장 명성: 1레벨',
       '평균 레벨: 3',
-      '등장 몬스터: 좀비, 뮤턴트 좀비 · 총 8마리',
-      '최대 인원: 6명',
       '추천 속성: 어둠',
-      '총 웨이브: 3',
-      '극한 도전 불가',
+      '최대 입장 가능 인원: 6명',
     ],
     abilities: [
       { name: '1웨이브', description: '등장 몬스터: 좀비 · 1레벨 · 1마리' },
@@ -126,18 +118,15 @@ export const dungeonDetails: Record<string, EntryDetail> = {
     sourceUrl: '',
     checkedOn: '2026-10-24',
     stats: [
-      '권장 명성 / 최소 입장 명성: 3레벨',
+      '권장 명성: 3레벨',
       '평균 레벨: 10',
-      '등장 몬스터: 슬라임, 자수정 슬라임, 슬라임 킹',
-      '최대 인원: 8명',
       '추천 속성: 무속성',
-      '총 웨이브: 3',
-      '극한 도전 불가',
+      '최대 입장 가능 인원: 8명',
     ],
     abilities: [
       { name: '1웨이브', description: '슬라임 · 10레벨 · 3마리' },
       { name: '2웨이브', description: '슬라임 · 10레벨 · 4마리\n자수정 슬라임 · 10레벨 · 4마리' },
-      { name: '3웨이브', description: '슬라임 킹 · 20레벨' },
+      { name: '3웨이브', description: '슬라임 킹 · 20레벨', boss: true },
     ],
   },
 };

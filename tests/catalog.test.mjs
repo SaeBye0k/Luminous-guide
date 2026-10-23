@@ -32,10 +32,13 @@ test('dungeon entries retain their wave details and each provided drop table exa
  const all=[...entries,...dungeons,...supplements];
  assert.equal(new Set(all.map(entry=>entry.id)).size,all.length);
  assert.equal(dungeons.length,3);
+ assert.deepEqual(dungeons.map(d=>d.id),['dungeon_gloomy_cave','dungeon_slime_cave','dungeon_chicken_farm']);
+ assert.equal(dungeonDetails.dungeon_slime_cave.abilities[2].boss,true);
  for(const dungeon of dungeons){
   assert.equal(dungeon.dropTable.draws,2);
   assert.equal(dungeon.dropTable.items.length,7);
   assert.equal(dungeonDetails[dungeon.id].abilities.length,3);
+  assert.deepEqual(dungeonDetails[dungeon.id].stats.map(stat=>stat.split(':')[0]),['권장 명성','평균 레벨','추천 속성','최대 입장 가능 인원']);
  }
  assert.equal(dungeons.find(d=>d.id==='dungeon_slime_cave').dropTable.items.find(i=>i.name==='탐색의 흔적').probability,'확정');
 });
