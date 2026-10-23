@@ -12,7 +12,9 @@
     "build": "next build",
     "start": "npx serve out",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern out",
-    "db:generate": "drizzle-kit generate"
+    "db:generate": "drizzle-kit generate",
+    "test": "node tests/catalog.test.mjs",
+    "data:sync": "python scripts/sync-notion.py"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

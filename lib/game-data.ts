@@ -1,3 +1,4 @@
+import { catalogSupplements } from './catalog-supplements';
 import { notionArmor } from './notion-armor';
 import { notionItems } from './notion-items';
 import { notionJobs } from './notion-jobs';
@@ -11,7 +12,8 @@ export const TIER_RANGES: Record<Tier, string> = { S: '4.50+', A: '3.75+', 'B+':
 export const tierClass = (tier: string) => tier === 'B+' ? 'B-plus' : tier;
 export const emptyCounts = () => TIERS.map(() => 0);
 
-export const VERSIONS = ['26-09-30'];
+export const GAME_VERSION = '[루미너스:윈더러스트]';
+export const VERSIONS = [GAME_VERSION];
 export type Category = '무기' | '직업' | '유물' | '갑옷' | '던전';
 
 export type Entry = {
@@ -48,7 +50,8 @@ export const entries: Entry[] = [
   ...notionJobs,
   ...notionItems,
   ...notionArmor,
-];
+  ...catalogSupplements,
+].filter(entry => !/미완|추가\s*전/.test(entry.name));
 export const guides: Guide[] = [];
 
 export function baseCounts(entry: Entry, _version: string) {

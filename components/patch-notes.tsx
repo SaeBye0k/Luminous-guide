@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { ThumbsUp, ThumbsDown, ArrowRight, ExternalLink } from 'lucide-react';
+import { GAME_VERSION } from '@/lib/game-data';
 import { supabase } from '@/lib/supabase';
 import { CommunityDiscussion } from '@/components/community-discussion';
 
@@ -69,7 +70,7 @@ export function PatchNotes({compact=false,userId,nickname,onLogin,onNickname}:Pr
     {error&&<p className="editor-error" role="alert">{error}<button type="button" className="text-button" disabled={loading||saving} onClick={()=>void refresh()}>다시 시도</button></p>}
     {patch&&<>
       {!compact&&patches.length>1&&<label className="patch-select">패치 선택<select value={patch.id} onChange={event=>setSelected(event.target.value)}>{patches.map(p=><option key={p.id} value={p.id}>{p.published_on} · {p.title}</option>)}</select></label>}
-      <article className="patch-article"><div className="patch-meta"><span className="small-tag">{compact?'최신 패치':patch.version}</span><time dateTime={patch.published_on}>{patch.published_on}</time></div><h2>{patch.title}</h2><p className="patch-summary">{patch.summary}</p>{!!patch.highlights.length&&<ul className="patch-highlights">{(compact?patch.highlights.slice(0,3):patch.highlights).map((highlight,index)=><li key={index}>{highlight}</li>)}</ul>}
+      <article className="patch-article"><div className="patch-meta"><span className="small-tag">{compact?'최신 패치':GAME_VERSION}</span><time dateTime={patch.published_on}>{patch.published_on}</time></div><h2>{patch.title}</h2><p className="patch-summary">{patch.summary}</p>{!!patch.highlights.length&&<ul className="patch-highlights">{(compact?patch.highlights.slice(0,3):patch.highlights).map((highlight,index)=><li key={index}>{highlight}</li>)}</ul>}
       {!compact&&<><div className="patch-content">{patch.content}</div>{patch.source_url&&/^https:\/\//i.test(patch.source_url)&&<a className="text-button patch-source" href={patch.source_url} target="_blank" rel="noopener noreferrer">공식 원문 보기 <ExternalLink size={14}/></a>}</>}
       </article>{rating}
       {!compact&&<CommunityDiscussion key={patch.id} targetKey={`patch:${patch.id}`} label="이번 패치에 대한 의견" userId={userId} nickname={nickname} onLogin={onLogin} onNickname={onNickname}/>}

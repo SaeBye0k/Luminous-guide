@@ -1,0 +1,97 @@
+{
+  "source": "https://app.notion.com/p/luminous-rpg/RPG-04815989269e46d6b1a8ab186328ebdd",
+  "checkedOn": "2026-10-23",
+  "counts": {
+    "무기": 53,
+    "유물": 54,
+    "갑옷": 11,
+    "직업": 54
+  },
+  "excluded": [
+    {
+      "category": "무기",
+      "name": "어둠이 잠든 검 (미완)",
+      "sourceId": "3a9f741d-045e-8088-a5b5-cf11ed92426c"
+    },
+    {
+      "category": "무기",
+      "name": "무한히 잠든 검 (미완)",
+      "sourceId": "3a9f741d-045e-8035-86ed-db58f689adf8"
+    },
+    {
+      "category": "무기",
+      "name": "영혼의 검 (미완)",
+      "sourceId": "3a9f741d-045e-8033-a664-eb507672ef11"
+    },
+    {
+      "category": "무기",
+      "name": "끔찍한 마도서 (미완)",
+      "sourceId": "3a9f741d-045e-8046-8370-d7b0819b6fb0"
+    },
+    {
+      "category": "무기",
+      "name": "광기의 마도서 (미완)",
+      "sourceId": "3a9f741d-045e-80ca-8b58-f5addbc50eb5"
+    },
+    {
+      "category": "무기",
+      "name": "파멸의 마도서 (미완)",
+      "sourceId": "3a9f741d-045e-8083-9de6-e88c55b14db3"
+    },
+    {
+      "category": "무기",
+      "name": "수목의 낫 (미완)",
+      "sourceId": "3a9f741d-045e-80ae-9a9e-f72ce00557ca"
+    },
+    {
+      "category": "무기",
+      "name": "이형의 낫 (미완)",
+      "sourceId": "3a9f741d-045e-80ad-aad3-f887d172d9a3"
+    },
+    {
+      "category": "무기",
+      "name": "저주받은 수호자의 잔해 (미완)",
+      "sourceId": "3a9f741d-045e-80aa-b1d6-d60a84a06e59"
+    },
+    {
+      "category": "무기",
+      "name": "레드스톤 스메시 스태프 (미완)",
+      "sourceId": "3a9f741d-045e-80de-8086-e563f6dd479a"
+    },
+    {
+      "category": "무기",
+      "name": "레드스톤 낫 (미완)",
+      "sourceId": "3a9f741d-045e-803f-b6cd-e2e8db027d2b"
+    },
+    {
+      "category": "무기",
+      "name": "하늘의 척결 (미완)",
+      "sourceId": "3a9f741d-045e-80ea-98bd-f7b6c1993756"
+    },
+    {
+      "category": "무기",
+      "name": "아스트라 (미완)",
+      "sourceId": "3a9f741d-045e-8077-883a-c5db464027ef"
+    },
+    {
+      "category": "무기",
+      "name": "종말의 검 (미완)",
+      "sourceId": "3a9f741d-045e-8091-b4da-f2ed6a41e49b"
+    },
+    {
+      "category": "무기",
+      "name": "파괴자 (미완)",
+      "sourceId": "3a9f741d-045e-8078-9aa2-c2fea2ce1bf2"
+    },
+    {
+      "category": "직업",
+      "name": "화련 (추가 전)",
+      "sourceId": "3f2f741d-045e-80f6-bef8-cf82a2105404"
+    },
+    {
+      "category": "직업",
+      "name": "가희 (추가 전)",
+      "sourceId": "3daf741d-045e-80fb-95b3-db3a110bfbdb"
+    }
+  ]
+}
