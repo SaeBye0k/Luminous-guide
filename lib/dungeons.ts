@@ -56,6 +56,28 @@ export const dungeonEntries: Entry[] = [
     },
   },
   {
+    id: 'dungeon_russell_battle',
+    name: '러셀과의 전투',
+    category: '던전',
+    type: '보스 던전',
+    element: '어둠',
+    rarity: '던전',
+    icon: 'castle',
+    description: '최소 입장 명성 15레벨. 1웨이브에 20레벨 보스 러셀이 등장하며, 최대 2명까지 입장할 수 있습니다.',
+    power: 0,
+    team: 'D',
+    counts: [0, 0, 0, 0, 0, 0, 0],
+    tagline: '20레벨 보스 러셀과의 전투',
+    dropTable: {
+      draws: 1,
+      items: [
+        { name: '철강검', quantity: '1개', probability: '7.50%' },
+        { name: '경험의 봉우리', quantity: '1~6개', probability: '47.50%' },
+        { name: '꽝', quantity: '—', probability: '45.00%' },
+      ],
+    },
+  },
+  {
     id: 'dungeon_chicken_farm',
     name: '닭농장',
     category: '던전',
@@ -84,6 +106,19 @@ export const dungeonEntries: Entry[] = [
 ];
 
 export const dungeonDetails: Record<string, EntryDetail> = {
+  dungeon_russell_battle: {
+    sourceUrl: '',
+    checkedOn: '2026-10-24',
+    stats: [
+      '권장 명성: 15레벨',
+      '평균 레벨: 20',
+      '추천 속성: 어둠',
+      '최대 입장 가능 인원: 2명',
+    ],
+    abilities: [
+      { name: '1웨이브', description: '러셀 · 20레벨', boss: true },
+    ],
+  },
   dungeon_chicken_farm: {
     sourceUrl: '',
     checkedOn: '2026-10-24',
