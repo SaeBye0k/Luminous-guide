@@ -13,7 +13,7 @@
     "start": "npx serve out",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern out",
     "db:generate": "drizzle-kit generate",
-    "test": "node tests/catalog.test.mjs && node tests/verify-xbox.test.mjs && node tests/auth-callback.test.mjs",
+    "test": "node tests/catalog.test.mjs && node tests/verify-xbox.test.mjs && node tests/auth-callback.test.mjs && node tests/navigation.test.mjs",
     "data:sync": "python scripts/sync-notion.py"
   },
   "dependencies": {
