@@ -62,7 +62,7 @@ export function BuildBoard({entries,version,userId,nickname,onLogin,onNickname,r
  async function submit(e:FormEvent){
    e.preventDefault();if(submitLock.current)return;setFormError('');
    if(!valid){setFormError('직업, 제목, 목적 태그와 공략을 채워주세요.');return}
-   if(!userId){setFormError('게시하려면 Google 로그인이 필요합니다.');return}
+   if(!userId){setFormError('게시하려면 Xbox 로그인이 필요합니다.');return}
    if(!nickname){setFormError('게시하려면 닉네임을 설정해주세요.');return}
    if(!supabase){setFormError('빌드 공유 연결이 아직 설정되지 않았습니다.');return}
    submitLock.current=true;setSaving(true);
@@ -99,7 +99,7 @@ export function BuildBoard({entries,version,userId,nickname,onLogin,onNickname,r
      <fieldset className="build-purpose"><legend>목적 태그 · 1개 이상 선택</legend><div className="build-tags">{TAGS.map(t=><button type="button" key={t} className={tags.includes(t)?'active':''} aria-pressed={tags.includes(t)} onClick={()=>setTags(prev=>prev.includes(t)?prev.filter(v=>v!==t):[...prev,t])}>[{t}]</button>)}</div></fieldset>
      <label>간단한 공략<textarea required rows={6} maxLength={5000} value={content} onChange={e=>setContent(e.target.value)} placeholder="조합의 핵심, 운용 순서와 주의할 점을 알려주세요."/></label>
      {formError&&<p role="alert" className="editor-error">{formError}</p>}
-     <div className="editor-actions">{!userId?<button type="button" className="secondary" onClick={onLogin}>Google 로그인</button>:!nickname?<button type="button" className="secondary" onClick={()=>{setWriting(false);onNickname()}}>닉네임 설정</button>:null}<button type="button" className="secondary" disabled={saving} onClick={()=>setWriting(false)}>닫기</button><button className="primary" disabled={saving||!valid}>{saving?'저장 중':editing?'수정 저장':'빌드 게시'}</button></div>
+     <div className="editor-actions">{!userId?<button type="button" className="secondary" onClick={onLogin}>Xbox 로그인</button>:!nickname?<button type="button" className="secondary" onClick={()=>{setWriting(false);onNickname()}}>닉네임 설정</button>:null}<button type="button" className="secondary" disabled={saving} onClick={()=>setWriting(false)}>닫기</button><button className="primary" disabled={saving||!valid}>{saving?'저장 중':editing?'수정 저장':'빌드 게시'}</button></div>
    </form>}</BuildModal>}
    {selected&&<BuildModal title="빌드 상세" className="build-detail-modal" onClose={()=>setSelected(null)}>{error&&<p role="alert" className="editor-error">{error}</p>}
      <article className="build-detail">

@@ -1,0 +1,4 @@
+# OAuth callback is public; POST explicitly verifies the Supabase bearer token.
+# GET forwards to the fixed site; authenticated POST consumes the state and links.
+[functions.verify-xbox]
+verify_jwt = false

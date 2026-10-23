@@ -70,7 +70,7 @@ export function CommunityDiscussion({
     {!loading&&!comments.length&&<p className="empty-mini">첫 의견을 남겨보세요.</p>}
     {comments.map(comment=><div className="comment" key={comment.id}><span className="avatar">{comment.profiles?.nickname?.slice(0,1)||'?'}</span><div className="comment-copy"><strong>{comment.profiles?.nickname||'모험가'}</strong><p>{comment.content}</p></div>{comment.user_id===userId&&<button className="comment-delete" onClick={()=>void remove(comment)} aria-label="내 의견 삭제" title="삭제"><Trash2 size={14}/></button>}</div>)}
     {error&&<p className="editor-error" role="alert">{error}</p>}
-    {!userId?<button className="secondary" onClick={onLogin}>Google 로그인 후 의견 남기기</button>
+    {!userId?<button className="secondary" onClick={onLogin}>Xbox 로그인 후 의견 남기기</button>
     :!nickname?<button className="secondary" onClick={onNickname}>닉네임을 설정하고 의견 남기기</button>
     :<form className="comment-form" onSubmit={submit}><input aria-label="댓글" maxLength={500} value={content} onChange={e=>setContent(e.target.value)} placeholder={`${nickname}(으)로 의견 남기기`}/><button className="primary" disabled={saving||!content.trim()}>{saving?'등록 중':'등록'}</button></form>}
   </section>;

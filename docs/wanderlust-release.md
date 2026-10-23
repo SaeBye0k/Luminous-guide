@@ -15,11 +15,25 @@
 운영자가 별도로 제공한 구리 갑옷은 `catalog-supplements.ts`에서 유지합니다. 새 직업은 원본 페이지 ID를 사용합니다.
 기존 로컬 이미지가 있는 항목은 이미지를 유지하고, 신규 항목은 분류 아이콘을 사용합니다.
 
-## 로그인
+## Xbox 로그인
 
-이번 배포는 기존 Google 로그인을 유지합니다. Xbox 연동은 보류합니다.
-이미 생성된 Xbox 보조 테이블과 Edge Function은 사이트에서 호출하지 않으며,
-Xbox 미연동 계정의 쓰기를 제한하는 정책은 적용하지 않았습니다.
+사이트는 Xbox 로그인만 제공합니다. Microsoft 개인 계정 인증 후 별도의
+Xbox OAuth 동의와 User Token → XSTS 교환으로 XUID를 확인합니다.
+Google 로그인 버튼 및 수동 Google 계정 연결 흐름은 제공하지 않습니다.
+Supabase Google 공급자는 대시보드에서 비활성화합니다.
+기존 게시글·댓글은 삭제하지 않습니다. 동일 이메일의 공급자 자동 연결 여부는
+Supabase Auth 정책에 따르며, 별도의 수동 병합은 수행하지 않습니다.
+
+- Microsoft 앱 Client ID: `3e0076e5-bf57-4ba2-9377-c9f87b63c796`
+- Azure Tenant URL: `https://login.microsoftonline.com/consumers`
+- Web redirect URI: `https://ymmwzujuhwvmadynkerc.supabase.co/auth/v1/callback`
+- Web redirect URI: `https://ymmwzujuhwvmadynkerc.supabase.co/functions/v1/verify-xbox`
+- Edge Secrets: `XBOX_CLIENT_ID`, `XBOX_CLIENT_SECRET`, `XBOX_SITE_URL`
+- `XBOX_SITE_URL`: `https://saebye0k.github.io/Luminous-guide/`
+- Azure 토큰 구성에 email optional claim을 추가합니다.
+- Xbox 계정 검증 전에는 사이트에서 로그인 완료로 취급하지 않습니다.
+- `supabase/xbox-enforce.sql`은 검증된 Xbox 계정에만 insert/update/delete를 허용합니다.
+- 비밀 값은 저장소·문서에 기록하지 않습니다.
 
 ## 투표 초기화와 버전
 
@@ -43,6 +57,6 @@ SQL 마지막 검증 결과가 초기 실행 직후 두 항목 모두 0인지 �
 - 초기화 직후 투표 0건, 패치 평가 0건을 확인했습니다.
 - 댓글 42개, 프로필 8개, 공략 1개, 빌드 4개, 공유 티어표 3개를 보존했습니다.
 - 빌드·공유 티어표·패치노트의 버전을 통일했습니다.
-- Google 로그인과 기존 계정 기록을 유지합니다. Xbox 연동은 이번 배포에서 제외합니다.
+- 첫 데이터 배포는 Google 로그인을 유지했으며, 후속 인증 배포는 Xbox 전용으로 전환합니다.
 - 공개 집계 백업: `docs/backups/vote-counts-before-wanderlust-2026-10-23.txt`.
   이 파일은 계정과 개별 투표 시각을 포함하지 않으며, 원본 백업은 비공개 DB에 보관합니다.
