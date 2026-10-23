@@ -1,3 +1,4 @@
+import { dungeonEntries } from './dungeons';
 import { catalogSupplements } from './catalog-supplements';
 import { notionArmor } from './notion-armor';
 import { notionItems } from './notion-items';
@@ -51,6 +52,7 @@ export const entries: Entry[] = [
   ...notionItems,
   ...notionArmor,
   ...catalogSupplements,
+  ...dungeonEntries,
 ].filter(entry => !/미완|추가\s*전/.test(entry.name));
 export const guides: Guide[] = [];
 
