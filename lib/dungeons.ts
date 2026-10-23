@@ -130,9 +130,45 @@ export const dungeonEntries: Entry[] = [
       ],
     },
   },
+  {
+    id: 'dungeon_alicia',
+    name: '[1급 수녀] 알리시아',
+    category: '던전',
+    type: '보스 던전',
+    element: '무속성',
+    rarity: '던전',
+    icon: 'castle',
+    description: '최소 입장 명성 30레벨. 1웨이브에 34레벨 보스 [1급 수녀] 알리시아가 등장하며, 최대 8명까지 입장할 수 있습니다.',
+    power: 0,
+    team: 'D',
+    counts: [0, 0, 0, 0, 0, 0, 0],
+    tagline: '34레벨 보스 [1급 수녀] 알리시아와의 전투',
+    dropTable: {
+      draws: 2,
+      items: [
+        { name: '대신관의 지팡이', quantity: '1개', probability: '7.71%' },
+        { name: '경험의 봉우리', quantity: '4~12개', probability: '20.83%' },
+        { name: '철덩이', quantity: '5~12개', probability: '20.83%' },
+        { name: '꽝', quantity: '—', probability: '50.63%' },
+      ],
+    },
+  },
 ];
 
 export const dungeonDetails: Record<string, EntryDetail> = {
+  dungeon_alicia: {
+    sourceUrl: '',
+    checkedOn: '2026-10-24',
+    stats: [
+      '권장 명성: 30레벨',
+      '평균 레벨: 34',
+      '추천 속성: 무속성',
+      '최대 입장 가능 인원: 8명',
+    ],
+    abilities: [
+      { name: '1웨이브', description: '[1급 수녀] 알리시아 · 34레벨', boss: true },
+    ],
+  },
   dungeon_suspicious_church: {
     sourceUrl: '',
     checkedOn: '2026-10-24',
