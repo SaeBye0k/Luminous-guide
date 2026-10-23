@@ -321,4 +321,3 @@ version	mode	entry_id	tier	vote_count
 [패치 평가 집계 / TSV]
 patch_id	reaction	vote_count
 b6ac1001-0470-4000-8000-000000000001	like	1
-
