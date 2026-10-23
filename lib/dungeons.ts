@@ -98,7 +98,7 @@ export const dungeonEntries: Entry[] = [
     dropTable: {
       draws: 1,
       items: [
-        { name: '철강검', quantity: '1개', probability: '7.50%' },
+        { name: '철강검', quantity: '1개', probability: '7.50%', rarity: '신화' },
         { name: '경험의 봉우리', quantity: '1~6개', probability: '47.50%' },
         { name: '꽝', quantity: '—', probability: '45.00%' },
       ],
@@ -146,7 +146,7 @@ export const dungeonEntries: Entry[] = [
     dropTable: {
       draws: 2,
       items: [
-        { name: '대신관의 지팡이', quantity: '1개', probability: '7.71%' },
+        { name: '대신관의 지팡이', quantity: '1개', probability: '7.71%', rarity: '신화' },
         { name: '경험의 봉우리', quantity: '4~12개', probability: '20.83%' },
         { name: '철덩이', quantity: '5~12개', probability: '20.83%' },
         { name: '꽝', quantity: '—', probability: '50.63%' },

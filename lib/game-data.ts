@@ -35,7 +35,7 @@ export type Entry = {
   revision?: number;
   dropTable?: {
     draws: number;
-    items: { name: string; quantity: string; probability: string }[];
+    items: { name: string; quantity: string; probability: string; rarity?: string }[];
   };
 };
 
