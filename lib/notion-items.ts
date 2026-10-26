@@ -1253,7 +1253,8 @@ export const notionItems: Entry[] = [
       0,
       0,
       0
-    ]
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3Ad9c4abb9-ae28-4b70-9af8-ad4f9cd78277%3Aancient_ring.png?table=block&id=3fef741d-045e-807b-aaa5-dbebc36316b2&cache=v2&width=256"
   },
   {
     "id": "notion_3c5f741d045e804da0f4ecb3505c826b",
@@ -1626,7 +1627,8 @@ export const notionItems: Entry[] = [
       0,
       0,
       0
-    ]
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3Ab61ebf69-b187-4e3a-84f9-9f491e365cfb%3AKakaoTalk_20220919_083525111_10.png?table=block&id=3fbf741d-045e-8082-89e9-f0970fd370e3&cache=v2&width=256"
   },
   {
     "id": "notion_1ecf741d045e8015b07adec7d970259a",
@@ -2373,7 +2375,8 @@ export const notionItems: Entry[] = [
       0,
       0,
       0
-    ]
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3A3c1f4777-c9be-4be7-86b0-decf4340a1c9%3ANew_Piskel_32.png?table=block&id=403f741d-045e-8027-ab31-d9a08783d838&cache=v2&width=256"
   },
   {
     "id": "notion_403f741d045e80a3918cf1b4418f2611",
@@ -2394,7 +2397,8 @@ export const notionItems: Entry[] = [
       0,
       0,
       0
-    ]
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3A70cd6603-027e-459c-a6fb-dd0acd19f003%3Akk7.png?table=block&id=403f741d-045e-80a3-918c-f1b4418f2611&cache=v2&width=256"
   },
   {
     "id": "notion_404f741d045e80a881b8dba673cc5ff2",
@@ -2415,7 +2419,8 @@ export const notionItems: Entry[] = [
       0,
       0,
       0
-    ]
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3A1918bf16-7894-495f-8008-ce079a50599c%3AKakaoTalk_20220919_083612626_18.png?table=block&id=404f741d-045e-80a8-81b8-dba673cc5ff2&cache=v2&width=256"
   },
   {
     "id": "notion_404f741d045e80b7acf1f462b54ec80e",
@@ -2436,7 +2441,8 @@ export const notionItems: Entry[] = [
       0,
       0,
       0
-    ]
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3Adb941adf-61e5-4211-89bf-0b0f54c0f46e%3A4c9c0c0104dbef0b.png?table=block&id=404f741d-045e-80b7-acf1-f462b54ec80e&cache=v2&width=256"
   },
   {
     "id": "notion_404f741d045e8049857ccf19a7733e25",
@@ -2457,7 +2463,8 @@ export const notionItems: Entry[] = [
       0,
       0,
       0
-    ]
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3Ae31a741d-7581-4184-9641-1e74a271608d%3A34135e3b295f3e85.png?table=block&id=404f741d-045e-8049-857c-cf19a7733e25&cache=v2&width=256"
   },
   {
     "id": "notion_405f741d045e8039b6ddf41c7141ec55",
@@ -2478,7 +2485,8 @@ export const notionItems: Entry[] = [
       0,
       0,
       0
-    ]
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3A2dfc4b9b-33a9-4fb5-9a60-a33a13509db6%3AKakaoTalk_20220919_083612626_10.png?table=block&id=405f741d-045e-8039-b6dd-f41c7141ec55&cache=v2&width=256"
   },
   {
     "id": "notion_404f741d045e80c088e3cf5de881a87d",
@@ -2499,7 +2507,8 @@ export const notionItems: Entry[] = [
       0,
       0,
       0
-    ]
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3Ad11346ec-a98c-4d48-860a-7970918ce7ac%3Aarchors_bow.png?table=block&id=404f741d-045e-80c0-88e3-cf5de881a87d&cache=v2&width=256"
   },
   {
     "id": "notion_3a9f741d045e8033a664eb507672ef11",
@@ -2520,7 +2529,8 @@ export const notionItems: Entry[] = [
       0,
       0,
       0
-    ]
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3A672b8ab8-9cd9-488c-be65-d899bcdd87e3%3AKakaoTalk_20220919_083525111_06.png?table=block&id=3a9f741d-045e-8033-a664-eb507672ef11&cache=v2&width=256"
   },
   {
     "id": "notion_404f741d045e80a79529d700044066e5",
@@ -2541,7 +2551,8 @@ export const notionItems: Entry[] = [
       0,
       0,
       0
-    ]
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3Af0e79e68-90e3-437c-8e68-610a958583fa%3A77e474a4bbbb61b0.png?table=block&id=404f741d-045e-80a7-9529-d700044066e5&cache=v2&width=256"
   },
   {
     "id": "notion_405f741d045e8199a979fca0ff322229",
@@ -2562,6 +2573,7 @@ export const notionItems: Entry[] = [
       0,
       0,
       0
-    ]
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3A5f358d8d-06e0-4b3e-b3f7-41e6861209ae%3Asand_pocket.png?table=block&id=405f741d-045e-8199-a979-fca0ff322229&cache=v2&width=256"
   }
 ];

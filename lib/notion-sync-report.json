@@ -5,7 +5,7 @@
     "무기": 61,
     "유물": 56,
     "갑옷": 12,
-    "직업": 54
+    "직업": 58
   },
   "excluded": [
     {
@@ -77,22 +77,12 @@
       "category": "무기",
       "name": "파괴자 (미완)",
       "sourceId": "3a9f741d-045e-8078-9aa2-c2fea2ce1bf2"
-    },
-    {
-      "category": "직업",
-      "name": "화련 (추가 전)",
-      "sourceId": "3f2f741d-045e-80f6-bef8-cf82a2105404"
-    },
-    {
-      "category": "직업",
-      "name": "가희 (추가 전)",
-      "sourceId": "3daf741d-045e-80fb-95b3-db3a110bfbdb"
     }
   ],
   "scope": [
     "무기",
     "유물",
-    "갑옷"
-  ],
-  "retainedJobDataCheckedOn": "2026-10-23"
+    "갑옷",
+    "직업"
+  ]
 }

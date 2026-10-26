@@ -1557,5 +1557,121 @@ export const jobTraits:Record<string,{sourceUrl:string;traits:JobTrait[]}> = {
         "description": "(선택) 희귀 광물 드랍량 5%로 2배"
       }
     ]
+  },
+  "베리온": {
+    "sourceUrl": "https://luminous-rpg.notion.site/403f741d045e80588e79dc39e52c229b",
+    "traits": [
+      {
+        "id": "trait_405f741d045e8113917de63c8aea237e",
+        "description": "(선택) 치명타 피해 +8%"
+      },
+      {
+        "id": "trait_405f741d045e8172920ed993399946d9",
+        "description": "(선택) 상태이상 저항 +15%"
+      },
+      {
+        "id": "trait_405f741d045e812eb42cc5dc751e809b",
+        "description": "(선택) [가드업] 상태에서 가하는 피해 +8%"
+      },
+      {
+        "id": "trait_405f741d045e81bca302e9c49ec77200",
+        "description": "(선택) 체력 +15%"
+      },
+      {
+        "id": "trait_405f741d045e815eb922ff2ceb5a5cee",
+        "description": "(선택) 고유기 발동시 궁극기 포인트 +5pt"
+      },
+      {
+        "id": "trait_405f741d045e81d9aa78ca3853fce56d",
+        "description": "(선택) 궁극기 발동시 상태 게이지 50pt 회복"
+      }
+    ]
+  },
+  "화련": {
+    "sourceUrl": "https://luminous-rpg.notion.site/3f2f741d045e80f6bef8cf82a2105404",
+    "traits": [
+      {
+        "id": "trait_405f741d045e8168ac41eb85d76f3c32",
+        "description": "(선택) [개화]를 발동 할 때 마다, [화무] 상태에서 가하는 적중 피해 +5%"
+      },
+      {
+        "id": "trait_405f741d045e81579a05d9234ffea3e1",
+        "description": "(선택) [개화]를 공격력 27%의 대지 속성 피해를 3회 가하는 공격으로 변경"
+      },
+      {
+        "id": "trait_405f741d045e81d0a30addcee39b61df",
+        "description": "(선택) [개화]를 발동 할 때 마다, [화무] 상태에서 상태 명중 +5%"
+      },
+      {
+        "id": "trait_405f741d045e8163885fc27414b64df9",
+        "description": "(선택) [개화]를 발동 할 때 마다, [화무] 상태에서 집중 피해 +5%"
+      },
+      {
+        "id": "trait_405f741d045e81b48ac9c228ef8c4d85",
+        "description": "(선택) [개화]를 발동 할 때 마다, [화무] 상태에서 가하는 대지 속성 피해 +5%"
+      },
+      {
+        "id": "trait_405f741d045e8142bf9eca252058c84f",
+        "description": "(선택) [개화]가 속박을 8만큼 누적함"
+      }
+    ]
+  },
+  "가희": {
+    "sourceUrl": "https://luminous-rpg.notion.site/3daf741d045e80fb95b3db3a110bfbdb",
+    "traits": [
+      {
+        "id": "trait_405f741d045e81e9a850fbd54f5e1a3c",
+        "description": "(선택) 고유기의 공격력 증가량을 20%로 변경"
+      },
+      {
+        "id": "trait_405f741d045e81de87bcc02606595fb7",
+        "description": "(선택) 고유기로 가하는 피해에 치명타가 적용됩니다."
+      },
+      {
+        "id": "trait_405f741d045e810eb908c1a2803b79b7",
+        "description": "(선택) 이동 불가 상태에서 받는 피해 감소 +50%"
+      },
+      {
+        "id": "trait_405f741d045e814b998de8c059911d89",
+        "description": "(선택) 고유기 사용 시 8s 동안 넉백 무효"
+      },
+      {
+        "id": "trait_405f741d045e8127a27be7ee7166d4bd",
+        "description": "(선택) 고유기 사용 시 궁극기 포인트 +10pt"
+      },
+      {
+        "id": "trait_405f741d045e8110aa72c963a689cf92",
+        "description": "(선택) 고유기 피해를 입은 대상의 받는 피해 증가 +5% (최대 3회)"
+      }
+    ]
+  },
+  "마도사": {
+    "sourceUrl": "https://luminous-rpg.notion.site/402f741d045e80078953f20486c9239b",
+    "traits": [
+      {
+        "id": "trait_405f741d045e8157852dde4003516141",
+        "description": "(선택) 방어력 +20%"
+      },
+      {
+        "id": "trait_405f741d045e81caadb6e6db03b52aa2",
+        "description": "(선택) 회복력 +20%"
+      },
+      {
+        "id": "trait_405f741d045e81a6a0f6dd62494d0b5f",
+        "description": "(선택) [마갑]을 가진 아군에게 넉백 저항 + 70%"
+      },
+      {
+        "id": "trait_405f741d045e81058d51f418ccaf091b",
+        "description": "(선택) 자신의 [마갑]이 감소할 때 마다, 주변 10칸내 아군의 체력을 30pt 회복"
+      },
+      {
+        "id": "trait_405f741d045e815d90f5e7e6431eade9",
+        "description": "(선택) [마갑]이 피해를 70% 감소시킴"
+      },
+      {
+        "id": "trait_405f741d045e8161acd5e8d7627dc96d",
+        "description": "(선택) 궁극기 사용 시 10칸내 아군에게 [마갑]을 2개 부여함."
+      }
+    ]
   }
 };
