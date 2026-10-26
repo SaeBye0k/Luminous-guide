@@ -3,7 +3,7 @@
 Run: python scripts/sync-notion.py [--cache /tmp/luminous-source]
 Only public records reachable from the configured pages are requested.
 """
-import argparse, datetime, json, pathlib, re, time, urllib.request, subprocess
+import argparse, datetime, json, pathlib, re, time, urllib.request, urllib.parse, subprocess
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 SPACE = '0bb5df0a-0ecb-4dd2-9852-b56371883e4b'
@@ -146,6 +146,10 @@ def main():
             kind = props.get('유형') or ('갑옷' if category == '갑옷' else props.get('역할') or '유물')
             description = props.get('효과') or (record['abilities'][0]['description'].split('\n')[0][:150] if record['abilities'] else f'{element} {kind}입니다.')
             entry = {**old, 'id': eid, 'name': name, 'category': category, 'type': kind, 'element': element, 'rarity': props.get('등급') or category, 'icon': old.get('icon', 'shield' if category == '갑옷' else 'gem' if category == '유물' else 'sword'), 'description': description, 'power': 0, 'team': 'D', 'counts': [0]*7}
+            # Keep local assets; otherwise use Notion's stable public image endpoint.
+            page_icon = block.get('format', {}).get('page_icon', '')
+            if not entry.get('imageUrl') and page_icon.startswith(('attachment:', 'https://')):
+                entry['imageUrl'] = 'https://www.notion.so/image/' + urllib.parse.quote(page_icon, safe='') + '?' + urllib.parse.urlencode({'table': 'block', 'id': block['id'], 'cache': 'v2', 'width': '256'})
             if category == '갑옷': record['stats'] = [f"기초 방어력: {props.get('기초 방어력','')}", f"체력 추가량: {props.get('체력 추가량','')}", props.get('효과','')] + record['stats']
             entries.append(entry); details[eid] = record
     api.page(PAGES['직업'])
@@ -168,7 +172,7 @@ def main():
     for filename, category, var in [('notion-items.ts',None,'notionItems'),('notion-armor.ts','갑옷','notionArmor'),('notion-jobs.ts','직업','notionJobs')]:
         data = [entry for entry in entries if entry['category'] == category] if category else [entry for entry in entries if entry['category'] in ('무기','유물')]
         dump(ROOT/'lib'/filename,"import type { Entry } from './game-data';\n\n// Generated from the public Notion guide; excludes 미완 / 추가 전.\nexport const "+var+': Entry[] = ',data)
-    dump(ROOT/'lib/entry-details.ts',"export type Ability = {name:string;description:string;notes?:string[]};\nexport type EntryDetail = {sourceUrl:string;checkedOn:string;stats:string[];abilities:Ability[];transcend?:Ability[];traits?:string[]};\n\nexport const entryDetails:Record<string,EntryDetail> = ",details)
+    dump(ROOT/'lib/entry-details.ts',"export type Ability = {name:string;description:string;notes?:string[];boss?:boolean};\nexport type EntryDetail = {sourceUrl:string;checkedOn:string;stats:string[];abilities:Ability[];transcend?:Ability[];traits?:string[]};\n\nexport const entryDetails:Record<string,EntryDetail> = ",details)
     dump(ROOT/'lib/job-traits.ts',"export type JobTrait = {id:string;description:string};\nexport const jobTraits:Record<string,{sourceUrl:string;traits:JobTrait[]}> = ",traits)
     report = {'source':SOURCE,'checkedOn':checked,'counts':{category:sum(entry['category']==category for entry in entries) for category in ('무기','유물','갑옷','직업')},'excluded':excluded}
     (ROOT/'lib/notion-sync-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')

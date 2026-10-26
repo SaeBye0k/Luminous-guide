@@ -1135,5 +1135,89 @@ export const notionJobs: Entry[] = [
       0,
       0
     ]
+  },
+  {
+    "id": "job_403f741d045e80588e79dc39e52c229b",
+    "name": "베리온",
+    "category": "직업",
+    "type": "수호자 계열",
+    "element": "무속성",
+    "rarity": "직업",
+    "icon": "shield",
+    "description": "10s 동안 자신에게 [가드업] 상태를 부여합니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "id": "job_3f2f741d045e80f6bef8cf82a2105404",
+    "name": "화련",
+    "category": "직업",
+    "type": "저격수 계열",
+    "element": "무속성",
+    "rarity": "직업",
+    "icon": "bow",
+    "description": "8s 동안 [화무] 상태가 되어 공격속도가 10% 증가합니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "id": "job_3daf741d045e80fb95b3db3a110bfbdb",
+    "name": "가희",
+    "category": "직업",
+    "type": "지원가 계열",
+    "element": "무속성",
+    "rarity": "직업",
+    "icon": "heart",
+    "description": "8s 동안 자신이 이동 불가 상태가 되며 넉백 저항이 70% 증가합니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "id": "job_402f741d045e80078953f20486c9239b",
+    "name": "마도사",
+    "category": "직업",
+    "type": "지원가 계열",
+    "element": "무속성",
+    "rarity": "직업",
+    "icon": "heart",
+    "description": "주변 10칸 내 자신을 포함한 아군에게 8s동안 [마갑]을 5개 부여하고 자신의 최대체력의 5% 만큼 회복시킵니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
   }
 ];
