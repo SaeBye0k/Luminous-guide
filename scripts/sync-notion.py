@@ -9,7 +9,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 SPACE = '0bb5df0a-0ecb-4dd2-9852-b56371883e4b'
 SOURCE = 'https://app.notion.com/p/luminous-rpg/RPG-04815989269e46d6b1a8ab186328ebdd'
 PAGES = {'무기': '146ab655-c564-453c-8ce7-16dc37aabda6', '유물': 'a545f849-b1c2-435e-9c26-cd9018d3d185', '갑옷': '3a6f741d-045e-804b-850c-d9031561fd52', '직업': '171f741d-045e-80d0-9719-e2929a227baa'}
-BLOCKED = re.compile(r'미완|추가\s*전')
+BLOCKED = re.compile(r'미완|추가\s*전|보류')
 
 def unwrap(record):
     value = record.get('value', {})
@@ -165,7 +165,7 @@ def main():
             eid = old_jobs.get(name, 'job_' + block['id'].replace('-', ''))
             record, job_rows = detail(block)
             if not record['abilities']: raise RuntimeError('Job ability missing: ' + name)
-            entries.append({'id':eid,'name':name,'category':'직업','type':group_name+' 계열','element':'대지' if name in ('칼리우드','선포자') else '무속성','rarity':'직업','icon':{'전사':'sword','수호자':'shield','저격수':'bow','지원가':'heart','공통':'compass'}[group_name],'description':record['abilities'][0]['description'].split('\n')[0][:150], 'power':0,'team':'D','counts':[0]*7})
+            entries.append({'id':eid,'name':name,'category':'직업','type':group_name+' 계열','element':'물' if name == '가람' else '대지' if name in ('칼리우드','선포자') else '무속성','rarity':'직업','icon':{'전사':'sword','수호자':'shield','저격수':'bow','지원가':'heart','공통':'compass'}[group_name],'description':record['abilities'][0]['description'].split('\n')[0][:150], 'power':0,'team':'D','counts':[0]*7})
             details[eid] = record; traits[name] = {'sourceUrl':record['sourceUrl'],'traits':job_rows}
     if len({entry['id'] for entry in entries}) != len(entries): raise RuntimeError('Duplicate catalog ID')
     if any(not record['abilities'] for eid,record in details.items() if next(entry for entry in entries if entry['id']==eid)['category'] in ('직업','무기','유물')): raise RuntimeError('Missing ability')

@@ -511,7 +511,7 @@ export const notionJobs: Entry[] = [
     "name": "가람",
     "category": "직업",
     "type": "수호자 계열",
-    "element": "무속성",
+    "element": "물",
     "rarity": "직업",
     "icon": "shield",
     "description": "자신과 12칸 이내의 아군에게 8s 동안 [수류] 상태를 부여합니다.",
@@ -725,69 +725,6 @@ export const notionJobs: Entry[] = [
     "rarity": "직업",
     "icon": "bow",
     "description": "적에게 물 속성 원거리 피해를 가한 후 고유기 발동시 대상에게 공격력 152%의 피해를 가하고 2s 동안 공격 속도가 25% 증가합니다.",
-    "power": 0,
-    "team": "D",
-    "counts": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ]
-  },
-  {
-    "id": "job_3a9f741d045e80bba6a5cbfb492e8ba2",
-    "name": "집행자 (보류)",
-    "category": "직업",
-    "type": "저격수 계열",
-    "element": "무속성",
-    "rarity": "직업",
-    "icon": "bow",
-    "description": "주변 15칸내 바라보는 적 한명에게 8s동안 [죄인]를 부여합니다.",
-    "power": 0,
-    "team": "D",
-    "counts": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ]
-  },
-  {
-    "id": "job_3c5f741d045e80ccb25be098ec7650f0",
-    "name": "현상금 사냥꾼 (보류)",
-    "category": "직업",
-    "type": "저격수 계열",
-    "element": "무속성",
-    "rarity": "직업",
-    "icon": "bow",
-    "description": "15칸 내 바라보는 적 1명에게 12s 동안 [지명수배]를 부여합니다.",
-    "power": 0,
-    "team": "D",
-    "counts": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ]
-  },
-  {
-    "id": "job_3f2f741d045e80a2a235d28f110993d8",
-    "name": "레이븐 (보류)",
-    "category": "직업",
-    "type": "저격수 계열",
-    "element": "무속성",
-    "rarity": "직업",
-    "icon": "bow",
-    "description": "8s 동안 [광분] 상태가 되어 자신이 가하는 최종 피해가 40% 감소합니다.",
     "power": 0,
     "team": "D",
     "counts": [

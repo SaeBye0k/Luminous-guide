@@ -5,7 +5,7 @@
     "무기": 61,
     "유물": 56,
     "갑옷": 12,
-    "직업": 58
+    "직업": 55
   },
   "excluded": [
     {
@@ -77,6 +77,21 @@
       "category": "무기",
       "name": "파괴자 (미완)",
       "sourceId": "3a9f741d-045e-8078-9aa2-c2fea2ce1bf2"
+    },
+    {
+      "category": "직업",
+      "name": "집행자 (보류)",
+      "sourceId": "3a9f741d-045e-80bb-a6a5-cbfb492e8ba2"
+    },
+    {
+      "category": "직업",
+      "name": "현상금 사냥꾼 (보류)",
+      "sourceId": "3c5f741d-045e-80cc-b25b-e098ec7650f0"
+    },
+    {
+      "category": "직업",
+      "name": "레이븐 (보류)",
+      "sourceId": "3f2f741d-045e-80a2-a235-d28f110993d8"
     }
   ],
   "scope": [
