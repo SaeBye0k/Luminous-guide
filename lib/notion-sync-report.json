@@ -1,10 +1,10 @@
 {
   "source": "https://app.notion.com/p/luminous-rpg/RPG-04815989269e46d6b1a8ab186328ebdd",
-  "checkedOn": "2026-10-23",
+  "checkedOn": "2026-10-27",
   "counts": {
-    "무기": 53,
-    "유물": 54,
-    "갑옷": 11,
+    "무기": 61,
+    "유물": 56,
+    "갑옷": 12,
     "직업": 54
   },
   "excluded": [
@@ -17,11 +17,6 @@
       "category": "무기",
       "name": "무한히 잠든 검 (미완)",
       "sourceId": "3a9f741d-045e-8035-86ed-db58f689adf8"
-    },
-    {
-      "category": "무기",
-      "name": "영혼의 검 (미완)",
-      "sourceId": "3a9f741d-045e-8033-a664-eb507672ef11"
     },
     {
       "category": "무기",
@@ -93,5 +88,11 @@
       "name": "가희 (추가 전)",
       "sourceId": "3daf741d-045e-80fb-95b3-db3a110bfbdb"
     }
-  ]
+  ],
+  "scope": [
+    "무기",
+    "유물",
+    "갑옷"
+  ],
+  "retainedJobDataCheckedOn": "2026-10-23"
 }

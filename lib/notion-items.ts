@@ -2353,5 +2353,215 @@ export const notionItems: Entry[] = [
       0
     ],
     "imageUrl": "https://luminous-rpg.notion.site/image/attachment%3A630bc73d-d559-468a-964b-2ea75315606d%3A8430e54c48cafcf3.png?table=block&id=3ebf741d-045e-80a9-ae93-d2b4f20b8819&width=256&cache=v2"
+  },
+  {
+    "id": "notion_403f741d045e8027ab31d9a08783d838",
+    "name": "다양색 팔레트",
+    "category": "무기",
+    "type": "장병기",
+    "element": "빛",
+    "rarity": "희귀",
+    "icon": "sword",
+    "description": "전방으로 페인트 방울을 날려 명중한 적에게 공격력 100%의 스킬 피해를 가합니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "id": "notion_403f741d045e80a3918cf1b4418f2611",
+    "name": "꿀침",
+    "category": "무기",
+    "type": "단검",
+    "element": "빛",
+    "rarity": "희귀",
+    "icon": "sword",
+    "description": "앞에 있는 적에게 공격력의 70%의 근접 피해를 입힙니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "id": "notion_404f741d045e80a881b8dba673cc5ff2",
+    "name": "성광검",
+    "category": "무기",
+    "type": "단검",
+    "element": "빛",
+    "rarity": "희귀",
+    "icon": "sword",
+    "description": "앞에 있는 적에게 공격력의 100%의 근접 피해를 입힙니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "id": "notion_404f741d045e80b7acf1f462b54ec80e",
+    "name": "빛바랜 작살",
+    "category": "무기",
+    "type": "장병기",
+    "element": "무속성",
+    "rarity": "영웅",
+    "icon": "sword",
+    "description": "1) 긴 범위로 찔러 명중한 적에게 공격력 100%의 근접 피해를 가합니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "id": "notion_404f741d045e8049857ccf19a7733e25",
+    "name": "지휘의 깃발",
+    "category": "무기",
+    "type": "장병기",
+    "element": "무속성",
+    "rarity": "영웅",
+    "icon": "sword",
+    "description": "1) 현재 위치에 깃발을 꼽고 주변 3칸 이내에 적들에게 공격력 60%의 침식 피해를 가합니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "id": "notion_405f741d045e8039b6ddf41c7141ec55",
+    "name": "슬래시 액스",
+    "category": "무기",
+    "type": "장병기",
+    "element": "무속성",
+    "rarity": "영웅",
+    "icon": "sword",
+    "description": "1) 도끼를 넓게 오른쪽으로 휘둘러 명중한 적들을 모두 오른쪽으로 밀쳐내고 공격력 180%의 근접 피해를 가합니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "id": "notion_404f741d045e80c088e3cf5de881a87d",
+    "name": "전동 활",
+    "category": "무기",
+    "type": "활",
+    "element": "번개",
+    "rarity": "영웅",
+    "icon": "sword",
+    "description": "1) 부채꼴 범위로 화살을 3발 발사하여 명중한 적에게 공격력 70%의 원거리 피해를 가합니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "id": "notion_3a9f741d045e8033a664eb507672ef11",
+    "name": "영혼의 검",
+    "category": "무기",
+    "type": "단검",
+    "element": "불",
+    "rarity": "신화",
+    "icon": "sword",
+    "description": "1) 검을 크게 휘둘러 전방의 적들에게 불길을 뿜습니다. 불길에 닿은 적들은 2s 동안 공격력 30%의 불 속성 추가 피해를 3번 가합니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "id": "notion_404f741d045e80a79529d700044066e5",
+    "name": "돌고래의 가호",
+    "category": "유물",
+    "type": "버프",
+    "element": "물",
+    "rarity": "유물",
+    "icon": "gem",
+    "description": "5s 동안 넉백 저항이 70%, 상태이상 저항이 10% 증가합니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "id": "notion_405f741d045e8199a979fca0ff322229",
+    "name": "만물 주머니",
+    "category": "유물",
+    "type": "유물",
+    "element": "대지",
+    "rarity": "유물",
+    "icon": "gem",
+    "description": "스스로 모래폭풍이 되어 4s 동안 주변의 적을 끌어당기고 받는 피해가 50% 감소합니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
   }
 ];
