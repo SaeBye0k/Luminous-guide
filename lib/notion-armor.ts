@@ -243,5 +243,26 @@ export const notionArmor: Entry[] = [
       0
     ],
     "imageUrl": "/game-assets/armor/3a6f741d045e80c3bf96f47f6c46f186.png"
+  },
+  {
+    "id": "notion_405f741d045e8121bd00f3eb73949160",
+    "name": "신관의 갑옷",
+    "category": "갑옷",
+    "type": "갑옷",
+    "element": "빛",
+    "rarity": "갑옷",
+    "icon": "shield",
+    "description": "회복력 +15%, 장병기·특수 장비로 가하는 피해 +50%",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
   }
 ];
