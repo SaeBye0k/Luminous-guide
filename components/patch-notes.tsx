@@ -64,9 +64,9 @@ export function PatchNotes({compact=false,userId,nickname,onLogin,onNickname}:Pr
   }
   const rating=patch&&<div className="patch-rating"><p>이번 패치, 어떻게 느끼셨나요?</p><div className="patch-reactions">{(['like','dislike'] as Reaction[]).map(reaction=><button key={reaction} type="button" className={`secondary ${mine[patch.id]===reaction?'chosen':''}`} disabled={!supabase||!ratingsReady||loading||saving} aria-pressed={!!userId&&mine[patch.id]===reaction} onClick={()=>void vote(reaction)}>{reaction==='like'?<ThumbsUp size={15}/>:<ThumbsDown size={15}/>}<span>{reaction==='like'?'좋아요':'아쉬워요'}</span><b>{ratingsReady?count(reaction).toLocaleString():'—'}</b></button>)}</div><small>{saving?'평가 저장 중…':userId?'계정당 한 표 · 다시 선택해 변경할 수 있어요.':'로그인 후 평가에 참여할 수 있어요.'}</small></div>;
   return <section className={compact?'patch-feature':'patch-page'} aria-label={compact?'최신 패치노트':'패치노트 목록'}>
-    {!compact&&<div className="page-title"><span className="overline">PATCH NOTES</span><h1>패치노트</h1><p>무엇이 달라졌는지 읽고, 이번 패치에 대한 의견을 나눠보세요.</p></div>}
+    {!compact&&<div className="page-title"><h1>패치노트</h1><p>무엇이 달라졌는지 읽고, 이번 패치에 대한 의견을 나눠보세요.</p></div>}
     {loading&&!patch&&<p className="empty-mini">패치노트를 불러오는 중입니다.</p>}
-    {!loading&&!error&&!patch&&<div className="patch-empty"><span className="overline">PATCH NOTES</span><h2>새로운 변화, 함께 살펴봐요.</h2><p>아직 등록된 패치노트가 없습니다. 등록되면 핵심 변경과 모험가의 평가를 여기에서 확인할 수 있어요.</p></div>}
+    {!loading&&!error&&!patch&&<div className="patch-empty"><h2>등록된 패치노트가 없습니다.</h2><p>새 패치노트가 올라오면 이곳에서 확인할 수 있습니다.</p></div>}
     {error&&<p className="editor-error" role="alert">{error}<button type="button" className="text-button" disabled={loading||saving} onClick={()=>void refresh()}>다시 시도</button></p>}
     {patch&&<>
       {!compact&&patches.length>1&&<label className="patch-select">패치 선택<select value={patch.id} onChange={event=>setSelected(event.target.value)}>{patches.map(p=><option key={p.id} value={p.id}>{p.published_on} · {p.title}</option>)}</select></label>}

@@ -29,13 +29,13 @@ export function DungeonGuideHub({dungeons,dungeonId,onSelect,tagCounts={},onPost
   const detail=dungeonDetails[selected.id];
 
   return <>
-    <div className="page-title"><span className="overline">DUNGEON FIELD NOTES</span><h1>던전 공략</h1><p>도전할 던전을 고르고, 공략과 짧은 경험을 나눠보세요. 던전의 태그는 모험가들이 작성한 공략에서 모입니다.</p></div>
+    <div className="page-title"><h1>던전 공략</h1><p>던전별 권장 명성, 드랍 아이템, 공략을 확인하세요.</p></div>
     <div className="dungeon-world-heading"><span className="dungeon-world-label">월드 1</span></div>
     <div className="dungeon-guide-selector" role="group" aria-label="공략을 볼 던전 선택">
       {dungeons.map(dungeon=><button type="button" key={dungeon.id} aria-pressed={selected.id===dungeon.id} className={selected.id===dungeon.id?'active':''} onClick={()=>onSelect(dungeon.id)}><Castle size={19} aria-hidden="true"/><span><strong>{dungeon.name}</strong><small>{dungeonDetails[dungeon.id]?.stats[0]}</small><DungeonTagBadges tags={tagCounts[dungeon.id]}/></span><ChevronRight size={16} aria-hidden="true"/></button>)}
     </div>
     <section className="dungeon-guide-overview" aria-label={`${selected.name} 요약`}>
-      <div><span className="overline">SELECTED DUNGEON</span><h2>{selected.name}</h2><p>{selected.tagline}</p><DungeonTagBadges tags={tagCounts[selected.id]}/></div>
+      <div><h2>{selected.name}</h2><p>{selected.tagline}</p><DungeonTagBadges tags={tagCounts[selected.id]}/></div>
       <div className="dungeon-guide-facts">{detail?.stats.slice(1).map(stat=><span key={stat}>{stat}</span>)}<Link className="text-button" href={`/database/?${new URLSearchParams({category:'던전',item:selected.id})}`}>던전 정보·드랍테이블 <ChevronRight size={14}/></Link></div>
     </section>
     <div className="tabs dungeon-guide-tabs" role="group" aria-label="공략과 한줄평 보기">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "./archive-theme.css";
+import "./field-guide.css";
 
 export const metadata: Metadata = {
   referrer: "no-referrer",
