@@ -92,6 +92,8 @@ def main():
     old_by_id = {entry['id']: entry for entry in old_items + old_armor}
     job_source = (ROOT / 'lib/notion-jobs.ts').read_text()
     # Preserve existing positional job IDs; never renumber when a job is removed.
+    old_job_entries = read_array(ROOT / 'lib/notion-jobs.ts')
+    old_traits = json.loads((ROOT/'lib/job-traits.ts').read_text().split(' = ',2)[-1].strip().rstrip(';'))
     old_jobs = {}
     for group, names in re.findall(r'^  (\S+): \[(.*?)\]', job_source, re.M):
         for index, name in enumerate(re.findall(r"'([^']+)'", names)):
@@ -139,6 +141,7 @@ def main():
             name = props['이름']
             if BLOCKED.search(name): excluded.append({'category': category, 'name': name, 'sourceId': block['id']}); continue
             eid = 'notion_' + block['id'].replace('-', '')
+            if category == '갑옷' and name == '구리 갑옷': eid = 'armor_copper'
             old = old_by_id.get(eid, {})
             record, _ = detail(block)
             element = props.get('속성', props.get('더 잘나오는 속성', '무')) or '무'
@@ -165,7 +168,11 @@ def main():
             eid = old_jobs.get(name, 'job_' + block['id'].replace('-', ''))
             record, job_rows = detail(block)
             if not record['abilities']: raise RuntimeError('Job ability missing: ' + name)
-            entries.append({'id':eid,'name':name,'category':'직업','type':group_name+' 계열','element':'대지' if name in ('칼리우드','선포자') else '무속성','rarity':'직업','icon':{'전사':'sword','수호자':'shield','저격수':'bow','지원가':'heart','공통':'compass'}[group_name],'description':record['abilities'][0]['description'].split('\n')[0][:150], 'power':0,'team':'D','counts':[0]*7})
+            entries.append({**next((job for job in old_job_entries if job['id']==eid), {}),'id':eid,'name':name,'category':'직업','type':group_name+' 계열','element':'대지' if name in ('칼리우드','선포자') else '무속성','rarity':'직업','icon':{'전사':'sword','수호자':'shield','저격수':'bow','지원가':'heart','공통':'compass'}[group_name],'description':record['abilities'][0]['description'].split('\n')[0][:150], 'power':0,'team':'D','counts':[0]*7})
+            used = set()
+            for row in job_rows:
+                previous = next((t for t in old_traits.get(name, {}).get('traits', []) if t['id'] not in used and re.sub(r'\s', '', t['description']) == re.sub(r'\s', '', row['description'])), None)
+                if previous: row['id'] = previous['id']; used.add(previous['id'])
             details[eid] = record; traits[name] = {'sourceUrl':record['sourceUrl'],'traits':job_rows}
     if len({entry['id'] for entry in entries}) != len(entries): raise RuntimeError('Duplicate catalog ID')
     if any(not record['abilities'] for eid,record in details.items() if next(entry for entry in entries if entry['id']==eid)['category'] in ('직업','무기','유물')): raise RuntimeError('Missing ability')

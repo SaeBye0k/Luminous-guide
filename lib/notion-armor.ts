@@ -10,7 +10,7 @@ export const notionArmor: Entry[] = [
     "element": "무속성",
     "rarity": "갑옷",
     "icon": "shield",
-    "description": "유물 쿨타임 감소 +25%",
+    "description": "유물 쿨타임 감소 25%",
     "power": 0,
     "team": "D",
     "counts": [
@@ -32,7 +32,7 @@ export const notionArmor: Entry[] = [
     "element": "무속성",
     "rarity": "갑옷",
     "icon": "shield",
-    "description": "무속성 피해량 +60%",
+    "description": "무속성 피해량 +35%",
     "power": 0,
     "team": "D",
     "counts": [
@@ -54,7 +54,7 @@ export const notionArmor: Entry[] = [
     "element": "어둠",
     "rarity": "갑옷",
     "icon": "shield",
-    "description": "치명타 확률 +10%, 치명타 피해 +60%",
+    "description": "치명타 피해 +80%, 치명타 확률 +15%",
     "power": 0,
     "team": "D",
     "counts": [
@@ -73,10 +73,10 @@ export const notionArmor: Entry[] = [
     "name": "철 갑옷",
     "category": "갑옷",
     "type": "갑옷",
-    "element": "어둠",
+    "element": "무속성",
     "rarity": "갑옷",
     "icon": "shield",
-    "description": "방어력 +10%",
+    "description": "방어력 +25%",
     "power": 0,
     "team": "D",
     "counts": [
@@ -120,7 +120,7 @@ export const notionArmor: Entry[] = [
     "element": "어둠",
     "rarity": "갑옷",
     "icon": "shield",
-    "description": "모든 피해량 +45%",
+    "description": "모든 피해량 +30%",
     "power": 0,
     "team": "D",
     "counts": [
@@ -142,7 +142,7 @@ export const notionArmor: Entry[] = [
     "element": "빛",
     "rarity": "갑옷",
     "icon": "shield",
-    "description": "장비 쿨타임 감소 +10%, 스킬로 가하는 피해 +10%",
+    "description": "장비 쿨타임 감소 +20%, 스킬로 가하는 피해 +60%",
     "power": 0,
     "team": "D",
     "counts": [
@@ -164,7 +164,7 @@ export const notionArmor: Entry[] = [
     "element": "빛",
     "rarity": "갑옷",
     "icon": "shield",
-    "description": "회복력 +10%, 상태 이상 저항 +15%, 방어력 -10%",
+    "description": "방어력 -10%, 회복력 +10%, 상태 이상 저항 +20%",
     "power": 0,
     "team": "D",
     "counts": [
@@ -186,7 +186,7 @@ export const notionArmor: Entry[] = [
     "element": "어둠",
     "rarity": "갑옷",
     "icon": "shield",
-    "description": "넉백 저항 +20%, 상태 이상 명중 +8%",
+    "description": "넉백 저항 +20%, 상태 이상 명중 +16%",
     "power": 0,
     "team": "D",
     "counts": [
@@ -264,5 +264,27 @@ export const notionArmor: Entry[] = [
       0,
       0
     ]
+  },
+  {
+    "id": "armor_copper",
+    "name": "구리 갑옷",
+    "category": "갑옷",
+    "type": "갑옷",
+    "element": "어둠",
+    "rarity": "갑옷",
+    "icon": "shield",
+    "description": "에너지 최대치 +160pt, 에너지 회복 효율 +30%",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "imageUrl": "/game-assets/armor/copper-chestplate.png"
   }
 ];

@@ -1,10 +1,10 @@
 {
   "source": "https://app.notion.com/p/luminous-rpg/RPG-04815989269e46d6b1a8ab186328ebdd",
-  "checkedOn": "2026-10-27",
+  "checkedOn": "2026-11-24",
   "counts": {
-    "무기": 61,
+    "무기": 68,
     "유물": 56,
-    "갑옷": 12,
+    "갑옷": 13,
     "직업": 58
   },
   "excluded": [
@@ -40,11 +40,6 @@
     },
     {
       "category": "무기",
-      "name": "이형의 낫 (미완)",
-      "sourceId": "3a9f741d-045e-80ad-aad3-f887d172d9a3"
-    },
-    {
-      "category": "무기",
       "name": "저주받은 수호자의 잔해 (미완)",
       "sourceId": "3a9f741d-045e-80aa-b1d6-d60a84a06e59"
     },
@@ -65,11 +60,6 @@
     },
     {
       "category": "무기",
-      "name": "아스트라 (미완)",
-      "sourceId": "3a9f741d-045e-8077-883a-c5db464027ef"
-    },
-    {
-      "category": "무기",
       "name": "종말의 검 (미완)",
       "sourceId": "3a9f741d-045e-8091-b4da-f2ed6a41e49b"
     },
@@ -77,12 +67,11 @@
       "category": "무기",
       "name": "파괴자 (미완)",
       "sourceId": "3a9f741d-045e-8078-9aa2-c2fea2ce1bf2"
+    },
+    {
+      "category": "직업",
+      "name": "호위무사 (추가 전)",
+      "sourceId": "40df741d-045e-80af-89e9-cd48bf8b1ad9"
     }
-  ],
-  "scope": [
-    "무기",
-    "유물",
-    "갑옷",
-    "직업"
   ]
 }

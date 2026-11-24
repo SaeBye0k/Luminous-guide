@@ -12,8 +12,8 @@ export const jobTraits:Record<string,{sourceUrl:string;traits:JobTrait[]}> = {
         "description": "(선택) 고유기로 가하는 피해에 치명타 적용"
       },
       {
-        "id": "trait_3e6f741d045e813da500c87b9edca99e",
-        "description": "(선택) 고유기의 명중한 적의 받는 피해 3s 동안 +40%"
+        "id": "trait_405f741d045e81f9a80dd4ae947f3b97",
+        "description": "(선택) 고유기의 명중한 적의 받는 피해 3s 동안 +25%"
       },
       {
         "id": "trait_3e6f741d045e81ff9098c182df515e0e",
@@ -70,12 +70,12 @@ export const jobTraits:Record<string,{sourceUrl:string;traits:JobTrait[]}> = {
         "description": "(선택) 치명타 확률 +15%"
       },
       {
-        "id": "trait_3e6f741d045e816c9074fe9e691bc006",
-        "description": "(선택) 치명타 피해 +10%"
+        "id": "trait_405f741d045e8114a614ffe6b218d607",
+        "description": "(선택) 치명타 피해 +30%"
       },
       {
-        "id": "trait_3e6f741d045e8172a259c426f3def342",
-        "description": "(선택) 궁극기 사용시 지속시간 동안 고유기 대기시간 2s로 변경"
+        "id": "trait_405f741d045e817da027c3167523d3b4",
+        "description": "(선택) 궁극기 사용시 지속시간 동안 고유기 대기시간 3s로 변경"
       },
       {
         "id": "trait_3e6f741d045e81bf9538ca708ab74331",
@@ -124,8 +124,8 @@ export const jobTraits:Record<string,{sourceUrl:string;traits:JobTrait[]}> = {
         "description": "(선택) 공격력 +20%"
       },
       {
-        "id": "trait_3e6f741d045e811ea675e2bb9933f7be",
-        "description": "(선택) 검을 주울때마다 치명타 확률 +16%"
+        "id": "trait_405f741d045e8165b3edc16526d73af8",
+        "description": "(선택) 검을 주울때마다 치명타 확률 +10%"
       },
       {
         "id": "trait_3e6f741d045e8159aad9c8ea42861513",
@@ -153,8 +153,8 @@ export const jobTraits:Record<string,{sourceUrl:string;traits:JobTrait[]}> = {
         "description": "(선택) 공중에서 가하는 피해 +20%"
       },
       {
-        "id": "trait_3e6f741d045e813698c6eea9ffeb46ce",
-        "description": "(선택) 공중에서 궁극기 발동 시 버프 효과 2배"
+        "id": "trait_405f741d045e81a7a1dbdb76a6c39b5e",
+        "description": "(선택) 공중에서 궁극기 발동 시 8s 동안 공격력 +무기 공격력의 30%, 공격 속도 +20% 추가"
       },
       {
         "id": "trait_3e6f741d045e81eea25ac44649fdd00f",
@@ -190,8 +190,8 @@ export const jobTraits:Record<string,{sourceUrl:string;traits:JobTrait[]}> = {
         "description": "(선택) 투지 스택 획득량 +1pt"
       },
       {
-        "id": "trait_3e6f741d045e81df8ba5ef656b3d8530",
-        "description": "(선택) 공격력 +40%"
+        "id": "trait_405f741d045e81648f39e140cf90b39c",
+        "description": "(선택) 공격력 +25%"
       },
       {
         "id": "trait_3e6f741d045e813e90fcf31f0030992e",
@@ -256,8 +256,8 @@ export const jobTraits:Record<string,{sourceUrl:string;traits:JobTrait[]}> = {
         "description": "(선택) 스킬 피해 +20%"
       },
       {
-        "id": "trait_3e6f741d045e81ee9505cb412b728227",
-        "description": "(선택) 대지속성 스킬 피해를 가할시 대상에게 즉시 기존 피해 20%의 집중피해"
+        "id": "trait_405f741d045e814eb334feca572244ca",
+        "description": "(선택) 대지속성 스킬 피해를 가할시 대상에게 즉시 기존 피해 15%의 집중피해"
       }
     ]
   },
@@ -277,8 +277,8 @@ export const jobTraits:Record<string,{sourceUrl:string;traits:JobTrait[]}> = {
         "description": "(선택) [검계] 내에서 사용중인 장비의 속성 피해 +24%"
       },
       {
-        "id": "trait_3e6f741d045e81519e80c67c4c24206e",
-        "description": "(선택) [검흔] 5스택인 적에게 피해를 입히면 [검계]의 지속시간 +0.2s"
+        "id": "trait_405f741d045e81dcb192d9c89b5c2fb4",
+        "description": "(선택) [검흔] 5스택인 적에게 피해를 입히면 [검계]의 지속시간 +0.4s"
       },
       {
         "id": "trait_3e6f741d045e81158ec2e3d7cf1e1287",
@@ -294,16 +294,16 @@ export const jobTraits:Record<string,{sourceUrl:string;traits:JobTrait[]}> = {
     "sourceUrl": "https://luminous-rpg.notion.site/3adf741d045e80dfa567fa7a3a592c62",
     "traits": [
       {
-        "id": "trait_3e6f741d045e8160a446d52745b6fcce",
-        "description": "(선택) 발차기 치명타 확률 +5%"
+        "id": "trait_405f741d045e81389a66e7643322dc10",
+        "description": "(선택) 발차기 치명타 확률 +10%"
       },
       {
-        "id": "trait_3e6f741d045e8196bed1e0cd3336bb57",
-        "description": "(선택) 발차기 치명타 확률 +5%"
+        "id": "trait_405f741d045e81fbab76f15e33b6e164",
+        "description": "(선택) 발차기 치명타 확률 +10%"
       },
       {
-        "id": "trait_3e6f741d045e81228647cc82045b7917",
-        "description": "(선택) 발차기 치명타 피해 +10%"
+        "id": "trait_405f741d045e814d88dcc9f658986153",
+        "description": "(선택) 발차기 치명타 피해 +30%"
       },
       {
         "id": "trait_3e6f741d045e81d9967fe7ef87f05b8e",
@@ -372,8 +372,8 @@ export const jobTraits:Record<string,{sourceUrl:string;traits:JobTrait[]}> = {
         "description": "(선택) 자멸 피해로 가하는 피해 +20%"
       },
       {
-        "id": "trait_3e6f741d045e81a2b45bd1fcbb21cf12",
-        "description": "(선택) [결속]이 부여된 대상의 받는 피해 10% 증가"
+        "id": "trait_405f741d045e813bb2f4e3562ac5a5a1",
+        "description": "(선택) [결속]이 부여된 대상의 받는 피해 15% 증가"
       }
     ]
   },
@@ -393,8 +393,8 @@ export const jobTraits:Record<string,{sourceUrl:string;traits:JobTrait[]}> = {
         "description": "(선택) 고유기 발동 후 방어력 3s 동안 20% 증가"
       },
       {
-        "id": "trait_3e6f741d045e81f09916ee9fb48dd4db",
-        "description": "(선택) 방어력 +80%"
+        "id": "trait_405f741d045e81a2aa5bdb9dc4a70161",
+        "description": "(선택) 방어력 +40%"
       },
       {
         "id": "trait_3e6f741d045e81b79541ea618d2d25d0",
@@ -422,16 +422,16 @@ export const jobTraits:Record<string,{sourceUrl:string;traits:JobTrait[]}> = {
         "description": "(선택) 고유기로 반사하는 피해가 200% 증가"
       },
       {
-        "id": "trait_3e6f741d045e8163822ad20d80a50714",
-        "description": "(선택) 고유기의 지속시간 6s로 변경"
+        "id": "trait_405f741d045e813ea5e1d28a1e1e4cbf",
+        "description": "(선택) 고유기의 지속시간 6s로 변경 (재사용 대기시간 8s)"
       },
       {
         "id": "trait_3e6f741d045e813a8d71db326abb6b66",
         "description": "(선택) 고유기 발동중 자신에게 피해를 입힌 적의 받는 피해 3s 동안 +8%"
       },
       {
-        "id": "trait_3e6f741d045e81028771c9e9ed7e71dd",
-        "description": "(선택) 궁극기 사용시 주변 적들을 도발"
+        "id": "trait_405f741d045e81b09c06e9bab606db1b",
+        "description": "(선택) 궁극기 사용시 주변 8칸 내 적들을 도발"
       }
     ]
   },
@@ -468,28 +468,28 @@ export const jobTraits:Record<string,{sourceUrl:string;traits:JobTrait[]}> = {
     "sourceUrl": "https://luminous-rpg.notion.site/39ef741d045e80febc32e509e4c42af0",
     "traits": [
       {
-        "id": "trait_3e6f741d045e8156903bcf596b638ffa",
-        "description": "(선택) 방어력 감소량 100%로 변경"
+        "id": "trait_405f741d045e81458bfff09e0efc198b",
+        "description": "(선택) 입은 피해의 20% 만큼 회복"
       },
       {
-        "id": "trait_3e6f741d045e81e3bc83c41916bc6d68",
-        "description": "(선택) 전환 시 치명타 확률 15%, 치명타 피해 20%"
+        "id": "trait_405f741d045e8141807bc5bab86ac900",
+        "description": "(선택) [철혈] 지속중 방어력 150% 만큼 자신에게 피해를 가함 (1s)"
       },
       {
-        "id": "trait_3e6f741d045e81f38ad9f4c1442e673c",
-        "description": "(선택) 방어력 +30%"
+        "id": "trait_405f741d045e81528494f071fbbb1eb0",
+        "description": "(선택)  공격력 +20%"
       },
       {
-        "id": "trait_3e6f741d045e81d09665c7f6e8934a28",
-        "description": "(선택) 피격 시 방어력 5% 증가 (최대 5중첩)"
+        "id": "trait_405f741d045e8124a4c4f6b87dd70cd1",
+        "description": "(선택) 가하는 피해 +20%"
       },
       {
-        "id": "trait_3e6f741d045e8167b99feaf2cc906f72",
-        "description": "(선택) 체력이 50% 이하일 때 방어력 30% 증가"
+        "id": "trait_405f741d045e8118ae44c2e39ba336ed",
+        "description": "(선택) 궁극기 발동시 치명타 확률 +10%"
       },
       {
-        "id": "trait_3e6f741d045e816598d0f8b599d49c65",
-        "description": "(선택) 고유기 발동시 궁극기 포인트 20pt 회복"
+        "id": "trait_405f741d045e81ac9c92da8abf713b4e",
+        "description": "(선택) 고유기 발동시 궁극기 포인트 5pt 회복"
       }
     ]
   },
@@ -526,16 +526,16 @@ export const jobTraits:Record<string,{sourceUrl:string;traits:JobTrait[]}> = {
     "sourceUrl": "https://luminous-rpg.notion.site/3a7f741d045e804c934cea28fd5c9b92",
     "traits": [
       {
-        "id": "trait_3e6f741d045e81a8a93fda357a82bf6f",
-        "description": "(선택) 방어력 80% 증가"
+        "id": "trait_405f741d045e816cb91bdd0636a0b65a",
+        "description": "(선택) 방어력 40% 증가"
       },
       {
         "id": "trait_3e6f741d045e81d0855ac27cff49a2fa",
         "description": "(선택) 고유기 명중 적 하나당 에너지 5pt 회복"
       },
       {
-        "id": "trait_3e6f741d045e81fa9b73ecc295514440",
-        "description": "(선택) 고유기 지속중 체력 5% 회복"
+        "id": "trait_405f741d045e81e68b35ee2796d00acc",
+        "description": "(선택) 고유기 지속중 2s마다 체력 5% 회복 (최대 5회, 총 25%)"
       },
       {
         "id": "trait_3e6f741d045e81c2934ef1a93b2d4bf0",
@@ -575,8 +575,8 @@ export const jobTraits:Record<string,{sourceUrl:string;traits:JobTrait[]}> = {
         "description": "(선택) 체력 50%"
       },
       {
-        "id": "trait_3e6f741d045e81a08eb5cfb17f0c9fb1",
-        "description": "(선택) [방패]의 효과를 받는 피해 60%로 변경"
+        "id": "trait_405f741d045e81fda2bfc4bfa895823d",
+        "description": "(선택) [방패]의 효과를 받는 피해 50%로 변경"
       }
     ]
   },
@@ -600,8 +600,8 @@ export const jobTraits:Record<string,{sourceUrl:string;traits:JobTrait[]}> = {
         "description": "(선택) 체력 50%"
       },
       {
-        "id": "trait_3e6f741d045e81a780cbc896d4b51953",
-        "description": "(선택) 고유기 사용 후, 자신을 경직시키고 8s 동안 무적"
+        "id": "trait_405f741d045e816bb1d1fb2a0bbc11a0",
+        "description": "(선택) 고유기 사용 후, 자신을 2s 동안 경직시키고 8s 동안 무적"
       },
       {
         "id": "trait_3e6f741d045e81628bf1ecd328e56033",
@@ -716,8 +716,8 @@ export const jobTraits:Record<string,{sourceUrl:string;traits:JobTrait[]}> = {
         "description": "(선택) 체력 +30%"
       },
       {
-        "id": "trait_3e6f741d045e815d90c7d303197f4684",
-        "description": "(선택) [수류] 상태에서 받는 피해 감소량 +15%"
+        "id": "trait_405f741d045e81a0a96bf008a62f87a1",
+        "description": "(선택) [수류] 상태에서 받는 피해 감소량 +20%"
       },
       {
         "id": "trait_3e6f741d045e814b8df1d8da0052aeab",
@@ -758,6 +758,14 @@ export const jobTraits:Record<string,{sourceUrl:string;traits:JobTrait[]}> = {
     "sourceUrl": "https://luminous-rpg.notion.site/3adf741d045e80f69ebbd0a8882ed10d",
     "traits": [
       {
+        "id": "trait_405f741d045e81a6b1c5d48cbb263ca1",
+        "description": "(선택) [허수아비]가 존재하는 동안 가하는 피해 +15%"
+      },
+      {
+        "id": "trait_3adf741d045e80069d47ca9ffbae9ce7",
+        "description": "(선택) 방어력 +15%"
+      },
+      {
         "id": "trait_3adf741d045e80d78f2efb6058f32076",
         "description": "(선택) [허수아비]의 받는 피해 10% 감소"
       },
@@ -766,20 +774,41 @@ export const jobTraits:Record<string,{sourceUrl:string;traits:JobTrait[]}> = {
         "description": "(선택) 체력 +15%"
       },
       {
-        "id": "trait_3adf741d045e80069d47ca9ffbae9ce7",
-        "description": "(선택) 방어력 +15%"
-      },
-      {
         "id": "trait_3adf741d045e809e9c3cf6a05c9f398a",
         "description": "(선택) 체력 + 15%"
       },
       {
         "id": "trait_3adf741d045e80bfa7a1c2c1b7c96f45",
         "description": "(선택) 체력 +15%"
+      }
+    ]
+  },
+  "베리온": {
+    "sourceUrl": "https://luminous-rpg.notion.site/403f741d045e80588e79dc39e52c229b",
+    "traits": [
+      {
+        "id": "trait_405f741d045e8113917de63c8aea237e",
+        "description": "(선택) 치명타 피해 +8%"
       },
       {
-        "id": "trait_3adf741d045e8042a1b8d82f5b880b0c",
-        "description": "(선택) [허수아비]가 존재하는 동안 가하는 피해 +25%"
+        "id": "trait_405f741d045e8172920ed993399946d9",
+        "description": "(선택) 상태이상 저항 +15%"
+      },
+      {
+        "id": "trait_405f741d045e812eb42cc5dc751e809b",
+        "description": "(선택) [가드업] 상태에서 가하는 피해 +8%"
+      },
+      {
+        "id": "trait_405f741d045e81bca302e9c49ec77200",
+        "description": "(선택) 체력 +15%"
+      },
+      {
+        "id": "trait_405f741d045e815eb922ff2ceb5a5cee",
+        "description": "(선택) 고유기 발동시 궁극기 포인트 +5pt"
+      },
+      {
+        "id": "trait_405f741d045e81d9aa78ca3853fce56d",
+        "description": "(선택) 궁극기 발동시 상태 게이지 50pt 회복"
       }
     ]
   },
@@ -907,8 +936,8 @@ export const jobTraits:Record<string,{sourceUrl:string;traits:JobTrait[]}> = {
         "description": "(선택) [저주]의 저항 감소율이 50%로 증가"
       },
       {
-        "id": "trait_3fff741d045e8189b4fcd1901d87b199",
-        "description": "(선택) [필살]의 공격력 계수를 398%로 증가"
+        "id": "trait_405f741d045e819b962ed99ff9ba7e8f",
+        "description": "(선택) [필살]의 공격력 계수를 450%로 증가"
       },
       {
         "id": "trait_3e6f741d045e818fa54bc6c46d2c0e6d",
@@ -1015,31 +1044,60 @@ export const jobTraits:Record<string,{sourceUrl:string;traits:JobTrait[]}> = {
       }
     ]
   },
-  "집행자 (보류)": {
+  "화련": {
+    "sourceUrl": "https://luminous-rpg.notion.site/3f2f741d045e80f6bef8cf82a2105404",
+    "traits": [
+      {
+        "id": "trait_405f741d045e8168ac41eb85d76f3c32",
+        "description": "(선택) [개화]를 발동 할 때 마다, [화무] 상태에서 가하는 적중 피해 +5%"
+      },
+      {
+        "id": "trait_405f741d045e81579a05d9234ffea3e1",
+        "description": "(선택) [개화]를 공격력 27%의 대지 속성 피해를 3회 가하는 공격으로 변경"
+      },
+      {
+        "id": "trait_405f741d045e81d0a30addcee39b61df",
+        "description": "(선택) [개화]를 발동 할 때 마다, [화무] 상태에서 상태 명중 +5%"
+      },
+      {
+        "id": "trait_405f741d045e8163885fc27414b64df9",
+        "description": "(선택) [개화]를 발동 할 때 마다, [화무] 상태에서 집중 피해 +5%"
+      },
+      {
+        "id": "trait_405f741d045e81b48ac9c228ef8c4d85",
+        "description": "(선택) [개화]를 발동 할 때 마다, [화무] 상태에서 가하는 대지 속성 피해 +5%"
+      },
+      {
+        "id": "trait_405f741d045e8142bf9eca252058c84f",
+        "description": "(선택) [개화]가 속박을 8만큼 누적함"
+      }
+    ]
+  },
+  "집행자": {
     "sourceUrl": "https://luminous-rpg.notion.site/3a9f741d045e80bba6a5cbfb492e8ba2",
     "traits": [
       {
-        "id": "trait_3a9f741d045e80848973c3a0f5d385e3",
-        "description": "(선택) [죄인]이 부여된 대상의 받는 피해 증가 +20%"
-      },
-      {
-        "id": "trait_3a9f741d045e80958030f611865ba534",
+        "id": "trait_405f741d045e81d1a29ce7681d4a4e43",
         "description": "(선택) [심판] 활성화 조건을 6회로 변경"
       },
       {
-        "id": "trait_3a9f741d045e80229061fa9f46fe72a5",
+        "id": "trait_405f741d045e81858723f52fbfb92491",
+        "description": "(선택) [죄인]이 부여된 대상의 받는 피해 증가 +20%"
+      },
+      {
+        "id": "trait_405f741d045e8195ad8be6be19144228",
         "description": "(선택) [심판]의 공격력 계수를 200%로 변경"
       },
       {
-        "id": "trait_3a9f741d045e80f89daefdc6a746b4cb",
-        "description": "(선택) 원거리 피해 +30%"
-      },
-      {
-        "id": "trait_3a9f741d045e8099a63bfc81732de1f3",
+        "id": "trait_405f741d045e8144bed9f70f15d875e1",
         "description": "(선택) [심판]의 피해가 대상의 방어력을 50% 무시함"
       },
       {
-        "id": "trait_3a9f741d045e801d9174f542c89812ed",
+        "id": "trait_405f741d045e815fba07fa8e91e21a31",
+        "description": "(선택) 원거리 피해 +30%"
+      },
+      {
+        "id": "trait_405f741d045e81a6bbdde48fa441b9eb",
         "description": "(선택) [죄인] 부여 시, 5s 동안 공격속도 +15%"
       }
     ]
@@ -1143,16 +1201,16 @@ export const jobTraits:Record<string,{sourceUrl:string;traits:JobTrait[]}> = {
         "description": "(선택) 회복력 +50%"
       },
       {
-        "id": "trait_3e6f741d045e81c1b36cd724204269fa",
-        "description": "(선택) 고유기로 아군 회복 부여시 5s 동안 25pt 회복"
+        "id": "trait_405f741d045e819fbabfd1c9870d00ba",
+        "description": "(선택) 고유기로 [유대의 사슬]이 연결된 아군을 회복시키면 5s 동안 25pt 추가 회복"
       },
       {
         "id": "trait_3e6f741d045e813d80cfffc629eef91f",
         "description": "(선택) 고유기 회복량 +20pt"
       },
       {
-        "id": "trait_3e6f741d045e8196bbfdde4e22aacfed",
-        "description": "(선택) 고유기 발동시 조건 없이 대상 아군의 궁극기 포인트 5pt 회복"
+        "id": "trait_405f741d045e8132a341e9c65b151746",
+        "description": "(선택) 고유기 발동시 조건 없이 대상 아군의 궁극기 포인트 1pt 회복 ([유대의 사슬]이 연결된 아군은 5pt)"
       },
       {
         "id": "trait_3e6f741d045e81439debe16a95e6ffd6",
@@ -1164,8 +1222,8 @@ export const jobTraits:Record<string,{sourceUrl:string;traits:JobTrait[]}> = {
     "sourceUrl": "https://luminous-rpg.notion.site/227f741d045e80738d11eaf44b2329cb",
     "traits": [
       {
-        "id": "trait_3e6f741d045e81f487b6e20158f0ea9a",
-        "description": "(선택) [유대의 사슬]이 연결된 아군은 가하는 피해가 30% 증가"
+        "id": "trait_405f741d045e81b2ade0f84e6988ad8e",
+        "description": "(선택) [유대의 사슬]이 연결된 아군은 20s 동안 공격력 30% 증가"
       },
       {
         "id": "trait_3e6f741d045e816a9ff0da6c951dad03",
@@ -1180,8 +1238,8 @@ export const jobTraits:Record<string,{sourceUrl:string;traits:JobTrait[]}> = {
         "description": "(선택) 궁극기 발동 후 궁극기 포인트 20pt 반환"
       },
       {
-        "id": "trait_3e6f741d045e81b4a2ccd3f0348101af",
-        "description": "(선택) 경직된 아군의 수당 자신의 가하는 피해 1s 동안 20% 증가"
+        "id": "trait_405f741d045e811c8f00f8f1b9729d4b",
+        "description": "(선택) 경직된 아군의 수당 자신의 공격력 1s 동안 20% 증가"
       },
       {
         "id": "trait_3e6f741d045e810887baca6e1d930082",
@@ -1197,8 +1255,8 @@ export const jobTraits:Record<string,{sourceUrl:string;traits:JobTrait[]}> = {
         "description": "(선택) 공격력 +30%"
       },
       {
-        "id": "trait_3e6f741d045e81a6bb30e244a9e1689e",
-        "description": "(선택) 음식을 먹을 때마다 자신과 5칸 이내 아군의 체력을 50pt 회복"
+        "id": "trait_405f741d045e816f95b6ee45060d3c3d",
+        "description": "(선택) 음식을 먹을 때마다 자신과 5칸 이내 아군의 체력을 10pt 회복"
       },
       {
         "id": "trait_3e6f741d045e81a7b958d07801b22d6b",
@@ -1259,16 +1317,16 @@ export const jobTraits:Record<string,{sourceUrl:string;traits:JobTrait[]}> = {
         "description": "(선택) 체력 +30%"
       },
       {
-        "id": "trait_3e6f741d045e817d8001cd3fca34b1f4",
-        "description": "(선택) 체력 소모 20%, 쿨타임 감소 50%"
+        "id": "trait_405f741d045e817b8c62d76c60f357d5",
+        "description": "(선택) 체력 소모 20%, 쿨타임 감소 50% (safe와 함께 고르면 safe가 적용됨)"
       },
       {
         "id": "trait_3e6f741d045e81129fb5e5062a06a169",
         "description": "(선택) [유대의 사슬]이 없는 아군도 유물 쿨타임 15% 감소"
       },
       {
-        "id": "trait_3e6f741d045e810598b6f91a18ee03b7",
-        "description": "(선택) 체력 소모 제거, 쿨타임 감소 15%"
+        "id": "trait_405f741d045e81639713d3b9a32cbcd4",
+        "description": "(선택) 체력 소모 제거, 쿨타임 감소 15% (power와 함께 고르면 이쪽이 적용됨)"
       },
       {
         "id": "trait_3e6f741d045e8144b8faf6c34e5f70e4",
@@ -1309,8 +1367,8 @@ export const jobTraits:Record<string,{sourceUrl:string;traits:JobTrait[]}> = {
     "sourceUrl": "https://luminous-rpg.notion.site/3a8f741d045e809d886bcdefc6117922",
     "traits": [
       {
-        "id": "trait_3e6f741d045e810987b8e96e3fd98576",
-        "description": "(선택) [물방울]을 보유한 아군에게 공격력 15% 증가"
+        "id": "trait_405f741d045e8199be2ac6249051b392",
+        "description": "(선택) [물방울]을 받은 아군의 공격력 8s 동안 10% 증가 ([유대의 사슬] 공격력 증가와 중첩되지 않음)"
       },
       {
         "id": "trait_3e6f741d045e817ebd81d66c1d502f01",
@@ -1389,6 +1447,64 @@ export const jobTraits:Record<string,{sourceUrl:string;traits:JobTrait[]}> = {
       {
         "id": "trait_3e6f741d045e81a89d05d118211b10f6",
         "description": "(선택) 이동속도 +5pt"
+      }
+    ]
+  },
+  "가희": {
+    "sourceUrl": "https://luminous-rpg.notion.site/3daf741d045e80fb95b3db3a110bfbdb",
+    "traits": [
+      {
+        "id": "trait_405f741d045e81e9a850fbd54f5e1a3c",
+        "description": "(선택) 고유기의 공격력 증가량을 20%로 변경"
+      },
+      {
+        "id": "trait_405f741d045e81de87bcc02606595fb7",
+        "description": "(선택) 고유기로 가하는 피해에 치명타가 적용됩니다."
+      },
+      {
+        "id": "trait_405f741d045e810eb908c1a2803b79b7",
+        "description": "(선택) 이동 불가 상태에서 받는 피해 감소 +50%"
+      },
+      {
+        "id": "trait_405f741d045e814b998de8c059911d89",
+        "description": "(선택) 고유기 사용 시 8s 동안 넉백 무효"
+      },
+      {
+        "id": "trait_405f741d045e8127a27be7ee7166d4bd",
+        "description": "(선택) 고유기 사용 시 궁극기 포인트 +10pt"
+      },
+      {
+        "id": "trait_405f741d045e8110aa72c963a689cf92",
+        "description": "(선택) 고유기 피해를 입은 대상의 받는 피해 증가 +5% (최대 3회)"
+      }
+    ]
+  },
+  "마도사": {
+    "sourceUrl": "https://luminous-rpg.notion.site/402f741d045e80078953f20486c9239b",
+    "traits": [
+      {
+        "id": "trait_405f741d045e8157852dde4003516141",
+        "description": "(선택) 방어력 +20%"
+      },
+      {
+        "id": "trait_405f741d045e81caadb6e6db03b52aa2",
+        "description": "(선택) 회복력 +20%"
+      },
+      {
+        "id": "trait_405f741d045e81a6a0f6dd62494d0b5f",
+        "description": "(선택) [마갑]을 가진 아군에게 넉백 저항 + 70%"
+      },
+      {
+        "id": "trait_405f741d045e81058d51f418ccaf091b",
+        "description": "(선택) 자신의 [마갑]이 감소할 때 마다, 주변 10칸내 아군의 체력을 30pt 회복"
+      },
+      {
+        "id": "trait_405f741d045e815d90f5e7e6431eade9",
+        "description": "(선택) [마갑]이 피해를 70% 감소시킴"
+      },
+      {
+        "id": "trait_405f741d045e8161acd5e8d7627dc96d",
+        "description": "(선택) 궁극기 사용 시 10칸내 아군에게 [마갑]을 2개 부여함."
       }
     ]
   },
@@ -1555,122 +1671,6 @@ export const jobTraits:Record<string,{sourceUrl:string;traits:JobTrait[]}> = {
       {
         "id": "trait_3e6f741d045e81a199b6e29d7d031fbc",
         "description": "(선택) 희귀 광물 드랍량 5%로 2배"
-      }
-    ]
-  },
-  "베리온": {
-    "sourceUrl": "https://luminous-rpg.notion.site/403f741d045e80588e79dc39e52c229b",
-    "traits": [
-      {
-        "id": "trait_405f741d045e8113917de63c8aea237e",
-        "description": "(선택) 치명타 피해 +8%"
-      },
-      {
-        "id": "trait_405f741d045e8172920ed993399946d9",
-        "description": "(선택) 상태이상 저항 +15%"
-      },
-      {
-        "id": "trait_405f741d045e812eb42cc5dc751e809b",
-        "description": "(선택) [가드업] 상태에서 가하는 피해 +8%"
-      },
-      {
-        "id": "trait_405f741d045e81bca302e9c49ec77200",
-        "description": "(선택) 체력 +15%"
-      },
-      {
-        "id": "trait_405f741d045e815eb922ff2ceb5a5cee",
-        "description": "(선택) 고유기 발동시 궁극기 포인트 +5pt"
-      },
-      {
-        "id": "trait_405f741d045e81d9aa78ca3853fce56d",
-        "description": "(선택) 궁극기 발동시 상태 게이지 50pt 회복"
-      }
-    ]
-  },
-  "화련": {
-    "sourceUrl": "https://luminous-rpg.notion.site/3f2f741d045e80f6bef8cf82a2105404",
-    "traits": [
-      {
-        "id": "trait_405f741d045e8168ac41eb85d76f3c32",
-        "description": "(선택) [개화]를 발동 할 때 마다, [화무] 상태에서 가하는 적중 피해 +5%"
-      },
-      {
-        "id": "trait_405f741d045e81579a05d9234ffea3e1",
-        "description": "(선택) [개화]를 공격력 27%의 대지 속성 피해를 3회 가하는 공격으로 변경"
-      },
-      {
-        "id": "trait_405f741d045e81d0a30addcee39b61df",
-        "description": "(선택) [개화]를 발동 할 때 마다, [화무] 상태에서 상태 명중 +5%"
-      },
-      {
-        "id": "trait_405f741d045e8163885fc27414b64df9",
-        "description": "(선택) [개화]를 발동 할 때 마다, [화무] 상태에서 집중 피해 +5%"
-      },
-      {
-        "id": "trait_405f741d045e81b48ac9c228ef8c4d85",
-        "description": "(선택) [개화]를 발동 할 때 마다, [화무] 상태에서 가하는 대지 속성 피해 +5%"
-      },
-      {
-        "id": "trait_405f741d045e8142bf9eca252058c84f",
-        "description": "(선택) [개화]가 속박을 8만큼 누적함"
-      }
-    ]
-  },
-  "가희": {
-    "sourceUrl": "https://luminous-rpg.notion.site/3daf741d045e80fb95b3db3a110bfbdb",
-    "traits": [
-      {
-        "id": "trait_405f741d045e81e9a850fbd54f5e1a3c",
-        "description": "(선택) 고유기의 공격력 증가량을 20%로 변경"
-      },
-      {
-        "id": "trait_405f741d045e81de87bcc02606595fb7",
-        "description": "(선택) 고유기로 가하는 피해에 치명타가 적용됩니다."
-      },
-      {
-        "id": "trait_405f741d045e810eb908c1a2803b79b7",
-        "description": "(선택) 이동 불가 상태에서 받는 피해 감소 +50%"
-      },
-      {
-        "id": "trait_405f741d045e814b998de8c059911d89",
-        "description": "(선택) 고유기 사용 시 8s 동안 넉백 무효"
-      },
-      {
-        "id": "trait_405f741d045e8127a27be7ee7166d4bd",
-        "description": "(선택) 고유기 사용 시 궁극기 포인트 +10pt"
-      },
-      {
-        "id": "trait_405f741d045e8110aa72c963a689cf92",
-        "description": "(선택) 고유기 피해를 입은 대상의 받는 피해 증가 +5% (최대 3회)"
-      }
-    ]
-  },
-  "마도사": {
-    "sourceUrl": "https://luminous-rpg.notion.site/402f741d045e80078953f20486c9239b",
-    "traits": [
-      {
-        "id": "trait_405f741d045e8157852dde4003516141",
-        "description": "(선택) 방어력 +20%"
-      },
-      {
-        "id": "trait_405f741d045e81caadb6e6db03b52aa2",
-        "description": "(선택) 회복력 +20%"
-      },
-      {
-        "id": "trait_405f741d045e81a6a0f6dd62494d0b5f",
-        "description": "(선택) [마갑]을 가진 아군에게 넉백 저항 + 70%"
-      },
-      {
-        "id": "trait_405f741d045e81058d51f418ccaf091b",
-        "description": "(선택) 자신의 [마갑]이 감소할 때 마다, 주변 10칸내 아군의 체력을 30pt 회복"
-      },
-      {
-        "id": "trait_405f741d045e815d90f5e7e6431eade9",
-        "description": "(선택) [마갑]이 피해를 70% 감소시킴"
-      },
-      {
-        "id": "trait_405f741d045e8161acd5e8d7627dc96d",
-        "description": "(선택) 궁극기 사용 시 10칸내 아군에게 [마갑]을 2개 부여함."
       }
     ]
   }

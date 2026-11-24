@@ -32,7 +32,7 @@ export const notionItems: Entry[] = [
     "element": "빛",
     "rarity": "일반",
     "icon": "sword",
-    "description": "1) 지팡이를 들어올려서 주변 7칸 이내에 있는 아군을 자신의 회복력의 1000% 만큼 회복시킵니다. 이때 자신이 준 총 회복량의 20pt마다 [응원]을 1pt 획득합니다. (최대 64pt)",
+    "description": "1) 지팡이를 들어올려서 주변 7칸 이내에 있는 아군을 자신의 회복력의 1000% 만큼 회복시킵니다. 이때 자신이 준 총 회복량의 10pt마다 [응원]을 1pt 획득합니다. (최대 64pt)",
     "power": 0,
     "team": "D",
     "counts": [
@@ -177,6 +177,28 @@ export const notionItems: Entry[] = [
       0
     ],
     "imageUrl": "https://www.notion.so/image/attachment%3A6f278e6f-d41b-4d72-8317-2b6afd40eb78%3AGiantttt_hammer.png?table=block&id=3f1f741d-045e-8069-b513-d0364a87750b&width=256&cache=v2"
+  },
+  {
+    "id": "notion_403f741d045e8027ab31d9a08783d838",
+    "name": "다양색 팔레트",
+    "category": "무기",
+    "type": "장병기",
+    "element": "빛",
+    "rarity": "희귀",
+    "icon": "sword",
+    "description": "전방으로 페인트 방울을 날려 명중한 적에게 공격력 100%의 스킬 피해를 가합니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3A3c1f4777-c9be-4be7-86b0-decf4340a1c9%3ANew_Piskel_32.png?table=block&id=403f741d-045e-8027-ab31-d9a08783d838&cache=v2&width=256"
   },
   {
     "id": "notion_3f1f741d045e809c8f47db8553abb4e2",
@@ -353,6 +375,50 @@ export const notionItems: Entry[] = [
       0
     ],
     "imageUrl": "/game-assets/weapons/187f741d045e80c9aec7fec529052ded.webp"
+  },
+  {
+    "id": "notion_403f741d045e80a3918cf1b4418f2611",
+    "name": "꿀침",
+    "category": "무기",
+    "type": "단검",
+    "element": "빛",
+    "rarity": "희귀",
+    "icon": "sword",
+    "description": "앞에 있는 적에게 공격력의 70%의 근접 피해를 입힙니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3A70cd6603-027e-459c-a6fb-dd0acd19f003%3Akk7.png?table=block&id=403f741d-045e-80a3-918c-f1b4418f2611&cache=v2&width=256"
+  },
+  {
+    "id": "notion_404f741d045e80a881b8dba673cc5ff2",
+    "name": "성광검",
+    "category": "무기",
+    "type": "단검",
+    "element": "빛",
+    "rarity": "희귀",
+    "icon": "sword",
+    "description": "앞에 있는 적에게 공격력의 100%의 근접 피해를 입힙니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3A1918bf16-7894-495f-8008-ce079a50599c%3AKakaoTalk_20220919_083612626_18.png?table=block&id=404f741d-045e-80a8-81b8-dba673cc5ff2&cache=v2&width=256"
   },
   {
     "id": "notion_3e4f741d045e80a997a7cc800cab0af0",
@@ -604,7 +670,7 @@ export const notionItems: Entry[] = [
     "element": "어둠",
     "rarity": "영웅",
     "icon": "sword",
-    "description": "앞",
+    "description": "1) 적을 검날로 찔러 공격력 100%의 근접 피해를 가하고 대상을 2s 동안 [포박]합니다. 포박된 적은 이동시 검날에 꼽힌채 끌려옵니다.",
     "power": 0,
     "team": "D",
     "counts": [
@@ -617,6 +683,138 @@ export const notionItems: Entry[] = [
       0
     ],
     "imageUrl": "https://www.notion.so/image/attachment%3A2c756e65-271c-48eb-9b2b-8cc02da11457%3Aancient_sword.png?table=block&id=3a9f741d-045e-8092-b2c7-cb135f422f53&width=256&cache=v2"
+  },
+  {
+    "id": "notion_404f741d045e80b7acf1f462b54ec80e",
+    "name": "빛바랜 작살",
+    "category": "무기",
+    "type": "장병기",
+    "element": "무속성",
+    "rarity": "영웅",
+    "icon": "sword",
+    "description": "1) 긴 범위로 찔러 명중한 적에게 공격력 100%의 근접 피해를 가합니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3Adb941adf-61e5-4211-89bf-0b0f54c0f46e%3A4c9c0c0104dbef0b.png?table=block&id=404f741d-045e-80b7-acf1-f462b54ec80e&cache=v2&width=256"
+  },
+  {
+    "id": "notion_404f741d045e8049857ccf19a7733e25",
+    "name": "지휘의 깃발",
+    "category": "무기",
+    "type": "장병기",
+    "element": "무속성",
+    "rarity": "영웅",
+    "icon": "sword",
+    "description": "1) 현재 위치에 깃발을 꼽고 주변 3칸 이내에 적들에게 공격력 60%의 침식 피해를 가합니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3Ae31a741d-7581-4184-9641-1e74a271608d%3A34135e3b295f3e85.png?table=block&id=404f741d-045e-8049-857c-cf19a7733e25&cache=v2&width=256"
+  },
+  {
+    "id": "notion_405f741d045e8039b6ddf41c7141ec55",
+    "name": "슬래시 액스",
+    "category": "무기",
+    "type": "장병기",
+    "element": "무속성",
+    "rarity": "영웅",
+    "icon": "sword",
+    "description": "1) 도끼를 넓게 오른쪽으로 휘둘러 명중한 적들을 모두 오른쪽으로 밀쳐내고 공격력 180%의 근접 피해를 가합니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3A2dfc4b9b-33a9-4fb5-9a60-a33a13509db6%3AKakaoTalk_20220919_083612626_10.png?table=block&id=405f741d-045e-8039-b6dd-f41c7141ec55&cache=v2&width=256"
+  },
+  {
+    "id": "notion_404f741d045e80c088e3cf5de881a87d",
+    "name": "전동 활",
+    "category": "무기",
+    "type": "활",
+    "element": "번개",
+    "rarity": "영웅",
+    "icon": "sword",
+    "description": "1) 부채꼴 범위로 화살을 3발 발사하여 명중한 적에게 공격력 70%의 원거리 피해를 가합니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3Ad11346ec-a98c-4d48-860a-7970918ce7ac%3Aarchors_bow.png?table=block&id=404f741d-045e-80c0-88e3-cf5de881a87d&cache=v2&width=256"
+  },
+  {
+    "id": "notion_40af741d045e800ca363e5a0e333e2cc",
+    "name": "정든 활",
+    "category": "무기",
+    "type": "활",
+    "element": "무속성",
+    "rarity": "영웅",
+    "icon": "sword",
+    "description": "활을 당기고 잠시 후 발사하여 명중한 적에게 공격력 150%의 원거리 피해를 가하고 내구도를 1 소모합니다. 이 공격은 공격 속도 증감의 영향을 받지 않습니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3A0ac8705c-126c-4562-88e2-c418c5c7730a%3A2c8be953d8fee0e7.png?table=block&id=40af741d-045e-800c-a363-e5a0e333e2cc&cache=v2&width=256"
+  },
+  {
+    "id": "notion_411f741d045e8057a3a2f62ad61da2e0",
+    "name": "디아론",
+    "category": "무기",
+    "type": "장검",
+    "element": "무속성",
+    "rarity": "영웅",
+    "icon": "sword",
+    "description": "검을 돌려 찌르기 자세를 잡고 잠시 후 적을 향해 돌진하며 찔러 공격력 120%의 근접 피해를 가합니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3Afb1340b7-5713-4cc6-a27b-d0ab57d63ddd%3ASword_of_extinction.png?table=block&id=411f741d-045e-8057-a3a2-f62ad61da2e0&cache=v2&width=256"
   },
   {
     "id": "notion_3a5f741d045e80ec8b05d14f1b1b30db",
@@ -751,6 +949,28 @@ export const notionItems: Entry[] = [
     "imageUrl": "/game-assets/weapons/f16541b7fa4a487c905cc2c8ddb5cb29.webp"
   },
   {
+    "id": "notion_3a9f741d045e8033a664eb507672ef11",
+    "name": "영혼의 검",
+    "category": "무기",
+    "type": "단검",
+    "element": "불",
+    "rarity": "신화",
+    "icon": "sword",
+    "description": "1) 검을 크게 휘둘러 전방의 적들에게 불길을 뿜습니다. 불길에 닿은 적들은 2s 동안 공격력 30%의 불 속성 추가 피해를 3번 가합니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3A672b8ab8-9cd9-488c-be65-d899bcdd87e3%3AKakaoTalk_20220919_083525111_06.png?table=block&id=3a9f741d-045e-8033-a664-eb507672ef11&cache=v2&width=256"
+  },
+  {
     "id": "notion_3a9f741d045e803896f5f23096631490",
     "name": "다이아몬드 특수검",
     "category": "무기",
@@ -793,6 +1013,28 @@ export const notionItems: Entry[] = [
       0
     ],
     "imageUrl": "/game-assets/weapons/3a9f741d045e80bdb49cc7934437891a.webp"
+  },
+  {
+    "id": "notion_41ef741d045e80a6838cf2ef15a74495",
+    "name": "데스 위시",
+    "category": "무기",
+    "type": "장병기",
+    "element": "불",
+    "rarity": "신화",
+    "icon": "sword",
+    "description": "1) 낫을 왼쪽으로 휘둘러 공격력 120%의 근접 피해를 입힙니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3A43d81022-361b-4089-b94f-e7474cf4a85a%3A12061.png?table=block&id=41ef741d-045e-80a6-838c-f2ef15a74495&cache=v2&width=256"
   },
   {
     "id": "notion_3a5f741d045e80528ddbff1a88190601",
@@ -905,6 +1147,28 @@ export const notionItems: Entry[] = [
     "imageUrl": "/game-assets/weapons/945f2b9d83bc4ec29a4146439678ac33.webp"
   },
   {
+    "id": "notion_3a9f741d045e80adaad3f887d172d9a3",
+    "name": "이형의 낫",
+    "category": "무기",
+    "type": "장병기",
+    "element": "대지",
+    "rarity": "신화",
+    "icon": "sword",
+    "description": "1) 낫을 휘둘러 바라보는 방향으로 3칸 이내의 적들에게 공격력 75%의 근접 피해를 가합니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3Ad1fcc227-7910-43fe-9e6d-35ba56f62476%3AKakaoTalk_20220919_083525111_04.png?table=block&id=3a9f741d-045e-80ad-aad3-f887d172d9a3&cache=v2&width=256"
+  },
+  {
     "id": "notion_1e1f741d045e80cca4a5ea138d6567f6",
     "name": "그라운드 슬레이어",
     "category": "무기",
@@ -1000,7 +1264,7 @@ export const notionItems: Entry[] = [
     "element": "빛",
     "rarity": "신화",
     "icon": "sword",
-    "description": "[기본]: 바라보는 방향으로 마력 구체를 날립니다. 구체에 명중한 적은 공격력 100%의 스킬 피해를 입으며 주변 3칸 내에 있는 아군을 30pt 회복시킵니다.",
+    "description": "[기본]: 바라보는 방향으로 마력 구체를 날립니다. 구체에 명중한 적은 공격력 100%의 스킬 피해를 입으며 자신과 주변 3칸 내에 있는 아군을 30pt 회복시킵니다.",
     "power": 0,
     "team": "D",
     "counts": [
@@ -1167,6 +1431,72 @@ export const notionItems: Entry[] = [
       0
     ],
     "imageUrl": "/game-assets/weapons/3a9f741d045e80b0bfbbdf7a36226e1d.webp"
+  },
+  {
+    "id": "notion_3a9f741d045e8077883ac5db464027ef",
+    "name": "아스트라",
+    "category": "무기",
+    "type": "활",
+    "element": "빛",
+    "rarity": "전설",
+    "icon": "sword",
+    "description": "1) 바라보는 방향으로 화살을 한발 발사합니다. 화살은 적들을 관통하며 공격력 160%의 원거리 피해를 가합니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3A662af846-d8b6-46dd-b5e0-b890b48c87e3%3Aastra.png?table=block&id=3a9f741d-045e-8077-883a-c5db464027ef&cache=v2&width=256"
+  },
+  {
+    "id": "notion_41cf741d045e80fb8465efa0eb06a775",
+    "name": "천공검",
+    "category": "무기",
+    "type": "장검",
+    "element": "빛",
+    "rarity": "전설",
+    "icon": "sword",
+    "description": "1) 검을 왼쪽으로 베어서 적에게 공격력 150%의 근접 피해를 가합니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3A9207ca3b-9d96-468d-8bf0-d94d655cd39a%3AKakaoTalk_20220919_083612626_17.png?table=block&id=41cf741d-045e-80fb-8465-efa0eb06a775&cache=v2&width=256"
+  },
+  {
+    "id": "notion_41df741d045e80a08eb2cddeb73e97bd",
+    "name": "신수의 지팡이",
+    "category": "무기",
+    "type": "장병기",
+    "element": "빛",
+    "rarity": "전설",
+    "icon": "sword",
+    "description": "1) 지팡이를 오른쪽으로 휘둘러 마법 구체를 던집니다. 마법 구체는 주변 적을 추격하고 명중시 공격력 140%의 스킬 피해를 가합니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "imageUrl": "https://www.notion.so/image/attachment%3Acad9f1c7-e4ae-4443-8755-697c1ec78097%3AKakaoTalk_20220919_083525111_05.png?table=block&id=41df741d-045e-80a0-8eb2-cddeb73e97bd&cache=v2&width=256"
   },
   {
     "id": "notion_1db32b3715c246b9801b5f3b418b5f67",
@@ -1462,7 +1792,7 @@ export const notionItems: Entry[] = [
     "element": "불",
     "rarity": "유물",
     "icon": "gem",
-    "description": "장착 시 치명적인 피해를 입었을 때 죽지 않고 최대 체력의 5% 로 부활하며 상태이상에 걸린 상태였다면 상태도 빠져나옵니다.",
+    "description": "장착 시 치명적인 피해를 입었을 때 죽지 않고 최대 체력의 30% 로 부활하며 상태이상에 걸린 상태였다면 상태도 빠져나옵니다.",
     "power": 0,
     "team": "D",
     "counts": [
@@ -2226,7 +2556,7 @@ export const notionItems: Entry[] = [
   },
   {
     "id": "notion_3e2f741d045e8065902ee5dd65f529c4",
-    "name": "고서「뭐가 하고 싶은건데?」",
+    "name": "고서 「뭐가 하고 싶은건데?」",
     "category": "유물",
     "type": "특수,디버프",
     "element": "무속성",
@@ -2355,182 +2685,6 @@ export const notionItems: Entry[] = [
       0
     ],
     "imageUrl": "https://luminous-rpg.notion.site/image/attachment%3A630bc73d-d559-468a-964b-2ea75315606d%3A8430e54c48cafcf3.png?table=block&id=3ebf741d-045e-80a9-ae93-d2b4f20b8819&width=256&cache=v2"
-  },
-  {
-    "id": "notion_403f741d045e8027ab31d9a08783d838",
-    "name": "다양색 팔레트",
-    "category": "무기",
-    "type": "장병기",
-    "element": "빛",
-    "rarity": "희귀",
-    "icon": "sword",
-    "description": "전방으로 페인트 방울을 날려 명중한 적에게 공격력 100%의 스킬 피해를 가합니다.",
-    "power": 0,
-    "team": "D",
-    "counts": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    "imageUrl": "https://www.notion.so/image/attachment%3A3c1f4777-c9be-4be7-86b0-decf4340a1c9%3ANew_Piskel_32.png?table=block&id=403f741d-045e-8027-ab31-d9a08783d838&cache=v2&width=256"
-  },
-  {
-    "id": "notion_403f741d045e80a3918cf1b4418f2611",
-    "name": "꿀침",
-    "category": "무기",
-    "type": "단검",
-    "element": "빛",
-    "rarity": "희귀",
-    "icon": "sword",
-    "description": "앞에 있는 적에게 공격력의 70%의 근접 피해를 입힙니다.",
-    "power": 0,
-    "team": "D",
-    "counts": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    "imageUrl": "https://www.notion.so/image/attachment%3A70cd6603-027e-459c-a6fb-dd0acd19f003%3Akk7.png?table=block&id=403f741d-045e-80a3-918c-f1b4418f2611&cache=v2&width=256"
-  },
-  {
-    "id": "notion_404f741d045e80a881b8dba673cc5ff2",
-    "name": "성광검",
-    "category": "무기",
-    "type": "단검",
-    "element": "빛",
-    "rarity": "희귀",
-    "icon": "sword",
-    "description": "앞에 있는 적에게 공격력의 100%의 근접 피해를 입힙니다.",
-    "power": 0,
-    "team": "D",
-    "counts": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    "imageUrl": "https://www.notion.so/image/attachment%3A1918bf16-7894-495f-8008-ce079a50599c%3AKakaoTalk_20220919_083612626_18.png?table=block&id=404f741d-045e-80a8-81b8-dba673cc5ff2&cache=v2&width=256"
-  },
-  {
-    "id": "notion_404f741d045e80b7acf1f462b54ec80e",
-    "name": "빛바랜 작살",
-    "category": "무기",
-    "type": "장병기",
-    "element": "무속성",
-    "rarity": "영웅",
-    "icon": "sword",
-    "description": "1) 긴 범위로 찔러 명중한 적에게 공격력 100%의 근접 피해를 가합니다.",
-    "power": 0,
-    "team": "D",
-    "counts": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    "imageUrl": "https://www.notion.so/image/attachment%3Adb941adf-61e5-4211-89bf-0b0f54c0f46e%3A4c9c0c0104dbef0b.png?table=block&id=404f741d-045e-80b7-acf1-f462b54ec80e&cache=v2&width=256"
-  },
-  {
-    "id": "notion_404f741d045e8049857ccf19a7733e25",
-    "name": "지휘의 깃발",
-    "category": "무기",
-    "type": "장병기",
-    "element": "무속성",
-    "rarity": "영웅",
-    "icon": "sword",
-    "description": "1) 현재 위치에 깃발을 꼽고 주변 3칸 이내에 적들에게 공격력 60%의 침식 피해를 가합니다.",
-    "power": 0,
-    "team": "D",
-    "counts": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    "imageUrl": "https://www.notion.so/image/attachment%3Ae31a741d-7581-4184-9641-1e74a271608d%3A34135e3b295f3e85.png?table=block&id=404f741d-045e-8049-857c-cf19a7733e25&cache=v2&width=256"
-  },
-  {
-    "id": "notion_405f741d045e8039b6ddf41c7141ec55",
-    "name": "슬래시 액스",
-    "category": "무기",
-    "type": "장병기",
-    "element": "무속성",
-    "rarity": "영웅",
-    "icon": "sword",
-    "description": "1) 도끼를 넓게 오른쪽으로 휘둘러 명중한 적들을 모두 오른쪽으로 밀쳐내고 공격력 180%의 근접 피해를 가합니다.",
-    "power": 0,
-    "team": "D",
-    "counts": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    "imageUrl": "https://www.notion.so/image/attachment%3A2dfc4b9b-33a9-4fb5-9a60-a33a13509db6%3AKakaoTalk_20220919_083612626_10.png?table=block&id=405f741d-045e-8039-b6dd-f41c7141ec55&cache=v2&width=256"
-  },
-  {
-    "id": "notion_404f741d045e80c088e3cf5de881a87d",
-    "name": "전동 활",
-    "category": "무기",
-    "type": "활",
-    "element": "번개",
-    "rarity": "영웅",
-    "icon": "sword",
-    "description": "1) 부채꼴 범위로 화살을 3발 발사하여 명중한 적에게 공격력 70%의 원거리 피해를 가합니다.",
-    "power": 0,
-    "team": "D",
-    "counts": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    "imageUrl": "https://www.notion.so/image/attachment%3Ad11346ec-a98c-4d48-860a-7970918ce7ac%3Aarchors_bow.png?table=block&id=404f741d-045e-80c0-88e3-cf5de881a87d&cache=v2&width=256"
-  },
-  {
-    "id": "notion_3a9f741d045e8033a664eb507672ef11",
-    "name": "영혼의 검",
-    "category": "무기",
-    "type": "단검",
-    "element": "불",
-    "rarity": "신화",
-    "icon": "sword",
-    "description": "1) 검을 크게 휘둘러 전방의 적들에게 불길을 뿜습니다. 불길에 닿은 적들은 2s 동안 공격력 30%의 불 속성 추가 피해를 3번 가합니다.",
-    "power": 0,
-    "team": "D",
-    "counts": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    "imageUrl": "https://www.notion.so/image/attachment%3A672b8ab8-9cd9-488c-be65-d899bcdd87e3%3AKakaoTalk_20220919_083525111_06.png?table=block&id=3a9f741d-045e-8033-a664-eb507672ef11&cache=v2&width=256"
   },
   {
     "id": "notion_404f741d045e80a79529d700044066e5",

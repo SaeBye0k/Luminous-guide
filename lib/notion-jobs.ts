@@ -31,7 +31,7 @@ export const notionJobs: Entry[] = [
     "element": "무속성",
     "rarity": "직업",
     "icon": "sword",
-    "description": "2초 간 집중 상태가 됩니다. 집중 상태일 때 받는 피해를 80% 경감시키고 이동 속도가 60% 감소합니다. 이때 경감된 피해의 230%를 반사합니다",
+    "description": "1.5초 간 집중 상태가 됩니다. 집중 상태에서 처음 받는 피해를 80% 경감시키고 경감된 피해의 230%를 반사합니다. 사용 후 1초 동안 이동 속도가 60% 감소합니다",
     "power": 0,
     "team": "D",
     "counts": [
@@ -52,7 +52,7 @@ export const notionJobs: Entry[] = [
     "element": "무속성",
     "rarity": "직업",
     "icon": "sword",
-    "description": "전방을 7회 베어 검기를 남기고 돌아옵니다. 잠시 후 남겨진 검기가 적들에게 공격력의 90%의 피해를 7번 입히고 6s 동안 치명타 확률이 20% 증가합니다.",
+    "description": "전방을 7회 베어 검기를 남기고 돌아옵니다. 잠시 후 남겨진 검기가 적들에게 공격력의 70%의 피해를 7번 입히고 6s 동안 치명타 확률이 20% 증가합니다.",
     "power": 0,
     "team": "D",
     "counts": [
@@ -94,7 +94,7 @@ export const notionJobs: Entry[] = [
     "element": "무속성",
     "rarity": "직업",
     "icon": "sword",
-    "description": "주변에 검을 떨굽니다. 5s 동안 검이 유지되며 검을 주우면 근접 피해가 80% 증가하고 유지시간이 30% 감소한 검을 다시 주변에 떨굽니다. 검을 줍지 못할 때까지 반복되며 버프효과는 중첩되어 6s 동안 유지됩니다.",
+    "description": "주변에 검을 떨굽니다. 5s 동안 검이 유지되며 검을 주우면 근접 피해가 50% 증가하고 유지시간이 30% 감소한 검을 다시 주변에 떨굽니다. 검을 줍지 못할 때까지 반복되며 버프효과는 중첩되어 6s 동안 유지됩니다.",
     "power": 0,
     "team": "D",
     "counts": [
@@ -136,7 +136,7 @@ export const notionJobs: Entry[] = [
     "element": "무속성",
     "rarity": "직업",
     "icon": "sword",
-    "description": "궁극기 포인트와 에너지를 5pt 획득하고 [투지]를 1스택 얻습니다. 궁극기 사용시 가진 [투지] 스택 1당 가하는 스킬 피해가 15% 증가합니다.",
+    "description": "궁극기 포인트와 에너지를 5pt 획득하고 [투지]를 1스택 얻습니다. 궁극기 사용시 가진 [투지] 스택 1당 가하는 장비 스킬 피해가 20% 증가합니다.",
     "power": 0,
     "team": "D",
     "counts": [
@@ -157,7 +157,7 @@ export const notionJobs: Entry[] = [
     "element": "무속성",
     "rarity": "직업",
     "icon": "sword",
-    "description": "[마력 수집] 상태에 들어가 0.2s마다 궁극기 포인트를 1pt씩 회복합니다. 궁극기 포인트가 20의 배수에 도달할때마다 공격력 444%의 연계 공격을 가합니다. [마력 수집] 도중 스킬을 사용하거나 이동하거나 피해를 입을시 상태가 해제됩니다.",
+    "description": "[마력 수집] 상태에 들어가 0.1s마다 궁극기 포인트를 1pt씩 회복합니다. 궁극기 포인트가 20의 배수에 도달할때마다 공격력 444%의 연계 공격을 가합니다. [마력 수집] 도중 스킬을 사용하거나 이동하거나 피해를 입을시 상태가 해제됩니다.",
     "power": 0,
     "team": "D",
     "counts": [
@@ -178,7 +178,7 @@ export const notionJobs: Entry[] = [
     "element": "대지",
     "rarity": "직업",
     "icon": "sword",
-    "description": "눈앞의 적 하나를 찔러 5s 동안 [목화] 상태를 부여합니다. 목화 상태의 적은 0.3s 마다 10의 대지속성 추가피해를 입으며 [목화] 상태에서 추가피해가 아닌 대지속성 피해를 입으면 지속적으로 입던 추가피해의 데미지가 이 피해의 25%로 변경됩니다.",
+    "description": "눈앞의 적 하나를 찔러 5s 동안 [목화] 상태를 부여합니다. 목화 상태의 적은 0.3s 마다 10의 대지속성 추가피해를 입으며 [목화] 상태에서 추가피해가 아닌 대지속성 피해를 입으면 지속적으로 입던 추가피해의 데미지가 이 피해의 20%로 변경됩니다.",
     "power": 0,
     "team": "D",
     "counts": [
@@ -346,7 +346,7 @@ export const notionJobs: Entry[] = [
     "element": "무속성",
     "rarity": "직업",
     "icon": "shield",
-    "description": "4s 동안 최종 방어력의 70%와 최대 체력의 30%를 감소시키고 치명타 확률이 8%, 치명타 피해가 10% 증가합니다.",
+    "description": "4s 동안 받는 피해가 40% 증가하고 [철혈] 상태가 부여됩니다.",
     "power": 0,
     "team": "D",
     "counts": [
@@ -388,7 +388,7 @@ export const notionJobs: Entry[] = [
     "element": "무속성",
     "rarity": "직업",
     "icon": "shield",
-    "description": "주변 30칸 내에 있는 적들을 10s 동안 밧줄로 묶어 끌고 다닙니다. 묶인 적들이 끌려서 이동하면 가하는 최종 피해가 90% 감소하고 도발당합니다.",
+    "description": "주변 30칸 내에 있는 적들을 10s 동안 밧줄로 묶어 끌고 다닙니다. 묶인 적들은 도발당하고 가하는 최종 피해가 90% 감소합니다.",
     "power": 0,
     "team": "D",
     "counts": [
@@ -570,6 +570,27 @@ export const notionJobs: Entry[] = [
     ]
   },
   {
+    "id": "job_403f741d045e80588e79dc39e52c229b",
+    "name": "베리온",
+    "category": "직업",
+    "type": "수호자 계열",
+    "element": "무속성",
+    "rarity": "직업",
+    "icon": "shield",
+    "description": "10s 동안 자신에게 [가드업] 상태를 부여합니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
     "id": "job_저격수_1",
     "name": "궁수",
     "category": "직업",
@@ -577,7 +598,7 @@ export const notionJobs: Entry[] = [
     "element": "무속성",
     "rarity": "직업",
     "icon": "bow",
-    "description": "[화살]을 한 발 장전하고 5s 동안 공격력이 80% 증가합니다.",
+    "description": "[화살]을 3s 동안 한 발 장전합니다.",
     "power": 0,
     "team": "D",
     "counts": [
@@ -619,7 +640,7 @@ export const notionJobs: Entry[] = [
     "element": "무속성",
     "rarity": "직업",
     "icon": "bow",
-    "description": "공중에 투사체를 날리고 5s 동안 원거리 피해와 적중 피해로 적에게 가한 피해량 전체를 축적합니다. 5s 후 다시 발동하면 투사체를 가장 가까운 적에게 떨어뜨려 축적한 만큼 기술 피해를 가합니다.",
+    "description": "공중에 투사체를 날리고 5s 동안 원거리 피해와 적중 피해로 적에게 가한 피해량 전체를 축적합니다. 5s 후 다시 발동하면 투사체를 가장 가까운 적에게 떨어뜨려 축적한 피해의 50%만큼 기술 피해를 가합니다.",
     "power": 0,
     "team": "D",
     "counts": [
@@ -703,7 +724,7 @@ export const notionJobs: Entry[] = [
     "element": "무속성",
     "rarity": "직업",
     "icon": "bow",
-    "description": "에너지를 5pt, 궁극기 포인트를 5pt 회복하고 [신내림]을 1pt 획득합니다. 궁극기 발동시 보유한 신내림 개수만큼 하늘에서 번개를 떨궈 주변 30칸 이내에 있는 무작위 적들에게 공격력 100%의 번개속성 추가피해를 가합니다. 주변에 적이 없다면 무작위 위치에 번개",
+    "description": "에너지를 5pt, 궁극기 포인트를 5pt 회복하고 [신내림]을 1pt 획득합니다. 궁극기 발동시 보유한 신내림 개수만큼 하늘에서 번개를 떨궈 주변 30칸 이내에 있는 무작위 적들에게 공격력 130%의 번개속성 추가피해를 가합니다. 주변에 적이 없다면 무작위 위치에 번개",
     "power": 0,
     "team": "D",
     "counts": [
@@ -738,14 +759,35 @@ export const notionJobs: Entry[] = [
     ]
   },
   {
-    "id": "job_3a9f741d045e80bba6a5cbfb492e8ba2",
-    "name": "집행자 (보류)",
+    "id": "job_3f2f741d045e80f6bef8cf82a2105404",
+    "name": "화련",
     "category": "직업",
     "type": "저격수 계열",
     "element": "무속성",
     "rarity": "직업",
     "icon": "bow",
-    "description": "주변 15칸내 바라보는 적 한명에게 8s동안 [죄인]를 부여합니다.",
+    "description": "8s 동안 [화무] 상태가 되어 공격속도가 10% 증가합니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "id": "job_3a9f741d045e80bba6a5cbfb492e8ba2",
+    "name": "집행자",
+    "category": "직업",
+    "type": "저격수 계열",
+    "element": "무속성",
+    "rarity": "직업",
+    "icon": "bow",
+    "description": "주변 15칸내 바라보는 적 한명에게 8s동안 [죄인]을 부여합니다.",
     "power": 0,
     "team": "D",
     "counts": [
@@ -808,7 +850,7 @@ export const notionJobs: Entry[] = [
     "element": "무속성",
     "rarity": "직업",
     "icon": "heart",
-    "description": "자신의 최대체력의 24% 만큼 주변 30칸 내에 있는 아군의 체력을 회복시킵니다. 아군과 [유대의 사슬]로 연결되어 있다면 해당 아군의 최대체력의 40% 만큼 추가로 회복시킵니다.",
+    "description": "자신의 최대체력의 18% 만큼 자신과 주변 30칸 내에 있는 아군의 체력을 회복시킵니다. 아군과 [유대의 사슬]로 연결되어 있다면 해당 아군의 최대체력의 25% 만큼 추가로 회복시킵니다.",
     "power": 0,
     "team": "D",
     "counts": [
@@ -829,7 +871,7 @@ export const notionJobs: Entry[] = [
     "element": "무속성",
     "rarity": "직업",
     "icon": "heart",
-    "description": "주변 30칸 내에 있는 아군의 체력을 100pt 회복시킵니다. 만약 회복 받은 아군의 체력이 최대체력에 도달했다면 궁극기 포인트 20pt를 회복시킵니다. [유대의 사슬]이 연결된 아군은 범위에 상관 없이 모든 효과를 적용 받습니다.",
+    "description": "자신과 주변 30칸 내에 있는 아군의 체력을 100pt 회복시킵니다. 만약 회복 받은 아군의 체력이 최대체력에 도달했다면 궁극기 포인트 4pt를 회복시킵니다. [유대의 사슬]이 연결된 아군은 범위에 상관 없이 효과를 받으며, 궁극기 포인트를 20pt 회복합니다.",
     "power": 0,
     "team": "D",
     "counts": [
@@ -1011,6 +1053,48 @@ export const notionJobs: Entry[] = [
     ]
   },
   {
+    "id": "job_3daf741d045e80fb95b3db3a110bfbdb",
+    "name": "가희",
+    "category": "직업",
+    "type": "지원가 계열",
+    "element": "무속성",
+    "rarity": "직업",
+    "icon": "heart",
+    "description": "8s 동안 자신이 이동 불가 상태가 되며 넉백 저항이 70% 증가합니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "id": "job_402f741d045e80078953f20486c9239b",
+    "name": "마도사",
+    "category": "직업",
+    "type": "지원가 계열",
+    "element": "무속성",
+    "rarity": "직업",
+    "icon": "heart",
+    "description": "주변 10칸 내 자신을 포함한 아군에게 8s동안 [마갑]을 5개 부여하고 자신의 최대체력의 5% 만큼 회복시킵니다.",
+    "power": 0,
+    "team": "D",
+    "counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
     "id": "job_3fbf741d045e802496d2e40b47f2377a",
     "name": "딸깍",
     "category": "직업",
@@ -1124,90 +1208,6 @@ export const notionJobs: Entry[] = [
     "rarity": "직업",
     "icon": "compass",
     "description": "가까운 적을 곡괭이로 내리쳐서 300의 고정 수치만큼 집중 피해를 가합니다.",
-    "power": 0,
-    "team": "D",
-    "counts": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ]
-  },
-  {
-    "id": "job_403f741d045e80588e79dc39e52c229b",
-    "name": "베리온",
-    "category": "직업",
-    "type": "수호자 계열",
-    "element": "무속성",
-    "rarity": "직업",
-    "icon": "shield",
-    "description": "10s 동안 자신에게 [가드업] 상태를 부여합니다.",
-    "power": 0,
-    "team": "D",
-    "counts": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ]
-  },
-  {
-    "id": "job_3f2f741d045e80f6bef8cf82a2105404",
-    "name": "화련",
-    "category": "직업",
-    "type": "저격수 계열",
-    "element": "무속성",
-    "rarity": "직업",
-    "icon": "bow",
-    "description": "8s 동안 [화무] 상태가 되어 공격속도가 10% 증가합니다.",
-    "power": 0,
-    "team": "D",
-    "counts": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ]
-  },
-  {
-    "id": "job_3daf741d045e80fb95b3db3a110bfbdb",
-    "name": "가희",
-    "category": "직업",
-    "type": "지원가 계열",
-    "element": "무속성",
-    "rarity": "직업",
-    "icon": "heart",
-    "description": "8s 동안 자신이 이동 불가 상태가 되며 넉백 저항이 70% 증가합니다.",
-    "power": 0,
-    "team": "D",
-    "counts": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ]
-  },
-  {
-    "id": "job_402f741d045e80078953f20486c9239b",
-    "name": "마도사",
-    "category": "직업",
-    "type": "지원가 계열",
-    "element": "무속성",
-    "rarity": "직업",
-    "icon": "heart",
-    "description": "주변 10칸 내 자신을 포함한 아군에게 8s동안 [마갑]을 5개 부여하고 자신의 최대체력의 5% 만큼 회복시킵니다.",
     "power": 0,
     "team": "D",
     "counts": [
